@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
 
 /**
  * Read environment variables from file.
@@ -26,10 +27,19 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: 'http://automationexercise.com',
+    headless: true,
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+  },
+  expect: {
+    toHaveScreenshot: {
+      pathTemplate: path.resolve(__dirname, "test-screenshots", "{projectName}/{arg}{ext}"),
+      threshold: 0.2,
+    },
   },
 
   /* Configure projects for major browsers */
@@ -37,6 +47,7 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      outputDir: path.resolve(__dirname, 'test-results', 'chromium'),
     },
 
     // {
