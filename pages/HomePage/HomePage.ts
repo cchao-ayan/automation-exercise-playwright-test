@@ -1,5 +1,6 @@
 import {BasePage} from "../BasePage";
 import {expect} from "@playwright/test";
+import { locators, playwrightLocators } from "./HomePageLocators";
 
 export class HomePage extends BasePage {
 
@@ -12,6 +13,10 @@ export class HomePage extends BasePage {
     }
     
     async verifyLogoIsVisible(){
-        await this.basePageExpectToBeVisible(this.page.getByRole('img', { name: 'Website for automation practice' }));
+        await this.basePageExpectToBeVisible(locators.logoImage);
     }
+
+    async clickSignupLoginLink(){
+        await this.basePageClick(playwrightLocators.signupLoginLink(this.page));
+    }   
 }

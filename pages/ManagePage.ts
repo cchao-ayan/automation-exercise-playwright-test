@@ -1,6 +1,9 @@
 import { Page } from "@playwright/test";
 import { LoginPage } from "./LoginPage/LoginPage";
 import { HomePage } from "./HomePage/HomePage";
+import { SignUpPage } from "./SignUpPage/SignUpPage";
+import { AccountCreatedPage } from "./AccountCreatedPage/AccountCreatedPage";
+import { AccountDeletedPage } from "./AccountDeletedPage/AccountDeletedPage";
 
 export class ManagePage {
     constructor(private readonly page: Page) {}
@@ -8,9 +11,15 @@ export class ManagePage {
     // unidenfied pages
     private _login ?: LoginPage;
     private _home ?: HomePage;
+    private _signUp ?: SignUpPage;
+    private _accountCreated ?: AccountCreatedPage;
+    private _accountDeleted ?: AccountDeletedPage;  
 
     // if this._login is undefined, create a new LoginPage instance and assign it to this._login else return this._login
     get loginPage(): LoginPage { return this._login ??= new LoginPage(this.page); }
     get homePage(): HomePage { return this._home ??= new HomePage(this.page); }
+    get signUpPage(): SignUpPage { return this._signUp ??= new SignUpPage(this.page); }
+    get accountCreatedPage(): AccountCreatedPage { return this._accountCreated ??= new AccountCreatedPage(this.page); }
+    get accountDeletedPage(): AccountDeletedPage { return this._accountDeleted ??= new AccountDeletedPage(this.page); }
 }
 
