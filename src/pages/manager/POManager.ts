@@ -1,11 +1,11 @@
 import { Page } from "@playwright/test";
-import { LoginPage } from "./LoginPage/LoginPage";
-import { HomePage } from "./HomePage/HomePage";
-import { SignUpPage } from "./SignUpPage/SignUpPage";
-import { AccountCreatedPage } from "./AccountCreatedPage/AccountCreatedPage";
-import { AccountDeletedPage } from "./AccountDeletedPage/AccountDeletedPage";
+import { LoginPage } from "../login/LoginPage";
+import { HomePage } from "../home/HomePage";
+import { SignUpPage } from "../signup/SignUpPage";
+import { AccountCreatedPage } from "../account-created/AccountCreatedPage";
+import { AccountDeletedPage } from "../account-deleted/AccountDeletedPage";
 
-export class ManagePage {
+export class POManager {
     constructor(private readonly page: Page) {}
 
     // unidenfied pages

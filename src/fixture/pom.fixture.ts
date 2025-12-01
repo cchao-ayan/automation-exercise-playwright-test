@@ -1,13 +1,13 @@
 import {test as base} from '@playwright/test';
-import {ManagePage} from '../pages/ManagePage';
+import { POManager}  from '../pages/manager/POManager';
 
 type MyFixtures = {
-    managePage: ManagePage;
+    pom: POManager;
 };
 
 export const test = base.extend<MyFixtures>({
-    managePage: async ({ page} , use) => {
-        await use(new ManagePage(page));
+    pom: async ({ page} , use) => {
+        await use(new POManager(page));
     }   
 });
 

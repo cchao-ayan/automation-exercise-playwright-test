@@ -3,8 +3,7 @@ import { Page, Locator, expect } from '@playwright/test';
 export abstract class BasePage {
     constructor(protected page: Page) { 
         this.page = page;
-        
-    }
+        }
 
     protected async goToUrl(url: string) {
         await this.page.goto(url);

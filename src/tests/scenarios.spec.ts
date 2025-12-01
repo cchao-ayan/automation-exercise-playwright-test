@@ -1,23 +1,23 @@
 import { test, expect } from '../fixture/pom.fixture';
 
 test.describe('Automation Exercises - Test Cases', () => {
-    test.only('Test Case 1: Register User', async ({ managePage }) => {
+    test.only('Test Case 1: Register User', async ({ pom }) => {
         // Navigate to Home Page
-        await managePage.homePage.navigateToHomePage('/');
-        await managePage.homePage.verifyHomePageUrl('https://automationexercise.com/');
-        await managePage.homePage.verifyLogoIsVisible();
+        await pom.homePage.navigateToHomePage('/');
+        await pom.homePage.verifyHomePageUrl('https://automationexercise.com/');
+        await pom.homePage.verifyLogoIsVisible();
         // Navigate to Signup/Login Page
-        await managePage.homePage.clickSignupLoginLink();
-        await managePage.loginPage.verifyLoginPageUrl('https://automationexercise.com/login');
-        await managePage.loginPage.verifyLogoIsVisible();
-        await managePage.loginPage.verifySignUpHeadingIsVisible();
+        await pom.homePage.clickSignupLoginLink();
+        await pom.loginPage.verifyLoginPageUrl('https://automationexercise.com/login');
+        await pom.loginPage.verifyLogoIsVisible();
+        await pom.loginPage.verifySignUpHeadingIsVisible();
         // Input Name and Email
-        await managePage.loginPage.fillNameAndEmail('Elizabeth', 'Elizabeth.123TEST@gmail.com');
+        await pom.loginPage.fillNameAndEmail('Elizabeth', 'Elizabeth.123TEST@gmail.com');
         // Click Sign Up button 
-        await managePage.loginPage.clickSignUpButton();
-        await managePage.signUpPage.verifyURL('/signup');
+        await pom.loginPage.clickSignUpButton();
+        await pom.signUpPage.verifyURL('/signup');
         // Fill Signup Form
-        await managePage.signUpPage.fillSignUpForm({
+        await pom.signUpPage.fillSignUpForm({
             title: 'Mrs',
             name: 'Elizabeth',
             email: 'Elizabeth.123TEST@gmail.com',
@@ -37,7 +37,7 @@ test.describe('Automation Exercises - Test Cases', () => {
             mobileNumber: '123456789123'
         })
         // Click Account Create button
-        await managePage.signUpPage.clickCreateAccountButton();
+        await pom.signUpPage.clickCreateAccountButton();
 
     });
 });

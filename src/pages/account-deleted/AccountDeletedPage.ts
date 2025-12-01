@@ -1,9 +1,9 @@
-import { BasePage } from "../BasePage";
+import { BasePage } from "../base/BasePage";
 import { expect } from "@playwright/test";
 
-export class AccountCreatedPage extends BasePage {
+export class AccountDeletedPage extends BasePage {
     async verifyURL(expectedUrl: string){
         await this.basePageExpectToHaveURL(expectedUrl);
     }
-
+    
 }

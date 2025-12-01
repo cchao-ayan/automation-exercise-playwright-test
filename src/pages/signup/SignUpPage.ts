@@ -1,4 +1,4 @@
-import { BasePage } from "../BasePage";
+import { BasePage } from "../base/BasePage";
 import { expect } from "@playwright/test";
 import { locators, playwrightLocators } from "./SignUpPageLocators";
 
