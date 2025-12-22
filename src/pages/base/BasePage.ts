@@ -1,8 +1,15 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { Footer } from '../common/footer/Footer';
+import { Header } from '../common/header/Header';
 
 export abstract class BasePage {
+    readonly footer: Footer;
+    readonly header: Header;
+
     constructor(protected page: Page) { 
         this.page = page;
+        this.footer = new Footer(page);
+        this.header = new Header(page);
         }
 
     protected async goToUrl(url: string) {

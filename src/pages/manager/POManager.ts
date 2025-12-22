@@ -4,6 +4,8 @@ import { HomePage } from "../home/HomePage";
 import { SignUpPage } from "../signup/SignUpPage";
 import { AccountCreatedPage } from "../account-created/AccountCreatedPage";
 import { AccountDeletedPage } from "../account-deleted/AccountDeletedPage";
+import { Header } from "../common/header/Header";
+import { Footer } from "../common/footer/Footer";
 
 export class POManager {
     constructor(private readonly page: Page) {}
@@ -14,6 +16,8 @@ export class POManager {
     private _signUp ?: SignUpPage;
     private _accountCreated ?: AccountCreatedPage;
     private _accountDeleted ?: AccountDeletedPage;  
+    private _header ?: Header;
+    private _footer ?: Footer;
 
     // if this._login is undefined, create a new LoginPage instance and assign it to this._login else return this._login
     get loginPage(): LoginPage { return this._login ??= new LoginPage(this.page); }
@@ -21,5 +25,7 @@ export class POManager {
     get signUpPage(): SignUpPage { return this._signUp ??= new SignUpPage(this.page); }
     get accountCreatedPage(): AccountCreatedPage { return this._accountCreated ??= new AccountCreatedPage(this.page); }
     get accountDeletedPage(): AccountDeletedPage { return this._accountDeleted ??= new AccountDeletedPage(this.page); }
+    get header(): Header { return this._header ??= new Header(this.page); }
+    get footer(): Footer { return this._footer ??= new Footer(this.page); }
 }
 
