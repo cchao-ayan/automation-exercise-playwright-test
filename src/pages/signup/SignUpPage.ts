@@ -1,6 +1,7 @@
 import { BasePage } from "../base/BasePage";
 import { expect } from "@playwright/test";
 import { locators, playwrightLocators } from "./SignUpPageLocators";
+import { step } from "../../utilities/step-decorator2";
 
 export class SignUpPage extends BasePage {
     async verifyURL(expectedUrl: string) {
@@ -27,6 +28,7 @@ export class SignUpPage extends BasePage {
         await this.basePageClick(playwrightLocators.signUpCreateAccountButton(this.page));
     }
 
+    @step('Fill Sign Up Form')
     async fillSignUpForm(data: {
         title: string,
         name: string

@@ -5,11 +5,11 @@ test.describe('Automation Exercises - Test Cases', () => {
         // Navigate to Home Page
         await pom.homePage.navigateToHomePage('/');
         await pom.homePage.verifyHomePageUrl('https://automationexercise.com/');
-        await pom.homePage.verifyLogoIsVisible();
+        await pom.homePage.header.verifyLogoIsVisible();
         // Navigate to Signup/Login Page
-        await pom.homePage.clickSignupLoginLink();
+        await pom.header.clickSignupLoginLink();
         await pom.loginPage.verifyLoginPageUrl('https://automationexercise.com/login');
-        await pom.loginPage.verifyLogoIsVisible();
+        await pom.loginPage.header.verifyLogoIsVisible();
         await pom.loginPage.verifySignUpHeadingIsVisible();
         // Input Name and Email
         await pom.loginPage.fillNameAndEmail('Elizabeth', 'Elizabeth.123TEST@gmail.com');

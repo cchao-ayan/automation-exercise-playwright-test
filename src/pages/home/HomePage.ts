@@ -13,11 +13,4 @@ export class HomePage extends BasePage {
         await this.basePageExpectToHaveURL(expectedUrl);
     }
     
-    async verifyLogoIsVisible(){
-        await this.basePageExpectToBeVisible(headerLocators.logoImage(this.page));
-    }
-
-    async clickSignupLoginLink(){
-        await this.basePageClick(homepageLocators.signupLoginLink(this.page));
-    }   
 }

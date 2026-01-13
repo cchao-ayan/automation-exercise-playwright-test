@@ -27,7 +27,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'http://automationexercise.com',
+    baseURL: 'https://automationexercise.com/',
     headless: false,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -37,7 +37,7 @@ export default defineConfig({
   },
   expect: {
     toHaveScreenshot: {
-      pathTemplate: path.resolve(__dirname, "test-screenshots", "{projectName}/{arg}{ext}"),
+      pathTemplate: path.resolve(__dirname, 'test-screenshots', '{projectName}/{arg}{ext}'),
       threshold: 0.2,
     },
   },

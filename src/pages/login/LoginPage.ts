@@ -12,10 +12,6 @@ export class LoginPage extends BasePage {
         await this.basePageExpectToHaveURL(expectedUrl);
     }
 
-    async verifyLogoIsVisible(){
-        await this.basePageExpectToBeVisible(headerLocators.logoImage(this.page));
-    }
-
     async verifySignUpHeadingIsVisible(){
         await this.basePageExpectToBeVisible(locators.loginHeading);
     }  
