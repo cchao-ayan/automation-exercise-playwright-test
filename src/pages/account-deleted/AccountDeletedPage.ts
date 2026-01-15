@@ -3,7 +3,7 @@ import { expect } from "@playwright/test";
 
 export class AccountDeletedPage extends BasePage {
     async verifyURL(expectedUrl: string){
-        await this.basePageExpectToHaveURL(expectedUrl);
+        await this.expectUrl(expectedUrl);
     }
     
 }

@@ -10,7 +10,7 @@ export class HomePage extends BasePage {
     }
 
     async verifyHomePageUrl(expectedUrl: string){
-        await this.basePageExpectToHaveURL(expectedUrl);
+        await this.expectUrl(expectedUrl);
     }
     
 }

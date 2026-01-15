@@ -9,23 +9,23 @@ export class LoginPage extends BasePage {
     }
 
     async verifyLoginPageUrl(expectedUrl: string){
-        await this.basePageExpectToHaveURL(expectedUrl);
+        await this.expectUrl(expectedUrl);
     }
 
     async verifySignUpHeadingIsVisible(){
-        await this.basePageExpectToBeVisible(locators.loginHeading);
+        await this.expectVisible(locators.loginHeading);
     }  
 
     async fillSignUpNameInput(name: string){
-        await this.basePageFill(locators.loginNameInput, name);
+        await this.fill(locators.loginNameInput, name);
     }
 
     async fillSignUpEmailInput(email: string){
-        await this.basePageFill(locators.loginEmailInput, email);
+        await this.fill(locators.loginEmailInput, email);
     }
 
     async clickSignUpButton(){
-        await this.basePageClick(locators.loginButton);
+        await this.click(locators.loginButton);
     }
     
     @step("Fill name and email: {name}, {email}")

@@ -1,65 +1,24 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { Footer } from '../common/footer/Footer';
 import { Header } from '../common/header/Header';
+import { CommonPageMethods } from './CommonPageMethod';
 
-export abstract class BasePage {
-    readonly footer: Footer;
-    readonly header: Header;
+export abstract class BasePage extends CommonPageMethods{
+    private _footer?: Footer;
+    private _header?: Header;
 
     constructor(protected page: Page) { 
-        this.page = page;
-        this.footer = new Footer(page);
-        this.header = new Header(page);
-        }
+        super(page);
+    }
+
+    // lazy getter for footer and header instances, created only when accessed
+    // pom.homePage.footer instead of pom.footer which is much better for clarity
+    // footer and header lazy getters have been separated from POManager so that each page can have its own header/footer instance if needed
+    get footer(): Footer { return this._footer ??= new Footer(this.page); }
+    get header(): Header { return this._header ??= new Header(this.page); }
 
     protected async goToUrl(url: string) {
         await this.page.goto(url);
     }
 
-    protected async basePageClick(selector: Locator | string) {
-        await this.toLocator(selector).click();
-    }
-
-    protected async basePageFill(selector: Locator | string, value: string) {
-        await this.toLocator(selector).fill(value);
-    }
-
-    protected async basePageExpectToBeVisible(selector: Locator | string) {
-        await expect(this.toLocator(selector)).toBeVisible();
-    }
-
-    protected async basePageExpectToHaveText(selector: Locator | string, text: string) {
-        await expect(this.toLocator(selector)).toHaveText(text);
-    }
-
-    protected async basePageExpectToHaveURL(url: string) {
-        await expect(this.page).toHaveURL(url);
-    }
-
-    protected async basePageToHaveScreenshot(selector: Locator | string, path: string) {
-        await expect(this.toLocator(selector)).toHaveScreenshot(path);
-    }
-
-    protected async basePageSelectFromDropdownByValue(selector: Locator | string, value: string) {
-        await this.toLocator(selector).selectOption({ value: value });
-    }
-
-    protected async basePageCheckCheckbox(selector: Locator | string) {
-        await this.toLocator(selector).check();
-    }
-
-    protected async basePageUncheckCheckbox(selector: Locator | string) {
-        await this.toLocator(selector).uncheck();
-    }
-
-    protected async basePageRadioButtonSelect(selector: Locator | string) {
-        await this.toLocator(selector).check();
-    }
-
-    // this will convert string selectors to Locator objects
-    protected toLocator(selector: string | Locator): Locator {
-        return typeof selector === 'string'
-            ? this.page.locator(selector)   // string → Locator
-            : selector;                     // already a Locator
-    }
 }

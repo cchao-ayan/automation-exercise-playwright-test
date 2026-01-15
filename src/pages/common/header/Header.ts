@@ -1,6 +1,6 @@
 import {Page, expect, Locator} from '@playwright/test';
 import { playwrightLocators as headerLocators } from "./HeaderLocators";
-import { CommonPageMethods } from '../base-component/CommonPageMethod';
+import { CommonPageMethods } from '../../base/CommonPageMethod';
 
 export class Header extends CommonPageMethods {
 

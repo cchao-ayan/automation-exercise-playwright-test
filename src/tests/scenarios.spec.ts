@@ -7,7 +7,7 @@ test.describe('Automation Exercises - Test Cases', () => {
         await pom.homePage.verifyHomePageUrl('https://automationexercise.com/');
         await pom.homePage.header.verifyLogoIsVisible();
         // Navigate to Signup/Login Page
-        await pom.header.clickSignupLoginLink();
+        await pom.homePage.header.clickSignupLoginLink();
         await pom.loginPage.verifyLoginPageUrl('https://automationexercise.com/login');
         await pom.loginPage.header.verifyLogoIsVisible();
         await pom.loginPage.verifySignUpHeadingIsVisible();
