@@ -1,7 +1,7 @@
 import { step } from "../../utilities/step-decorator2";
 import { BasePage } from "../base/BasePage";
-import { locators } from "./LoginPageLocators";
-import { playwrightLocators as headerLocators } from "../common/header/HeaderLocators";
+import { locators, playwrightLocators } from "./LoginPageLocators";
+import { locators as headerLocators } from "../common/header/HeaderLocators";
 
 export class LoginPage extends BasePage {
     async navigateToManagePage(url: string){
@@ -13,19 +13,19 @@ export class LoginPage extends BasePage {
     }
 
     async verifySignUpHeadingIsVisible(){
-        await this.expectVisible(locators.loginHeading);
+        await this.expectVisible(playwrightLocators.newUserHeading(this.page));
     }  
 
     async fillSignUpNameInput(name: string){
-        await this.fill(locators.loginNameInput, name);
+        await this.fill(playwrightLocators.newUserNameInput(this.page), name);
     }
 
     async fillSignUpEmailInput(email: string){
-        await this.fill(locators.loginEmailInput, email);
+        await this.fill(playwrightLocators.newUserEmailInput(this.page), email);
     }
 
     async clickSignUpButton(){
-        await this.click(locators.loginButton);
+        await this.click(playwrightLocators.newUserSignupButton(this.page));
     }
     
     @step("Fill name and email: {name}, {email}")

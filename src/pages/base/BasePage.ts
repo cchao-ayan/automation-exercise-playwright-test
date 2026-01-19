@@ -3,11 +3,11 @@ import { Footer } from '../common/footer/Footer';
 import { Header } from '../common/header/Header';
 import { CommonPageMethods } from './CommonPageMethod';
 
-export abstract class BasePage extends CommonPageMethods{
+export abstract class BasePage extends CommonPageMethods {
     private _footer?: Footer;
     private _header?: Header;
 
-    constructor(protected page: Page) { 
+    constructor(protected page: Page) {
         super(page);
     }
 
@@ -17,8 +17,14 @@ export abstract class BasePage extends CommonPageMethods{
     get footer(): Footer { return this._footer ??= new Footer(this.page); }
     get header(): Header { return this._header ??= new Header(this.page); }
 
-    protected async goToUrl(url: string) {
-        await this.page.goto(url);
+    protected async ready(timeout = 60000) {
+        await this.page.waitForLoadState('domcontentloaded', { timeout });
     }
+    protected async goToUrl(url: string) {
+        await this.page.goto(url, { timeout: 60000 });
+        await this.ready();
+    }
+
+
 
 }

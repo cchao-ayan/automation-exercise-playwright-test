@@ -1,15 +1,16 @@
 import { BasePage } from "../base/BasePage";
-import { expect } from "@playwright/test";
 import { locators, playwrightLocators } from "./SignUpPageLocators";
 import { step } from "../../utilities/step-decorator2";
 
 export class SignUpPage extends BasePage {
-    async verifyURL(expectedUrl: string) {
-        await this.expectUrl(expectedUrl);
+
+    async navigateToSignUpPage(url: string) {
+        await this.goToUrl(url);
     }
 
-    async verifyLogoIsVisible() {
-        await this.expectVisible(locators.logoImage);
+    async verifySignUpUrl(expectedUrl: string) {
+        await this.expectUrl(expectedUrl);
+        await this.ready();
     }
 
     async verifyAccountInfoHeadingTestIsVisible() {
@@ -53,8 +54,8 @@ export class SignUpPage extends BasePage {
         } else if (data.title === 'Mrs') {
             await this.selectRadio(playwrightLocators.signUpMSTitle(this.page));
         }
-        await this.fill(playwrightLocators.signUpNameInput(this.page), data.name);
-        await this.fill(playwrightLocators.signUpEmailInput(this.page), data.email);
+        await this.expectEquals(playwrightLocators.signUpNameInput(this.page), data.name); // Verify name input is pre-filled with the name used during signup
+        await this.expectEquals(playwrightLocators.signUpEmailInput(this.page), data.email); // Verify email input is pre-filled with the email used during signup
         await this.fill(playwrightLocators.signUpPasswordInput(this.page), data.password);
         await this.selectByValue(locators.signUpDateOfBirthDay, data.day);
         await this.selectByValue(locators.signUpDateOfBirthMonth, data.month);

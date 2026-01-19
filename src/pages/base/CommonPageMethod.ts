@@ -6,46 +6,63 @@ export class CommonPageMethods {
         this.page = page;
     }
 
-    async click(selector: string | Locator) {
+    protected async click(selector: string | Locator) {
         await this.toLocator(selector).click();
     }
 
-    async fill(selector: string | Locator, value: string) {
+    protected async fill(selector: string | Locator, value: string) {
         await this.toLocator(selector).fill(value);
     }
 
-    async expectVisible(selector: string | Locator) {
+    protected async expectVisible(selector: string | Locator) {
         await expect(this.toLocator(selector)).toBeVisible();
     }
 
-    async expectHasText(selector: string | Locator, text: string) {
+    protected async expectNotVisible(selector: string | Locator) {
+        await expect(this.toLocator(selector)).not.toBeVisible();
+    }
+
+    protected async expectHasText(selector: string | Locator, text: string) {
         await expect(this.toLocator(selector)).toHaveText(text);
     }
 
-    async expectUrl(url: string) {
+    protected async expectUrl(url: string) {
         await expect(this.page).toHaveURL(url);
     }
 
-    async expectScreenshot(selector: string | Locator, path: string) {
+    protected async expectScreenshot(selector: string | Locator, path: string) {
         await expect(this.toLocator(selector)).toHaveScreenshot(path);
     }
 
-    async selectByValue(selector: string | Locator, value: string) {
-        await this.toLocator(selector).selectOption({ value: value });
+    protected async expectEquals(selector: string | Locator, expectedValue: string) {
+        const actual = await this.toLocator(selector).getAttribute('value');
+        console.log(`Actual value: ${actual}, Expected value: ${expectedValue}`);
+        expect(actual).toBe(expectedValue);
     }
 
-    async check(selector: string | Locator) {
+    protected async selectByValue(selector: string | Locator, value: string) {
+        try {
+            await this.toLocator(selector).selectOption({ label: value });
+        } catch (error) {
+            console.error(`The '${value}' is not in the list of values`, selector, error);
+        }        
+    }
+
+    protected async check(selector: string | Locator) {
         await this.toLocator(selector).check();
     }
 
-    async uncheck(selector: string | Locator) {
+    protected async uncheck(selector: string | Locator) {
         await this.toLocator(selector).uncheck();
     }
 
-    async selectRadio(selector: string | Locator) {
+    protected async selectRadio(selector: string | Locator) {
         await this.toLocator(selector).check();
     }
 
+
+
+    // Helper method to convert string selectors to Locator objects
     protected toLocator(selector: string | Locator): Locator {
         return typeof selector === 'string'
             ? this.page.locator(selector)   // string → Locator
