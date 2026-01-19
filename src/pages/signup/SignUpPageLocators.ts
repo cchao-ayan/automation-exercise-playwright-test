@@ -1,15 +1,12 @@
 import { Page } from "@playwright/test";
 
 export const locators = {
-    signUpInfoHeading:          'b:has-text("ENTER ACCOUNT INFORMATION")',
-    signUpAddressHeading:       'b:has-text("ADDRESS INFORMATION")',
-    signUpDateOfBirthDay:       '#days',
-    signUpDateOfBirthMonth:     '#months',
-    signUpDateOfBirthYear:      '#years',
-    signUpZipCodeInput:         '#zipcode'
-}
-
-export const playwrightLocators = {
+    signUpInfoHeading:          (page: Page) => page.locator('b:has-text("ENTER ACCOUNT INFORMATION")'),
+    signUpAddressHeading:       (page: Page) => page.locator('b:has-text("ADDRESS INFORMATION")'),
+    signUpDateOfBirthDay:       (page: Page) => page.locator('#days'),
+    signUpDateOfBirthMonth:     (page: Page) => page.locator('#months'),
+    signUpDateOfBirthYear:      (page: Page) => page.locator('#years'),
+    signUpZipCodeInput:         (page: Page) => page.locator('#zipcode'),
     signUpMRTitle:              (page: Page) => page.getByRole('radio', { name: 'Mr.' }),
     signUpMSTitle:              (page: Page) => page.getByRole('radio', { name: 'Mrs.' }),
     signUpNameInput:            (page: Page) => page.getByTestId('name'),

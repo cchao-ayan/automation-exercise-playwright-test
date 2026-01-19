@@ -1,5 +1,5 @@
 import { BasePage } from "../base/BasePage";
-import { locators, playwrightLocators } from "./SignUpPageLocators";
+import { locators } from "./SignUpPageLocators";
 import { step } from "../../utilities/step-decorator2";
 
 export class SignUpPage extends BasePage {
@@ -14,19 +14,19 @@ export class SignUpPage extends BasePage {
     }
 
     async verifyAccountInfoHeadingTestIsVisible() {
-        const accountInfo = locators.signUpInfoHeading;
+        const accountInfo = locators.signUpInfoHeading(this.page);
         await this.expectVisible(accountInfo);
         await this.expectHasText(accountInfo, 'ENTER ACCOUNT INFORMATION');
     }
 
     async verifyAddressInfoHeadingTextIsVisible() {
-        const addressInfo = locators.signUpAddressHeading;
+        const addressInfo = locators.signUpAddressHeading(this.page);
         await this.expectVisible(addressInfo);
         await this.expectHasText(addressInfo, 'ADDRESS INFORMATION');    
     }
 
     async clickCreateAccountButton(){
-        await this.click(playwrightLocators.signUpCreateAccountButton(this.page));
+        await this.click(locators.signUpCreateAccountButton(this.page));
     }
 
     @step('Fill Sign Up Form')
@@ -50,25 +50,25 @@ export class SignUpPage extends BasePage {
         mobileNumber: string
     }) {
         if (data.title === 'Mr') {
-            await this.selectRadio(playwrightLocators.signUpMRTitle(this.page));
+            await this.selectRadio(locators.signUpMRTitle(this.page));
         } else if (data.title === 'Mrs') {
-            await this.selectRadio(playwrightLocators.signUpMSTitle(this.page));
+            await this.selectRadio(locators.signUpMSTitle(this.page));
         }
-        await this.expectEquals(playwrightLocators.signUpNameInput(this.page), data.name); // Verify name input is pre-filled with the name used during signup
-        await this.expectEquals(playwrightLocators.signUpEmailInput(this.page), data.email); // Verify email input is pre-filled with the email used during signup
-        await this.fill(playwrightLocators.signUpPasswordInput(this.page), data.password);
-        await this.selectByValue(locators.signUpDateOfBirthDay, data.day);
-        await this.selectByValue(locators.signUpDateOfBirthMonth, data.month);
-        await this.selectByValue(locators.signUpDateOfBirthYear, data.year);
-        await this.fill(playwrightLocators.signUpFirstNameInput(this.page), data.firstName);
-        await this.fill(playwrightLocators.signUpLastNameInput(this.page), data.lastName);
-        await this.fill(playwrightLocators.signUpCompanyInput(this.page), data.company);
-        await this.fill(playwrightLocators.signUpAddress1Input(this.page), data.address1);
-        await this.fill(playwrightLocators.signUpAddress2Input(this.page), data.address2);
-        await this.selectByValue(playwrightLocators.signUpCountrySelect(this.page), data.country);
-        await this.fill(playwrightLocators.signUpStateInput(this.page), data.state);
-        await this.fill(playwrightLocators.signUpCityInput(this.page), data.city);
-        await this.fill(locators.signUpZipCodeInput, data.zipcode);
-        await this.fill(playwrightLocators.signUpMobileNumberInput(this.page), data.mobileNumber);
+        await this.expectEquals(locators.signUpNameInput(this.page), data.name); // Verify name input is pre-filled with the name used during signup
+        await this.expectEquals(locators.signUpEmailInput(this.page), data.email); // Verify email input is pre-filled with the email used during signup
+        await this.fill(locators.signUpPasswordInput(this.page), data.password);
+        await this.selectByValue(locators.signUpDateOfBirthDay(this.page), data.day);
+        await this.selectByValue(locators.signUpDateOfBirthMonth(this.page), data.month);
+        await this.selectByValue(locators.signUpDateOfBirthYear(this.page), data.year);
+        await this.fill(locators.signUpFirstNameInput(this.page), data.firstName);
+        await this.fill(locators.signUpLastNameInput(this.page), data.lastName);
+        await this.fill(locators.signUpCompanyInput(this.page), data.company);
+        await this.fill(locators.signUpAddress1Input(this.page), data.address1);
+        await this.fill(locators.signUpAddress2Input(this.page), data.address2);
+        await this.selectByValue(locators.signUpCountrySelect(this.page), data.country);
+        await this.fill(locators.signUpStateInput(this.page), data.state);
+        await this.fill(locators.signUpCityInput(this.page), data.city);
+        await this.fill(locators.signUpZipCodeInput(this.page), data.zipcode);
+        await this.fill(locators.signUpMobileNumberInput(this.page), data.mobileNumber);
     }
 }
