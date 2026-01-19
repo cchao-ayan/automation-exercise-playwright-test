@@ -14,21 +14,32 @@ The project automates core user flows of the Automation Exercise application suc
 🏆 Best Practices Applied
 
 ✔ Page Object Model (POM)
+
 ✔ Custom Playwright Fixtures
+
 ✔ Environment-based configuration
+
 ✔ No hardcoded credentials
+
 ✔ Auto-waiting (no fixed sleeps)
+
 ✔ CI-ready test execution
+
 
 🎯 Intended Use
 
 This framework is suitable for:
+
 UI regression testing
+
 Smoke testing
+
 Learning and demonstrating Playwright best practices
 
 📌 Notes
 
 Playwright’s built-in auto-waiting is leveraged instead of explicit waits.
+
 Selectors prioritize accessibility and stability.
+
 Tests are designed to be independent and repeatable.
