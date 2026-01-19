@@ -12,6 +12,7 @@ The project automates core user flows of the Automation Exercise application suc
 
 📁 Project Structure Overview
 src/
+
 ├── .github/
 │   └── workflows/
 │       └── playwright.yml              # GitHub Actions CI pipeline
@@ -189,3 +190,4 @@ Learning and demonstrating Playwright best practices
 Playwright’s built-in auto-waiting is leveraged instead of explicit waits.
 Selectors prioritize accessibility and stability.
 Tests are designed to be independent and repeatable.
+
