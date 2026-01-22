@@ -26,9 +26,9 @@ jobs:
       
       - name: Run Playwright tests
         env:
-          TEST_USERNAME1: ${{ secrets.TEST_USERNAME1 }}
-          TEST_USERNAME2: ${{ secrets.TEST_USERNAME2 }}
-          TEST_USERNAME3: ${{ secrets.TEST_USERNAME3 }}
+          TEST_EMAIL1: ${{ secrets.TEST_EMAIL1 }}
+          TEST_EMAIL2: ${{ secrets.TEST_EMAIL2 }}
+          TEST_EMAIL3: ${{ secrets.TEST_EMAIL3 }}
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
           TEST_FIRST_NAME: ${{ secrets.TEST_FIRST_NAME }}
           TEST_LAST_NAME: ${{ secrets.TEST_LAST_NAME }}
