@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test";
+import { sign } from "crypto";
 
 export const locators = {
     signUpInfoHeading:          (page: Page) => page.locator('b:has-text("ENTER ACCOUNT INFORMATION")'),
@@ -23,5 +24,10 @@ export const locators = {
     signUpStateInput:           (page: Page) => page.getByTestId('state'),
     signUpCityInput:            (page: Page) => page.getByTestId('city'),
     signUpMobileNumberInput:    (page: Page) => page.getByTestId('mobile_number'),
-    signUpCreateAccountButton:  (page: Page) => page.getByRole('button', { name: 'Create Account' })
+    signUpCreateAccountButton:  (page: Page) => page.getByRole('button', { name: 'Create Account' }),
+    signUpLoginAccountHeading:  (page: Page) => page.getByText('Login to your account', { exact: true }),
+    signUpLoginEmailInput:      (page: Page) => page.getByTestId ('login-email'),
+    signUpLoginPasswordInput:   (page: Page) => page.getByTestId ('login-password'),
+    signUpLoginButton:          (page: Page) => page.getByTestId('login-button'),
+
 }

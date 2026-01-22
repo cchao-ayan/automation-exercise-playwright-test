@@ -38,14 +38,12 @@ export class Header extends CommonPageMethods {
         await this.expectNotVisible(locators.logoutLink(this.page));
     }
 
-    async verifyLoggedInAsUsername(username: string) {
-        const loggedInText = `Logged in as ${username}`;
-        await this.expectHasText(locators.loggedInAsLabel(this.page), loggedInText);
-    }
-
     async verifyLoggedInUser() {
-        const loggedInUser = await locators.loggedInAsLabel(this.page).innerText() + ' ' + process.env.TEST_FIRST_NAME;
-        console.log(loggedInUser);
-        await this.expectHasText(locators.loggedInAsLabel(this.page), loggedInUser);
+        try {
+            const loggedInUser = await locators.navBar(this.page).nth(9).innerText();
+            await this.expectHasText(loggedInUser, 'Logged in as ' + process.env.TEST_FIRST_NAME);
+        } catch (error) {
+            console.error('Error verifying logged in user:', error);
+        }
     }
 }

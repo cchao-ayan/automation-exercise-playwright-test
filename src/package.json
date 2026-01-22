@@ -6,7 +6,8 @@
   "scripts": {
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "test:scenario": "playwright test tests/scenarios.spec.ts --ui",
+    "test:scenario": "playwright test tests/scenarios.spec.ts",
+    "test:scenario:ui": "playwright test tests/scenarios.spec.ts --ui",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report"

@@ -13,4 +13,9 @@ export class HomePage extends BasePage {
         await this.expectUrl(expectedUrl);
     }
     
+    async ready(){
+        await this.navigateToHomePage('/');
+        await this.expectUrl('https://automationexercise.com/');
+        await this.header.verifyLogoIsVisible();
+    }
 }

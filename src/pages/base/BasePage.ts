@@ -21,8 +21,8 @@ export abstract class BasePage extends CommonPageMethods {
         await this.page.waitForLoadState('domcontentloaded', { timeout });
     }
     protected async goToUrl(url: string) {
-        await this.page.goto(url, { timeout: 60000 });
-        await this.ready();
+        await this.page.goto(url);
+        //await this.ready();
     }
 
 

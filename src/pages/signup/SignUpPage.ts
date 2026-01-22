@@ -1,6 +1,7 @@
 import { BasePage } from "../base/BasePage";
 import { locators } from "./SignUpPageLocators";
 import { step } from "../../utilities/step-decorator2";
+import { testCredentials } from "../../config/TestCredentials";
 
 export class SignUpPage extends BasePage {
 
@@ -25,11 +26,24 @@ export class SignUpPage extends BasePage {
         await this.expectHasText(addressInfo, 'ADDRESS INFORMATION');    
     }
 
+    async verifyLoginToYourAccountIsVisible() {
+        await this.expectVisible(locators.signUpLoginAccountHeading(this.page));
+    }
+
+    async signInUsingCorrectCredentials(){
+        await this.fill(locators.signUpLoginEmailInput(this.page), testCredentials.email1);
+        await this.fill(locators.signUpLoginPasswordInput(this.page), testCredentials.password);
+    }
+
+    async clickLoginButton(){
+        await this.click(locators.signUpLoginButton(this.page));
+    }
+
     async clickCreateAccountButton(){
         await this.click(locators.signUpCreateAccountButton(this.page));
     }
 
-    @step('Fill Sign Up Form')
+    //@step('Fill Sign Up Form')
     async fillSignUpForm(data: {
         title: string,
         name: string
