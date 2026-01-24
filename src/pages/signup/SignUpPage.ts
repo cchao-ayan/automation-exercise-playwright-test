@@ -1,9 +1,15 @@
 import { BasePage } from "../base/BasePage";
 import { locators } from "./SignUpPageLocators";
-import { step } from "../../utilities/step-decorator2";
-import { testCredentials } from "../../config/TestCredentials";
+import { testData } from "./SignUpTestData";
 
 export class SignUpPage extends BasePage {
+
+    async ready() {
+        await this.verifySignUpUrl('https://automationexercise.com/signup');
+        await this.header.verifyLogoIsVisible();
+        await this.expectVisible(locators.loginAccountHeading(this.page));
+        await this.expectVisible(locators.newUserSignUpHeading(this.page));
+    }
 
     async navigateToSignUpPage(url: string) {
         await this.goToUrl(url);
@@ -11,78 +17,59 @@ export class SignUpPage extends BasePage {
 
     async verifySignUpUrl(expectedUrl: string) {
         await this.expectUrl(expectedUrl);
-        await this.ready();
     }
 
     async verifyAccountInfoHeadingTestIsVisible() {
-        const accountInfo = locators.signUpInfoHeading(this.page);
+        const accountInfo = locators.infoHeading(this.page);
         await this.expectVisible(accountInfo);
         await this.expectHasText(accountInfo, 'ENTER ACCOUNT INFORMATION');
     }
 
     async verifyAddressInfoHeadingTextIsVisible() {
-        const addressInfo = locators.signUpAddressHeading(this.page);
+        const addressInfo = locators.addressHeading(this.page);
         await this.expectVisible(addressInfo);
-        await this.expectHasText(addressInfo, 'ADDRESS INFORMATION');    
+        await this.expectHasText(addressInfo, 'ADDRESS INFORMATION');
     }
 
-    async verifyLoginToYourAccountIsVisible() {
-        await this.expectVisible(locators.signUpLoginAccountHeading(this.page));
+    async verifyLoginToYourAccountHeadingIsVisible() {
+        await this.expectVisible(locators.loginAccountHeading(this.page));
     }
 
-    async signInUsingCorrectCredentials(){
-        await this.fill(locators.signUpLoginEmailInput(this.page), testCredentials.email1);
-        await this.fill(locators.signUpLoginPasswordInput(this.page), testCredentials.password);
+    async enterCredentials() {
+        await this.fill(locators.loginEmailInput(this.page), testData.credential.email);
+        await this.fill(locators.loginPasswordInput(this.page), testData.credential.password);
     }
 
-    async clickLoginButton(){
-        await this.click(locators.signUpLoginButton(this.page));
+    async clickLoginButton() {
+        await this.click(locators.loginButton(this.page));
     }
 
-    async clickCreateAccountButton(){
-        await this.click(locators.signUpCreateAccountButton(this.page));
+    async clickCreateAccountButton() {
+        await this.click(locators.createAccountButton(this.page));
     }
 
     //@step('Fill Sign Up Form')
-    async fillSignUpForm(data: {
-        title: string,
-        name: string
-        email: string,
-        password: string,
-        day: string,
-        month: string,
-        year: string,
-        firstName: string,
-        lastName: string,
-        company: string,
-        address1: string,
-        address2: string,
-        country: string,
-        state: string,
-        city: string,
-        zipcode: string,
-        mobileNumber: string
-    }) {
-        if (data.title === 'Mr') {
-            await this.selectRadio(locators.signUpMRTitle(this.page));
-        } else if (data.title === 'Mrs') {
-            await this.selectRadio(locators.signUpMSTitle(this.page));
+    async fillSignUpForm() {
+        if (testData.signUp.title === 'Mr') {
+            await this.selectRadio(locators.MRTitle(this.page));
+        } else if (testData.signUp.title === 'Mrs') {
+            await this.selectRadio(locators.MSTitle(this.page));
         }
-        await this.expectEquals(locators.signUpNameInput(this.page), data.name); // Verify name input is pre-filled with the name used during signup
-        await this.expectEquals(locators.signUpEmailInput(this.page), data.email); // Verify email input is pre-filled with the email used during signup
-        await this.fill(locators.signUpPasswordInput(this.page), data.password);
-        await this.selectByValue(locators.signUpDateOfBirthDay(this.page), data.day);
-        await this.selectByValue(locators.signUpDateOfBirthMonth(this.page), data.month);
-        await this.selectByValue(locators.signUpDateOfBirthYear(this.page), data.year);
-        await this.fill(locators.signUpFirstNameInput(this.page), data.firstName);
-        await this.fill(locators.signUpLastNameInput(this.page), data.lastName);
-        await this.fill(locators.signUpCompanyInput(this.page), data.company);
-        await this.fill(locators.signUpAddress1Input(this.page), data.address1);
-        await this.fill(locators.signUpAddress2Input(this.page), data.address2);
-        await this.selectByValue(locators.signUpCountrySelect(this.page), data.country);
-        await this.fill(locators.signUpStateInput(this.page), data.state);
-        await this.fill(locators.signUpCityInput(this.page), data.city);
-        await this.fill(locators.signUpZipCodeInput(this.page), data.zipcode);
-        await this.fill(locators.signUpMobileNumberInput(this.page), data.mobileNumber);
+        await this.expectEquals(locators.nameInput(this.page), testData.signUp.name); // Verify name input is pre-filled with the name used during signup
+        await this.expectEquals(locators.emailInput(this.page), testData.signUp.email); // Verify email input is pre-filled with the email used during signup
+        await this.fill(locators.passwordInput(this.page), testData.signUp.password);
+        await this.selectByValue(locators.dateOfBirthDay(this.page), testData.signUp.day);
+        await this.selectByValue(locators.dateOfBirthMonth(this.page), testData.signUp.month);
+        await this.selectByValue(locators.dateOfBirthYear(this.page), testData.signUp.year);
+        await this.fill(locators.firstNameInput(this.page), testData.signUp.firstName);
+        await this.fill(locators.lastNameInput(this.page), testData.signUp.lastName);
+        await this.fill(locators.companyInput(this.page), testData.signUp.company);
+        await this.fill(locators.address1Input(this.page), testData.signUp.address1);
+        await this.fill(locators.address2Input(this.page), testData.signUp.address2);
+        await this.selectByValue(locators.countrySelect(this.page), testData.signUp.country);
+        await this.fill(locators.stateInput(this.page), testData.signUp.state);
+        await this.fill(locators.cityInput(this.page), testData.signUp.city);
+        await this.fill(locators.zipCodeInput(this.page), testData.signUp.zipcode);
+        await this.fill(locators.mobileNumberInput(this.page), testData.signUp.mobileNumber);
     }
 }

@@ -13,5 +13,5 @@ export const test = base.extend<MyFixtures>({
     
 });
 
-export { expect } from '@playwright/test';
+export { expect, Page } from '@playwright/test';
 export { checkForBrokenLink, checkForBrokenLinks };

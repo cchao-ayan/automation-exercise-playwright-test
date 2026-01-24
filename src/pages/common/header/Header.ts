@@ -1,6 +1,7 @@
 import { Page, expect, Locator } from '@playwright/test';
 import { locators } from "./HeaderLocators";
 import { CommonPageMethods } from '../../base/CommonPageMethod';
+import { testCredentials } from "../../../config/TestCredentials";
 
 export class Header extends CommonPageMethods {
 
@@ -41,9 +42,10 @@ export class Header extends CommonPageMethods {
     async verifyLoggedInUser() {
         try {
             const loggedInUser = await locators.navBar(this.page).nth(9).innerText();
-            await this.expectHasText(loggedInUser, 'Logged in as ' + process.env.TEST_FIRST_NAME);
+            console.log('Logged in user text: ', loggedInUser);
+            await this.expectHasText(loggedInUser, 'Logged in as ' + testCredentials.name);
         } catch (error) {
-            console.error('Error verifying logged in user:', error);
+            console.error('Error verifying logged in user: ', error);
         }
     }
 }
