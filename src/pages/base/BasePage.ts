@@ -2,13 +2,16 @@ import { Page, Locator, expect } from '@playwright/test';
 import { Footer } from '../common/footer/Footer';
 import { Header } from '../common/header/Header';
 import { CommonPageMethods } from './CommonPageMethod';
+import { AdHandler } from '../../utilities/ads-handler';
 
 export abstract class BasePage extends CommonPageMethods {
     private _footer?: Footer;
     private _header?: Header;
+    private readonly adHandler: AdHandler;
 
     constructor(protected page: Page) {
         super(page);
+        this.adHandler = new AdHandler(this.page);
     }
 
     // lazy getter for footer and header instances, created only when accessed
@@ -21,6 +24,7 @@ export abstract class BasePage extends CommonPageMethods {
         await this.page.waitForLoadState('domcontentloaded', { timeout });
     }
     protected async goToUrl(url: string) {
+        await this.adHandler.registerAutoCloseHandlers();
         await this.page.goto(url);
         //await this.ready();
     }

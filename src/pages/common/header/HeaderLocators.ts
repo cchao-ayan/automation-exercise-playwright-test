@@ -4,7 +4,7 @@ export const locators = {
     logoImage:          (page: Page) => page.locator('img[src*="/home/logo.png"]'),
     logoImageSignUp:    (page: Page) => page.getByRole('link', { name: 'Website for practice' }),
     homeLink:           (page: Page) => page.getByRole('link', { name: 'Home' }),
-    productsLink:       (page: Page) => page.getByRole('link', { name: ' Products' }),
+    productsLink:       (page: Page) => page.getByRole('link', { name: 'Products' }),
     cartLink:           (page: Page) => page.getByRole('link', { name: 'Cart' }),
     signUpLogInLink:    (page: Page) => page.getByText('Signup / Login', { exact: true }),
     testCasesLink:      (page: Page) => page.getByRole('link', { name: 'Test Cases' }),
@@ -13,6 +13,6 @@ export const locators = {
     contactUsLink:      (page: Page) => page.getByText('Contact us'),
     deleteAccountLink:  (page: Page) => page.getByText('Delete Account', { exact: true }),
     logoutLink:         (page: Page) => page.getByText('Logout', { exact: true }),
-    navBar:             (page: Page) => page.locator('ul.nav navbar-nav')
+    navBar:             (page: Page) => page.locator('ul.nav.navbar-nav >> li:has-text("Logged in as")'),
 
 }

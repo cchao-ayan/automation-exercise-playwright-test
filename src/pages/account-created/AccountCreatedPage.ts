@@ -9,19 +9,19 @@ export class AccountCreatedPage extends BasePage {
     async verifyHeadingisVisible() {
         const headingLocator = this.toLocator(locators.accountCreatedHeading(this.page));
         await this.expectVisible(headingLocator);
-        await this.expectHasText(headingLocator, 'Account Created!');
+        await this.expectHaveText(headingLocator, 'Account Created!');
     }
 
     async verifyText1isVisible() {
         const text1Locator = this.toLocator(locators.text1(this.page));
         await this.expectVisible(text1Locator);
-        await this.expectHasText(text1Locator, 'Congratulations! Your new account has been successfully created!');
+        await this.expectHaveText(text1Locator, 'Congratulations! Your new account has been successfully created!');
     }
 
     async verifyText2isVisible() {
         const text2Locator = this.toLocator(locators.text2(this.page));
         await this.expectVisible(text2Locator);
-        await this.expectHasText(text2Locator, 'You can now take advantage of member privileges to enhance your online shopping experience with us.');
+        await this.expectHaveText(text2Locator, 'You can now take advantage of member privileges to enhance your online shopping experience with us.');
     }
 
     async verifyAccountIscreated() {

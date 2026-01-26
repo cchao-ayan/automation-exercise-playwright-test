@@ -22,7 +22,7 @@ export class CommonPageMethods {
         await expect(this.toLocator(selector)).not.toBeVisible();
     }
 
-    protected async expectHasText(selector: string | Locator, text: string) {
+    protected async expectHaveText(selector: string | Locator, text: string) {
         await expect(this.toLocator(selector)).toHaveText(text);
     }
 

@@ -7,8 +7,6 @@ export class SignUpPage extends BasePage {
     async ready() {
         await this.verifySignUpUrl('https://automationexercise.com/signup');
         await this.header.verifyLogoIsVisible();
-        await this.expectVisible(locators.loginAccountHeading(this.page));
-        await this.expectVisible(locators.newUserSignUpHeading(this.page));
     }
 
     async navigateToSignUpPage(url: string) {
@@ -22,17 +20,13 @@ export class SignUpPage extends BasePage {
     async verifyAccountInfoHeadingTestIsVisible() {
         const accountInfo = locators.infoHeading(this.page);
         await this.expectVisible(accountInfo);
-        await this.expectHasText(accountInfo, 'ENTER ACCOUNT INFORMATION');
+        await this.expectHaveText(accountInfo, 'ENTER ACCOUNT INFORMATION');
     }
 
     async verifyAddressInfoHeadingTextIsVisible() {
         const addressInfo = locators.addressHeading(this.page);
         await this.expectVisible(addressInfo);
-        await this.expectHasText(addressInfo, 'ADDRESS INFORMATION');
-    }
-
-    async verifyLoginToYourAccountHeadingIsVisible() {
-        await this.expectVisible(locators.loginAccountHeading(this.page));
+        await this.expectHaveText(addressInfo, 'ADDRESS INFORMATION');
     }
 
     async enterCredentials() {

@@ -8,6 +8,7 @@ export class LoginPage extends BasePage {
         await this.verifyLoginPageUrl('https://automationexercise.com/login');
         await this.header.verifyLogoIsVisible();
         await this.verifySignUpHeadingIsVisible();
+        await this.verifyLoginHeadingIsVisible();
     }
     async navigateToManagePage(url: string) {
         await this.goToUrl(url);
