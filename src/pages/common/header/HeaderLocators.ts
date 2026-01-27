@@ -13,6 +13,6 @@ export const locators = {
     contactUsLink:      (page: Page) => page.getByText('Contact us'),
     deleteAccountLink:  (page: Page) => page.getByText('Delete Account', { exact: true }),
     logoutLink:         (page: Page) => page.getByText('Logout', { exact: true }),
-    navBar:             (page: Page) => page.locator('ul.nav.navbar-nav >> li:has-text("Logged in as")'),
+    loggedInText:       (page: Page) => page.locator('ul.nav.navbar-nav >> li:has-text("Logged in as")'),
 
 }

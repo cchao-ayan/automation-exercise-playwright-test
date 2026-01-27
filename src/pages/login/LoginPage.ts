@@ -4,7 +4,7 @@ import { locators } from "./LoginPageLocators";
 
 export class LoginPage extends BasePage {
 
-    async ready(){
+    async ready() {
         await this.verifyLoginPageUrl('https://automationexercise.com/login');
         await this.header.verifyLogoIsVisible();
         await this.verifySignUpHeadingIsVisible();
@@ -34,14 +34,25 @@ export class LoginPage extends BasePage {
         await this.fill(locators.newUserEmailInput(this.page), email);
     }
 
-    async clickSignUpButton() {
-        await this.click(locators.newUserSignupButton(this.page));
-    }
-
     async fillNameAndEmail(name: string, email: string) {
         await this.fillSignUpNameInput(name);
         await this.fillSignUpEmailInput(email);
     }
 
+    async clickSignUpButton() {
+        await this.click(locators.newUserSignupButton(this.page));
+    }
 
+    async signUp(name: string, email: string) {
+        await this.fillNameAndEmail(name, email);
+        await this.clickSignUpButton();
+    }
+
+    async logoutLandingPage() {
+        await this.ready();
+        await this.header.verifyDeleteButtonIsNotVisible();
+        await this.header.verifyLogoutButtonIsNotVisible();
+        await this.header.verifyLoggedInUserTextIsNotVisible();
+
+    }
 }

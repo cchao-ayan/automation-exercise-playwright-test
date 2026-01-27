@@ -17,18 +17,17 @@ test.describe('Automation Exercises - Test Cases', () => {
         await test.step('3. Register a new account', async () => {
             await pom.homePage.header.clickSignupLoginLink();
             await pom.loginPage.ready();
-            await pom.loginPage.fillNameAndEmail(testCredentials.name, testCredentials.email1);
-            await pom.loginPage.clickSignUpButton();
+            await pom.loginPage.signUp(testCredentials.name, testCredentials.email1);
             await pom.signUpPage.ready();
-            await pom.signUpPage.fillSignUpForm();
-            await pom.signUpPage.clickCreateAccountButton();
+            await pom.signUpPage.registerNewAccount();
         });
         await test.step('4. Verify account creation', async () => {
             await pom.accountCreatedPage.verifyAccountIscreated();
         });
         await test.step('5. Verify user is logged-in', async () => {
-            await pom.homePage.verifyThatUserIsLoggedIn();
+            await pom.homePage.loggedInUserLandingPage();
         });
+        /*
         await test.step('6. Delete user account', async () => {
             await pom.homePage.header.clickDeleteAccountLink();
         });
@@ -38,6 +37,7 @@ test.describe('Automation Exercises - Test Cases', () => {
         await test.step('9. Verify landing page and user is logged out', async () => {
             await pom.homePage.verifyThatUserIsLoggedOut();
         });
+        */
     });
 
     test('Test Case 2: Login User with correct email and password', async ({ pom }) => {
@@ -51,11 +51,10 @@ test.describe('Automation Exercises - Test Cases', () => {
         await test.step('3. Login valid credentials', async () => {
             await pom.homePage.header.clickSignupLoginLink();
             await pom.loginPage.ready();
-            await pom.signUpPage.enterCredentials();
-            await pom.signUpPage.clickLoginButton();
+            await pom.signUpPage.login(testCredentials.email1, testCredentials.password);
         });
         await test.step('4. Verify user is logged-in', async () => {
-            await pom.homePage.verifyThatUserIsLoggedIn();
+            await pom.homePage.loggedInUserLandingPage();
         });
         await test.step('5. Delete user account', async () => {
             await pom.homePage.header.clickDeleteAccountLink();
@@ -64,13 +63,81 @@ test.describe('Automation Exercises - Test Cases', () => {
             await pom.accountDeletedPage.verifyAccountIsDeleted();
         });
         await test.step('7. Verify landing page and user is logged out', async () => {
-            await pom.homePage.verifyThatUserIsLoggedOut();
+            await pom.loginPage.logoutLandingPage();
         });
     });
 
-    test.skip('Test Case 3: Login User with incorrect email and password', async ({ pom }) => {       
+    test('Test Case 3: Login User with incorrect email and password', async ({ pom }) => {
+        await test.step('1. Launch application', async () => {
+            await pom.homePage.navigateToHomePage('/');
+        });
+        await test.step('2. Verify home page', async () => {
+            await pom.homePage.ready();
+        });
+        await test.step('3. Login invalid credentials', async () => {
+            await pom.homePage.header.clickSignupLoginLink();
+            await pom.loginPage.ready();
+            await pom.signUpPage.login(invalidCredentials.user1.email, invalidCredentials.user1.password);
+        });
+        await test.step('4. Verify login error message', async () => {
+            await pom.signUpPage.verifyLoginErrorMessageIsVisible();
+        });
+    });
 
+    test('Test Case 4: Logout User', async ({ pom }) => {
+        await test.step('1. Launch application', async () => {
+            await pom.homePage.navigateToHomePage('/');
+        });
+        await test.step('2. Verify home page', async () => {
+            await pom.homePage.ready();
+        });
+        await test.step('3. Login valid credentials', async () => {
+            await pom.homePage.header.clickSignupLoginLink();
+            await pom.loginPage.ready();
+            await pom.signUpPage.login(testCredentials.email1, testCredentials.password);
+        });
+        await test.step('4. Verify user is logged-in', async () => {
+            await pom.homePage.loggedInUserLandingPage();
+        });
+        await test.step('5. Logout user', async () => {
+            await pom.homePage.header.clickLogoutLink();
+        });
+        await test.step('6. Verify user is logged out', async () => {
+            await pom.loginPage.logoutLandingPage();
+        });
+    });
 
+    test('Test Case 5: Register User with existing email', async ({ pom }) => {
+        await test.step('1. Launch application', async () => {
+            await pom.homePage.navigateToHomePage('/');
+        });
+        await test.step('2. Verify home page', async () => {
+            await pom.homePage.ready();
+        });
+        await test.step('3. Signup using existing credentials', async () => {
+            await pom.homePage.header.clickSignupLoginLink();
+            await pom.loginPage.ready();
+            await pom.loginPage.signUp(testCredentials.name, testCredentials.email1);
+        });
+
+        await test.step('4. Verify error message for existing email', async () => {
+            await pom.signUpPage.verifyExistingEmailErrorMessageIsVisible();
+        });
+    });
+
+     test('Test Case 6: Contact Us Form', async ({ pom }) => {
+        await test.step('1. Launch application', async () => {
+            await pom.homePage.navigateToHomePage('/');
+        });
+        await test.step('2. Verify home page', async () => {
+            await pom.homePage.ready();
+        });
+        await test.step('3. Signup using existing credentials', async () => {
+        });
+
+        await test.step('4. Verify error message for existing email', async () => {
+            await pom.signUpPage.verifyExistingEmailErrorMessageIsVisible();
+        });
     });
 
 });

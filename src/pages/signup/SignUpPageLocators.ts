@@ -27,5 +27,7 @@ export const locators = {
     loginEmailInput:      (page: Page) => page.getByTestId ('login-email'),
     loginPasswordInput:   (page: Page) => page.getByTestId ('login-password'),
     loginButton:          (page: Page) => page.getByTestId('login-button'),
+    loginErrorMessage:    (page: Page) => page.locator('p:has-text("Your email or password is incorrect!")'),
+    existingEmailErrMsg: (page: Page) => page.locator('p:has-text("Email Address already exist!")'),
 
 }

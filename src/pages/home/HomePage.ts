@@ -3,6 +3,11 @@ import { locators } from "./HomePageLocators";
 
 export class HomePage extends BasePage {
 
+    async ready() {
+        await this.verifyHomePageUrl('https://automationexercise.com/');
+        await this.header.verifyLogoIsVisible();
+    }
+
     async navigateToHomePage(url: string,) {
         await this.goToUrl(url);
     }
@@ -15,23 +20,11 @@ export class HomePage extends BasePage {
         await this.expectVisible(locators.sliderCarousel(this.page));
     }
 
-    async ready() {
-        await this.expectUrl('https://automationexercise.com/');
-        await this.header.verifyLogoIsVisible();
-    }
-
-    async verifyThatUserIsLoggedIn() {
-        await this.verifyHomePageUrl('https://automationexercise.com/');
-        await this.header.verifyLogoIsVisible();
+    async loggedInUserLandingPage() {
+        await this.ready();
         await this.header.verifyDeleteButtonIsVisible();
         await this.header.verifyLogoutButtonIsVisible();
         await this.header.verifyLoggedInUser();
     }
 
-    async verifyThatUserIsLoggedOut() {
-        await this.verifyHomePageUrl('https://automationexercise.com/');
-        await this.header.verifyLogoIsVisible();
-        await this.header.verifyDeleteButtonIsNotVisible();
-        await this.header.verifyLogoutButtonIsNotVisible();
-    }
 }

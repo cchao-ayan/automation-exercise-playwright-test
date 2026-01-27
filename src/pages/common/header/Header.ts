@@ -18,6 +18,10 @@ export class Header extends CommonPageMethods {
         await this.click(locators.deleteAccountLink(this.page));
     }
 
+    async clickLogoutLink() {
+        await this.click(locators.logoutLink(this.page));
+    }
+
     /*  Verifications */
     async verifyDeleteButtonIsVisible() {
         await this.expectVisible(locators.deleteAccountLink(this.page));
@@ -39,11 +43,16 @@ export class Header extends CommonPageMethods {
         await this.expectNotVisible(locators.logoutLink(this.page));
     }
 
+    async verifyLoggedInUserTextIsNotVisible() {
+        await this.expectNotVisible(locators.loggedInText(this.page));
+    }
+
     async verifyLoggedInUser() {
         try {
-            const loggedInUser = locators.navBar(this.page);
+            const loggedInUser = locators.loggedInText(this.page);
             console.log('Logged in user text: ', loggedInUser);
-            await this.expectHaveText(await loggedInUser.innerText(), 'Logged in as ' + testCredentials.name);
+            await this.expectVisible(loggedInUser);
+            await this.expectHaveText(loggedInUser, 'Logged in as ' + testCredentials.name);
         } catch (error) {
             console.error('Error verifying logged in user: ', error);
         }

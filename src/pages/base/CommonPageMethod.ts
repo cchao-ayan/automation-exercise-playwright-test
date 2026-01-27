@@ -18,6 +18,10 @@ export class CommonPageMethods {
         await expect(this.toLocator(selector)).toBeVisible();
     }
 
+    protected async expectEnabled(selector: string | Locator) {
+        await expect(this.toLocator(selector)).toBeEnabled();
+    }
+
     protected async expectNotVisible(selector: string | Locator) {
         await expect(this.toLocator(selector)).not.toBeVisible();
     }

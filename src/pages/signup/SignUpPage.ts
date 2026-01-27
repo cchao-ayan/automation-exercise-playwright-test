@@ -7,6 +7,8 @@ export class SignUpPage extends BasePage {
     async ready() {
         await this.verifySignUpUrl('https://automationexercise.com/signup');
         await this.header.verifyLogoIsVisible();
+        await this.verifyAccountInfoHeadingTestIsVisible();
+        await this.verifyAddressInfoHeadingTextIsVisible();
     }
 
     async navigateToSignUpPage(url: string) {
@@ -29,20 +31,32 @@ export class SignUpPage extends BasePage {
         await this.expectHaveText(addressInfo, 'ADDRESS INFORMATION');
     }
 
-    async enterCredentials() {
-        await this.fill(locators.loginEmailInput(this.page), testData.credential.email);
-        await this.fill(locators.loginPasswordInput(this.page), testData.credential.password);
+    async verifyLoginErrorMessageIsVisible() {
+        const loginErrorMessage = locators.loginErrorMessage(this.page);
+        await this.expectVisible(loginErrorMessage);
+        await this.expectHaveText(loginErrorMessage, 'Your email or password is incorrect!');
+    }
+
+    async verifyExistingEmailErrorMessageIsVisible() {
+        const emailErrorMessage = locators.existingEmailErrMsg(this.page);
+        await this.expectVisible(emailErrorMessage);
+        await this.expectHaveText(emailErrorMessage, 'Email Address already exist!');
+    }
+
+    async enterCredentials(email: string, password: string) {
+        await this.fill(locators.loginEmailInput(this.page), email);
+        await this.fill(locators.loginPasswordInput(this.page), password);
     }
 
     async clickLoginButton() {
         await this.click(locators.loginButton(this.page));
     }
 
-    async clickCreateAccountButton() {
-        await this.click(locators.createAccountButton(this.page));
+    async login(email: string, password: string) {
+        await this.enterCredentials(email, password);
+        await this.clickLoginButton();
     }
 
-    //@step('Fill Sign Up Form')
     async fillSignUpForm() {
         if (testData.signUp.title === 'Mr') {
             await this.selectRadio(locators.MRTitle(this.page));
@@ -65,5 +79,14 @@ export class SignUpPage extends BasePage {
         await this.fill(locators.cityInput(this.page), testData.signUp.city);
         await this.fill(locators.zipCodeInput(this.page), testData.signUp.zipcode);
         await this.fill(locators.mobileNumberInput(this.page), testData.signUp.mobileNumber);
+    }
+
+    async clickCreateAccountButton() {
+        await this.click(locators.createAccountButton(this.page));
+    }
+
+    async registerNewAccount() {
+        await this.fillSignUpForm();
+        await this.clickCreateAccountButton();
     }
 }

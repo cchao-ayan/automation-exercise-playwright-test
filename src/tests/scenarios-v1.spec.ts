@@ -44,25 +44,7 @@ test.describe('Automation Exercises - Test Cases', () => {
         await test.step('5. Fill up the Signup from', async () => {
             await pom.signUpPage.verifySignUpUrl('https://automationexercise.com/signup');
             await pom.signUpPage.header.verifyLogoIsVisible();
-            await pom.signUpPage.fillSignUpForm({
-                title: 'Mrs',
-                name: 'Elizabeth',
-                email: testCredentials.email1,
-                password: testCredentials.password,
-                day: '15',
-                month: 'May',
-                year: '1990',
-                firstName: 'Elizabeth',
-                lastName: 'Andromeda',
-                company: 'Galaxy Corp',
-                address1: '123 Star Lane',
-                address2: 'Unit 45',
-                country: 'Canada',
-                state: 'Aurora',
-                city: 'Aurora',
-                zipcode: '23001',
-                mobileNumber: '123456789123'
-            })
+            await pom.signUpPage.fillSignUpForm();
         });
         await test.step('6. Click "Create Account" button', async () => {
             await pom.signUpPage.clickCreateAccountButton();
@@ -134,13 +116,6 @@ test.describe('Automation Exercises - Test Cases 2', () => {
             await pom.loginPage.header.verifyLogoIsVisible();
         });
 
-        await test.step('2. Verify "Login to your account" is visible', async () => {
-            await pom.signUpPage.verifyLoginToYourAccountIsVisible();
-        });
-
-        await test.step('3. Enter correct email address and password', async () => {
-            await pom.signUpPage.enterCredentials(testCredentials.email1, testCredentials.password);
-        });
 
         await test.step('4. Click "Login" button', async () => {
             await pom.signUpPage.clickLoginButton();
