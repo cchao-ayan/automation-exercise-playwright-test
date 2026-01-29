@@ -63,7 +63,7 @@ test.describe('Automation Exercises - Test Cases', () => {
             await pom.accountDeletedPage.verifyAccountIsDeleted();
         });
         await test.step('7. Verify landing page and user is logged out', async () => {
-            await pom.loginPage.logoutLandingPage();
+            await pom.homePage.ready();
         });
     });
 
@@ -132,11 +132,40 @@ test.describe('Automation Exercises - Test Cases', () => {
         await test.step('2. Verify home page', async () => {
             await pom.homePage.ready();
         });
-        await test.step('3. Signup using existing credentials', async () => {
+        await test.step('3. Submit contact us form', async () => {
+            await pom.homePage.header.clickContactUsLink();
+            await pom.contactUsPage.ready();
+            await pom.contactUsPage.submitContactUsForm();
         });
 
-        await test.step('4. Verify error message for existing email', async () => {
-            await pom.signUpPage.verifyExistingEmailErrorMessageIsVisible();
+        await test.step('4. Verify success message for contact us form', async () => {
+            await pom.contactUsPage.verifySuccessMessageIsVisible();
+        });
+
+        await test.step('5. Navigate back to home page', async () => {
+            await pom.contactUsPage.clickHomeButton();
+            await pom.homePage.ready();
+        });
+    });
+
+    test('Test Case 7: Verify Test Cases Page', async ({ pom }) => {
+        await test.step('1. Launch application', async () => {
+            await pom.homePage.navigateToHomePage('/');
+        });
+        await test.step('2. Verify home page', async () => {
+            await pom.homePage.ready();
+        });
+        await test.step('3. Navigate to Test Case link', async () =>{
+            await pom.TestCasesPage.ready();
+        });        
+    });
+
+    test('Test Case 8: Verify All Products and product detail page', async ({ pom }) =>{
+         await test.step('1. Launch application', async () => {
+            await pom.homePage.navigateToHomePage('/');
+        });
+        await test.step('2. Verify home page', async () => {
+            await pom.homePage.ready();
         });
     });
 

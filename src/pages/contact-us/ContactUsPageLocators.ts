@@ -16,4 +16,6 @@ export const locators = {
     feedbackText3:      (page: Page) => page.locator('p:has-text("If you have any suggestion areas or improvements, do let us know. We will definitely work on it.")'),
     feedbackText4:      (page: Page) => page.locator('p:has-text("Thank you")'),
     uploadFile:         (page: Page) => page.locator('input[name="upload_file"]'),
+    successMessage:     (page: Page) => page.locator('#contact-page').getByText('Success! Your details have'),
+    homeButton:         (page: Page) => page.locator('a.btn.btn-success >> span:has-text("Home")'),
 }

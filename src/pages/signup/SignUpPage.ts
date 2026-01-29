@@ -22,13 +22,13 @@ export class SignUpPage extends BasePage {
     async verifyAccountInfoHeadingTestIsVisible() {
         const accountInfo = locators.infoHeading(this.page);
         await this.expectVisible(accountInfo);
-        await this.expectHaveText(accountInfo, 'ENTER ACCOUNT INFORMATION');
+        await this.expectHaveText(accountInfo, 'Enter Account Information');
     }
 
     async verifyAddressInfoHeadingTextIsVisible() {
         const addressInfo = locators.addressHeading(this.page);
         await this.expectVisible(addressInfo);
-        await this.expectHaveText(addressInfo, 'ADDRESS INFORMATION');
+        await this.expectHaveText(addressInfo, 'Address Information');
     }
 
     async verifyLoginErrorMessageIsVisible() {

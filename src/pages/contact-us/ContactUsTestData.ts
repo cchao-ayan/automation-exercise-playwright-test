@@ -11,5 +11,7 @@ export const testData = {
         subject: '',
         message: ''
     },
-    filePath: 'src/fixtures/test-file.txt'
+    upload: {
+    filePath: './pages/contact-us/test-123.txt'
+    }
 };

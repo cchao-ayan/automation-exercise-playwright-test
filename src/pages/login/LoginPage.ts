@@ -55,4 +55,8 @@ export class LoginPage extends BasePage {
         await this.header.verifyLoggedInUserTextIsNotVisible();
 
     }
+
+    async loginPause(){
+        await this.page.pause();
+    }
 }

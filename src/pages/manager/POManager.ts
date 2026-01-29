@@ -4,6 +4,8 @@ import { HomePage } from "../home/HomePage";
 import { SignUpPage } from "../signup/SignUpPage";
 import { AccountCreatedPage } from "../account-created/AccountCreatedPage";
 import { AccountDeletedPage } from "../account-deleted/AccountDeletedPage";
+import { ContactUsPage } from "../contact-us/ContactUsPage";
+import { TestCasePage } from "../testcases/TestCasesPage"
 // Header/Footer are provided by pages via BasePage lazy getters
 
 export class POManager {
@@ -15,6 +17,9 @@ export class POManager {
     private _signUp ?: SignUpPage;
     private _accountCreated ?: AccountCreatedPage;
     private _accountDeleted ?: AccountDeletedPage;  
+    private _contactUs ?: ContactUsPage;
+    private _testCase ?: TestCasePage;
+
 
     // if this._login is undefined, create a new LoginPage instance and assign it to this._login else return this._login
     get loginPage(): LoginPage { return this._login ??= new LoginPage(this.page); }
@@ -22,6 +27,8 @@ export class POManager {
     get signUpPage(): SignUpPage { return this._signUp ??= new SignUpPage(this.page); }
     get accountCreatedPage(): AccountCreatedPage { return this._accountCreated ??= new AccountCreatedPage(this.page); }
     get accountDeletedPage(): AccountDeletedPage { return this._accountDeleted ??= new AccountDeletedPage(this.page); }
+    get contactUsPage(): ContactUsPage { return this._contactUs ??= new ContactUsPage(this.page); }
+    get TestCasesPage(): TestCasePage { return this._testCase ??= new TestCasePage(this.page); }
     // header/footer removed from POManager - now provided by pages via BasePage lazy getters
 }
 

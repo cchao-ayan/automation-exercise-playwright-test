@@ -6,7 +6,11 @@ export class ContactUsPage extends BasePage {
 
     async ready() {
         await this.verifyContactUsPageUrl('https://automationexercise.com/contact_us');
-        await this.header.verifyLogoIsVisible();        
+        await this.header.verifyLogoIsVisible();      
+        await this.verifyContactUsFormIsVisible();  
+        await this.verifyGetInTouchHeadingIsVisible();
+        await this.verifyFeedbackHeadingIsVisible();
+        await this.verifyFeedbackTextIsVisible();
     }
     async navigateToContactUsPage(url: string) {
         await this.goToUrl(url);
@@ -43,7 +47,7 @@ export class ContactUsPage extends BasePage {
     }
     async uploadFile() {
         const data = this.page.locator('input[name="upload_file"]');
-        await data.setInputFiles(testData.filePath);
+        await data.setInputFiles(testData.upload.filePath);
     }
     async clickSubmitButton() {
         await this.click(locators.submitButton(this.page));
@@ -52,5 +56,14 @@ export class ContactUsPage extends BasePage {
         await this.fillContactUsForm();
         await this.uploadFile();
         await this.clickSubmitButton();
+    }
+
+    async verifySuccessMessageIsVisible() {       
+        await this.expectVisible(locators.successMessage(this.page));
+        await this.expectHaveText(locators.successMessage(this.page), 'Success! Your details have been submitted successfully.');
+    }
+
+    async clickHomeButton() {
+        await this.click(locators.homeButton(this.page));
     }
 }

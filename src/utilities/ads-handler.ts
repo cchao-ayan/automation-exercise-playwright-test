@@ -46,7 +46,13 @@ export class AdHandler {
   async handleDialogs(): Promise<void> {
     this.page.on('dialog', async dialog => {
       console.log(`Dialog detected: ${dialog.message()}`);
+      if (dialog.message().includes('Press OK to proceed!')) {
+        console.log('Accepting success dialog');
+        await dialog.accept();
+        return; // exits the method early.
+      } 
       await dialog.dismiss();
+      console.log('Dialog dismissed');
     });
   }
 

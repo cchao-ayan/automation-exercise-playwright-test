@@ -1,8 +1,8 @@
 import { Page } from "@playwright/test";
 
 export const locators = {
-    infoHeading:          (page: Page) => page.locator('b:has-text("ENTER ACCOUNT INFORMATION")'),
-    addressHeading:       (page: Page) => page.locator('b:has-text("ADDRESS INFORMATION")'),
+    infoHeading:          (page: Page) => page.getByText('Enter Account Information'),
+    addressHeading:       (page: Page) => page.getByText('Address Information'),
     dateOfBirthDay:       (page: Page) => page.locator('#days'),
     dateOfBirthMonth:     (page: Page) => page.locator('#months'),
     dateOfBirthYear:      (page: Page) => page.locator('#years'),
