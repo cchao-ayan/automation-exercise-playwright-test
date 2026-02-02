@@ -1,7 +1,7 @@
 {
   "name": "automationexercise",
   "version": "1.0.0",
-  "description": "",
+  "description": "Playwright TypeScript test automation project for automationexercise.com",
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
@@ -10,7 +10,9 @@
     "test:scenario:ui": "playwright test tests/scenarios.spec.ts --ui",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "lint": "eslint \"**/*.{ts,tsx}\" --max-warnings=0",
+    "format": "prettier --write \"**/*.{ts,js,json,md}\""
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,11 @@
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "@types/node": "^24.10.1",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.1.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {

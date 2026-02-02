@@ -1,6 +1,5 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page } from "@playwright/test";
 
 export class Footer {
-    constructor(private page: Page) {}
-
+  constructor(private page: Page) {}
 }

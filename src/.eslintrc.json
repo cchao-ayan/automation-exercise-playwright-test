@@ -1,0 +1,53 @@
+{
+  /**
+   * ESLint configuration for Playwright TypeScript project.
+   * Enforces code quality standards, prevents common mistakes, and maintains consistency.
+   * Integrates with Prettier for automatic code formatting.
+   */
+
+  // Mark this as root config - ESLint won't search for parent configs
+  "root": true,
+
+  // Use TypeScript parser to understand .ts syntax
+  "parser": "@typescript-eslint/parser",
+
+  "parserOptions": {
+    // Reference tsconfig.json for type information
+    "project": "./tsconfig.json",
+
+    // Treat files as ES modules
+    "sourceType": "module"
+  },
+
+  // Enable TypeScript-specific rules
+  "plugins": ["@typescript-eslint"],
+
+  // Extend recommended rulesets
+  "extends": [
+    // ESLint's recommended rules for JavaScript
+    "eslint:recommended",
+
+    // TypeScript ESLint recommended rules for stricter type safety
+    "plugin:@typescript-eslint/recommended",
+
+    // Disable formatting rules that conflict with Prettier
+    "prettier"
+  ],
+
+  // Fine-tune individual rules
+  "rules": {
+    // Disable requirement for explicit return types on internal exports
+    // (too verbose for helper functions)
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+
+    // Warn when function return types are not explicitly declared
+    // This improves code clarity and prevents accidental type changes
+    "@typescript-eslint/explicit-function-return-type": [
+      "warn",
+      {
+        // Allow inline expressions without explicit types (e.g., const x = () => 42)
+        "allowExpressions": true
+      }
+    ]
+  }
+}

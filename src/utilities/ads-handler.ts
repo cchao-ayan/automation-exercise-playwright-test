@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page } from "@playwright/test";
 
 export class AdHandler {
   constructor(private readonly page: Page) {}
@@ -17,9 +17,9 @@ export class AdHandler {
     const closeSelectors = [
       'button:has-text("Close")',
       'button:has-text("×")',
-      '.modal-close',
-      '.close',
-      '[aria-label="Close"]'
+      ".modal-close",
+      ".close",
+      '[aria-label="Close"]',
     ];
 
     // Register a handler for each selector
@@ -27,10 +27,10 @@ export class AdHandler {
     for (const selector of closeSelectors) {
       await this.page.addLocatorHandler(
         this.page.locator(selector),
-        async locator => {
+        async (locator) => {
           console.log(`Auto-closing popup using selector: ${selector}`);
           await locator.click();
-        }
+        },
       );
     }
   }
@@ -44,15 +44,15 @@ export class AdHandler {
    * These dialogs are NOT DOM elements and cannot be handled by locators
    */
   async handleDialogs(): Promise<void> {
-    this.page.on('dialog', async dialog => {
+    this.page.on("dialog", async (dialog) => {
       console.log(`Dialog detected: ${dialog.message()}`);
-      if (dialog.message().includes('Press OK to proceed!')) {
-        console.log('Accepting success dialog');
+      if (dialog.message().includes("Press OK to proceed!")) {
+        console.log("Accepting success dialog");
         await dialog.accept();
         return; // exits the method early.
-      } 
+      }
       await dialog.dismiss();
-      console.log('Dialog dismissed');
+      console.log("Dialog dismissed");
     });
   }
 
@@ -61,8 +61,8 @@ export class AdHandler {
    * triggered by ads or third-party links
    */
   async handlePopups(): Promise<void> {
-    this.page.on('popup', async popup => {
-      console.log('Unexpected popup detected — closing it');
+    this.page.on("popup", async (popup) => {
+      console.log("Unexpected popup detected — closing it");
       await popup.close();
     });
   }
@@ -77,14 +77,14 @@ export class AdHandler {
    * - Unexpected UI overlays
    */
   async blockAds(): Promise<void> {
-    await this.page.route('**/*', route => {
+    await this.page.route("**/*", (route) => {
       const url = route.request().url();
 
       // Abort requests coming from known ad providers
       if (
-        url.includes('ads') ||
-        url.includes('doubleclick') ||
-        url.includes('googlesyndication')
+        url.includes("ads") ||
+        url.includes("doubleclick") ||
+        url.includes("googlesyndication")
       ) {
         console.log(`Blocking ad request: ${url}`);
         route.abort();

@@ -1,4 +1,5 @@
 ## Project Structure Overview
+
 ```
 src/
 ├── .github/
@@ -59,45 +60,51 @@ src/
 ```
 
 ## Framework Design & Key Concepts
+
 ✅ Page Object Model (POM)
 
 Each page has:
-* Page class (actions & behaviors)
-* Locator class (selectors only)
-* Separating locators improves:
-* Maintainability
-* Readability
-* Easier UI updates
+
+- Page class (actions & behaviors)
+- Locator class (selectors only)
+- Separating locators improves:
+- Maintainability
+- Readability
+- Easier UI updates
 
 Example:
 `await loginPage.login(username, password);`
 
 ✅ Base Page Architecture
 Located in pages/base/
-* BasePage.ts
-* Centralized navigation logic
-* URL handling
-* CommonPageMethods.ts
-* Shared methods like page readiness, common waits, reusable actions
-* This ensures consistent behavior across all pages.
+
+- BasePage.ts
+- Centralized navigation logic
+- URL handling
+- CommonPageMethods.ts
+- Shared methods like page readiness, common waits, reusable actions
+- This ensures consistent behavior across all pages.
 
 ✅ Common Components
 Located in pages/common/
-* Header and Footer components
-* Reusable UI elements shared across multiple pages
-* Prevents duplicated locators and logic
+
+- Header and Footer components
+- Reusable UI elements shared across multiple pages
+- Prevents duplicated locators and logic
 
 ✅ Page Object Manager Pattern
 Located in pages/manager/
-* Central factory for initializing page objects
-* Keeps test files clean
-* Supports scalable test growth
+
+- Central factory for initializing page objects
+- Keeps test files clean
+- Supports scalable test growth
 
 ✅ Custom Fixtures
 Located in fixture/
-* pom.fixture.ts - Injects page objects into tests
-* ui.fixture.ts - Shared UI setup logic
-  
+
+- pom.fixture.ts - Injects page objects into tests
+- ui.fixture.ts - Shared UI setup logic
+
 Example usage:
 
 `test('User can sign up', async ({ signupPage }) => {
@@ -106,15 +113,18 @@ Example usage:
 
 ✅ Environment Configuration
 Located in config/
-* .env - Stores credentials and environment values
-*  TestCredentials.ts - Central access layer for environment variables, Avoids hardcoding sensitive data.
+
+- .env - Stores credentials and environment values
+- TestCredentials.ts - Central access layer for environment variables, Avoids hardcoding sensitive data.
 
 ✅ Utilities
 Located in utilities/
-* broken-links-checker.ts - Validates broken links on a page
-* step-decorator.ts - Adds readable step logging to tests, Improves reporting and debugging
+
+- broken-links-checker.ts - Validates broken links on a page
+- step-decorator.ts - Adds readable step logging to tests, Improves reporting and debugging
 
 ## How to Run the Tests
+
 🔹 Prerequisites
 
 Node.js (v16+)
@@ -140,13 +150,14 @@ npm
 
 The project includes a GitHub Actions workflow:
 .github/workflows/playwright.yml
-* This pipeline:
-* Installs dependencies
-* Runs Playwright tests
-* Generates test results automatically on push or pull request
+
+- This pipeline:
+- Installs dependencies
+- Runs Playwright tests
+- Generates test results automatically on push or pull request
 
 ## Test Evidence & Reporting
 
-* Screenshots captured on failure → test-screenshots/
-* HTML reports → playwright-report/
-* Execution artifacts → test-results/
+- Screenshots captured on failure → test-screenshots/
+- HTML reports → playwright-report/
+- Execution artifacts → test-results/
