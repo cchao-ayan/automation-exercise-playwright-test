@@ -1,9 +1,6 @@
-import { test as base } from "@playwright/test";
-import { POManager } from "../pages/manager/POManager";
-import {
-  checkForBrokenLink,
-  checkForBrokenLinks,
-} from "../utilities/broken-links-checker";
+import { test as base } from '@playwright/test';
+import { POManager } from '../pages/manager/POManager';
+import { checkForBrokenLink, checkForBrokenLinks } from '../utilities/broken-links-checker';
 
 type MyFixtures = {
   pom: POManager;
@@ -15,5 +12,5 @@ export const test = base.extend<MyFixtures>({
   },
 });
 
-export { expect, Page } from "@playwright/test";
+export { expect, Page } from '@playwright/test';
 export { checkForBrokenLink, checkForBrokenLinks };

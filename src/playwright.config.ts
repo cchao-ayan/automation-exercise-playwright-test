@@ -1,9 +1,9 @@
-import { defineConfig, devices } from "@playwright/test";
-import path from "path";
-import dotenv from "dotenv";
+import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
+import dotenv from 'dotenv';
 
 dotenv.config({
-  path: "./config/.env",
+  path: './config/.env',
 });
 
 /**
@@ -15,7 +15,7 @@ dotenv.config({
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./tests",
+  testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -27,30 +27,26 @@ export default defineConfig({
   /* Timeout per test in milliseconds (120 seconds per test, override per-test with test.setTimeout) */
   timeout: 120_000,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [["list"], ["html", { outputFolder: "playwright-report" }]],
+  reporter: [['list'], ['html', { outputFolder: 'playwright-report' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: "https://automationexercise.com/",
+    baseURL: 'https://automationexercise.com/',
     headless: false,
-    screenshot: "only-on-failure",
-    video: "retain-on-failure",
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    trace: 'on-first-retry',
 
     /* Custom test ID attribute */
-    testIdAttribute: "data-qa",
+    testIdAttribute: 'data-qa',
   },
   expect: {
     /* Timeout for expect assertions (e.g., expect(locator).toBeVisible()) */
     timeout: 5_000,
     toHaveScreenshot: {
-      pathTemplate: path.resolve(
-        __dirname,
-        "test-screenshots",
-        "{projectName}/{arg}{ext}",
-      ),
+      pathTemplate: path.resolve(__dirname, 'test-screenshots', '{projectName}/{arg}{ext}'),
       /* Threshold for visual regression (0.2 = 20% tolerance for screenshot diffs) */
       threshold: 0.2,
     },
@@ -59,9 +55,9 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-      outputDir: path.resolve(__dirname, "test-results", "chromium"),
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+      outputDir: path.resolve(__dirname, 'test-results', 'chromium'),
     },
 
     // {

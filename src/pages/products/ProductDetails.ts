@@ -1,4 +1,4 @@
-import { Locator } from "@playwright/test";
+import { Locator } from '@playwright/test';
 
 /**
  * Page object for a single product details element.
@@ -8,13 +8,13 @@ export class ProductDetails {
 
   /** Return the image `src` or null if not present. */
   async getProductImage(): Promise<string | null> {
-    const img = this.root.locator("img");
-    return await img.getAttribute("src");
+    const img = this.root.locator('img');
+    return await img.getAttribute('src');
   }
 
   /** Return locator for cost element. */
   getCost(): Locator {
-    return this.root.locator("h2");
+    return this.root.locator('h2');
   }
 
   /** Get cost text. */
@@ -24,7 +24,7 @@ export class ProductDetails {
 
   /** Return locator for name element. */
   getName(): Locator {
-    return this.root.locator("p");
+    return this.root.locator('p');
   }
 
   /** Get name text. */

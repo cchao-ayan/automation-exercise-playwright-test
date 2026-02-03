@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from "playwright/test";
+import { Page, Locator, expect } from 'playwright/test';
 
 export class CommonPageMethods {
   constructor(protected page: Page) {
@@ -45,11 +45,8 @@ export class CommonPageMethods {
     await expect(this.toLocator(selector)).toHaveScreenshot(path);
   }
 
-  protected async expectEquals(
-    selector: string | Locator,
-    expectedValue: string,
-  ) {
-    const actual = await this.toLocator(selector).getAttribute("value");
+  protected async expectEquals(selector: string | Locator, expectedValue: string) {
+    const actual = await this.toLocator(selector).getAttribute('value');
     console.log(`Actual value: ${actual}, Expected value: ${expectedValue}`);
     expect(actual).toBe(expectedValue);
   }
@@ -58,11 +55,7 @@ export class CommonPageMethods {
     try {
       await this.toLocator(selector).selectOption({ label: value });
     } catch (error) {
-      console.error(
-        `The '${value}' is not in the list of values`,
-        selector,
-        error,
-      );
+      console.error(`The '${value}' is not in the list of values`, selector, error);
     }
   }
 
@@ -78,13 +71,29 @@ export class CommonPageMethods {
     await this.toLocator(selector).check();
   }
 
-  protected async getInnerText(selector: string | Locator): Promise<string> {
-    return await this.toLocator(selector).innerText();
+  /**
+   * Get inner text from a locator.
+   * @param selector - CSS selector (string) or Locator object
+   * @param optional - If true, returns empty string on error; if false, throws error
+   * @returns Promise resolving to inner text or empty string (if optional)
+   */
+  protected async getInnerText(
+    selector: string | Locator,
+    optional: boolean = false,
+  ): Promise<string> {
+    try {
+      return await this.toLocator(selector).innerText();
+    } catch (error) {
+      if (optional) {
+        return '';
+      }
+      throw error;
+    }
   }
 
   // Helper method to convert string selectors to Locator objects
   protected toLocator(selector: string | Locator): Locator {
-    return typeof selector === "string"
+    return typeof selector === 'string'
       ? this.page.locator(selector) // string → Locator
       : selector; // already a Locator
   }

@@ -1,5 +1,5 @@
-import { BasePage } from "../base/BasePage";
-import { locators } from "./AccountCreatedPageLocators";
+import { BasePage } from '../base/BasePage';
+import { locators } from './AccountCreatedPageLocators';
 
 export class AccountCreatedPage extends BasePage {
   async verifyPageUrl(expectedUrl: string) {
@@ -7,11 +7,9 @@ export class AccountCreatedPage extends BasePage {
   }
 
   async verifyHeadingisVisible() {
-    const headingLocator = this.toLocator(
-      locators.accountCreatedHeading(this.page),
-    );
+    const headingLocator = this.toLocator(locators.accountCreatedHeading(this.page));
     await this.expectVisible(headingLocator);
-    await this.expectHaveText(headingLocator, "Account Created!");
+    await this.expectHaveText(headingLocator, 'Account Created!');
   }
 
   async verifyText1isVisible() {
@@ -19,7 +17,7 @@ export class AccountCreatedPage extends BasePage {
     await this.expectVisible(text1Locator);
     await this.expectHaveText(
       text1Locator,
-      "Congratulations! Your new account has been successfully created!",
+      'Congratulations! Your new account has been successfully created!',
     );
   }
 
@@ -28,12 +26,12 @@ export class AccountCreatedPage extends BasePage {
     await this.expectVisible(text2Locator);
     await this.expectHaveText(
       text2Locator,
-      "You can now take advantage of member privileges to enhance your online shopping experience with us.",
+      'You can now take advantage of member privileges to enhance your online shopping experience with us.',
     );
   }
 
   async verifyAccountIscreated() {
-    await this.verifyPageUrl("https://automationexercise.com/account_created");
+    await this.verifyPageUrl('https://automationexercise.com/account_created');
     await this.header.verifyLogoIsVisible();
     await this.verifyHeadingisVisible();
     await this.verifyText1isVisible();

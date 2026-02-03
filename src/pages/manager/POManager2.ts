@@ -1,6 +1,6 @@
-import { Page } from "@playwright/test";
-import path from "path";
-import fs from "fs";
+import { Page } from '@playwright/test';
+import path from 'path';
+import fs from 'fs';
 
 /* 
 - scans your /pages folder
@@ -20,13 +20,13 @@ export class POManager2 {
   }
 
   private async discoverClasses() {
-    const pagesDir = path.join(__dirname, "../pages");
+    const pagesDir = path.join(__dirname, '../pages');
     if (!fs.existsSync(pagesDir)) return;
 
     const files = this.walkDirSync(pagesDir); // returns string[]
 
     for (const filePath of files) {
-      if (!filePath.endsWith(".ts") && !filePath.endsWith(".js")) continue;
+      if (!filePath.endsWith('.ts') && !filePath.endsWith('.js')) continue;
 
       const className = path.basename(filePath, path.extname(filePath));
       const key = className.charAt(0).toLowerCase() + className.slice(1);

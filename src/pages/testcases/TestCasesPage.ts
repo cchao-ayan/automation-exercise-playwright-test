@@ -1,11 +1,9 @@
-import { BasePage } from "../base/BasePage";
-import { locators } from "./TestCasesPageLocators";
+import { BasePage } from '../base/BasePage';
+import { locators } from './TestCasesPageLocators';
 
 export class TestCasePage extends BasePage {
   async ready() {
-    await this.navigateToTestCasePage(
-      "https://automationexercise.com/test_cases",
-    );
+    await this.navigateToTestCasePage('https://automationexercise.com/test_cases');
     await this.header.verifyLogoIsVisible();
     await this.verifyTestCaseHeadingIsVisible();
     await this.verifyFeedbackHeadingIsVisible();

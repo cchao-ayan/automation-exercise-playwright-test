@@ -1,5 +1,5 @@
-export { expect } from "@playwright/test";
-import { test } from "@playwright/test";
+export { expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 /**
  * Decorator function for wrapping POM methods in a test.step.
@@ -12,10 +12,7 @@ import { test } from "@playwright/test";
  * @returns A decorator function that can be used to decorate test methods.
  */
 export function step(stepName?: string) {
-  return function decorator(
-    target: Function,
-    context: ClassMethodDecoratorContext,
-  ) {
+  return function decorator(target: Function, context: ClassMethodDecoratorContext) {
     return function replacementMethod(this: any, ...args: any) {
       const name = `${stepName || (context.name as string)} (${this.constructor.name})`;
       return test.step(name, async () => {

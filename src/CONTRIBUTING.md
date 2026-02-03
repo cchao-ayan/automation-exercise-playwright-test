@@ -73,7 +73,7 @@ npm run format    # Auto-format all files
 **For flaky tests**:
 
 ```typescript
-test("Flaky test", async ({ pom }) => {
+test('Flaky test', async ({ pom }) => {
   test.setTimeout(180_000); // Extend timeout to 3 minutes
   // or
   test.slow(); // Multiply timeout by 3x

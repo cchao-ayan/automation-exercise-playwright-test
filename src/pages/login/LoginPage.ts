@@ -1,9 +1,9 @@
-import { BasePage } from "../base/BasePage";
-import { locators } from "./LoginPageLocators";
+import { BasePage } from '../base/BasePage';
+import { locators } from './LoginPageLocators';
 
 export class LoginPage extends BasePage {
   async ready() {
-    await this.verifyLoginPageUrl("https://automationexercise.com/login");
+    await this.verifyLoginPageUrl('https://automationexercise.com/login');
     await this.header.verifyLogoIsVisible();
     await this.verifySignUpHeadingIsVisible();
     await this.verifyLoginHeadingIsVisible();

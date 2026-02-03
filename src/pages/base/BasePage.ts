@@ -1,8 +1,8 @@
-import { Page } from "@playwright/test";
-import { Footer } from "../common/footer/Footer";
-import { Header } from "../common/header/Header";
-import { CommonPageMethods } from "./CommonPageMethod";
-import { AdHandler } from "../../utilities/ads-handler";
+import { Page } from '@playwright/test';
+import { Footer } from '../common/footer/Footer';
+import { Header } from '../common/header/Header';
+import { CommonPageMethods } from './CommonPageMethod';
+import { AdHandler } from '../../utilities/ads-handler';
 
 export abstract class BasePage extends CommonPageMethods {
   private _footer?: Footer;
@@ -28,7 +28,7 @@ export abstract class BasePage extends CommonPageMethods {
    * Wait for page to reach domcontentloaded state.
    */
   protected async ready(timeout = 60000): Promise<void> {
-    await this.page.waitForLoadState("domcontentloaded", { timeout });
+    await this.page.waitForLoadState('domcontentloaded', { timeout });
   }
 
   /**

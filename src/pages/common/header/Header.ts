@@ -1,7 +1,7 @@
-import { Page } from "@playwright/test";
-import { locators } from "./HeaderLocators";
-import { CommonPageMethods } from "../../base/CommonPageMethod";
-import { testCredentials } from "../../../config/TestCredentials";
+import { Page } from '@playwright/test';
+import { locators } from './HeaderLocators';
+import { CommonPageMethods } from '../../base/CommonPageMethod';
+import { testCredentials } from '../../../config/TestCredentials';
 
 export class Header extends CommonPageMethods {
   constructor(page: Page) {
@@ -59,10 +59,10 @@ export class Header extends CommonPageMethods {
       await this.expectVisible(locators.loggedInText(this.page));
       await this.expectHaveText(
         locators.loggedInText(this.page),
-        "Logged in as " + testCredentials.name,
+        'Logged in as ' + testCredentials.name,
       );
     } catch (error) {
-      console.error("Error verifying logged in user: ", error);
+      console.error('Error verifying logged in user: ', error);
     }
   }
 }
