@@ -2,7 +2,7 @@ import { Page } from '@playwright/test';
 
 export const locators = {
   featuredItems: (page: Page) => page.locator('div.features_items >> div.col-sm-4'),
-  featuredDetails: (page: Page) => page.locator('div.col-sm-4'),
+  //featuredDetails: (page: Page) => page.locator('div.col-sm-4'),
   recommendedItems: (page: Page) => page.locator('div.recommended-items'),
   featureItemsHeading: (page: Page) =>
     page.getByRole('heading', { name: 'Features Items', level: 2 }),

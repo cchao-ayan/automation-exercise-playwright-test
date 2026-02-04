@@ -25,7 +25,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Timeout per test in milliseconds (120 seconds per test, override per-test with test.setTimeout) */
-  timeout: 120_000,
+  //timeout: 120_000,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['list'], ['html', { outputFolder: 'playwright-report' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -44,7 +44,7 @@ export default defineConfig({
   },
   expect: {
     /* Timeout for expect assertions (e.g., expect(locator).toBeVisible()) */
-    timeout: 5_000,
+    //timeout: 5_000,
     toHaveScreenshot: {
       pathTemplate: path.resolve(__dirname, 'test-screenshots', '{projectName}/{arg}{ext}'),
       /* Threshold for visual regression (0.2 = 20% tolerance for screenshot diffs) */
