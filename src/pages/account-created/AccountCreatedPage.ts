@@ -3,7 +3,7 @@ import { locators } from './AccountCreatedPageLocators';
 
 export class AccountCreatedPage extends BasePage {
   async verifyPageUrl(expectedUrl: string) {
-    await this.expectUrl(expectedUrl);
+    return await this.expectUrl(expectedUrl);
   }
 
   async verifyHeadingisVisible() {

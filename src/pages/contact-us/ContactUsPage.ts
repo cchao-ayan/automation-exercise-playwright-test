@@ -57,14 +57,13 @@ export class ContactUsPage extends BasePage {
     await this.clickSubmitButton();
   }
 
-  async verifySuccessMessageIsVisible() {
+  async verifySuccessMessageState() {
     await this.expectVisible(locators.successMessage(this.page));
     await this.expectHaveText(
       locators.successMessage(this.page),
       'Success! Your details have been submitted successfully.',
     );
   }
-
   async clickHomeButton() {
     await this.click(locators.homeButton(this.page));
   }

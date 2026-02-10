@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { locators } from './HeaderLocators';
-import { CommonPageMethods } from '../../base/CommonPageMethod';
-import { testCredentials } from '../../../config/TestCredentials';
+import { CommonPageMethods } from '../../pages/base/CommonPageMethod';
+import { testCredentials } from '../../config/TestCredentials';
 
 export class Header extends CommonPageMethods {
   constructor(page: Page) {

@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
-import { Footer } from '../common/footer/Footer';
-import { Header } from '../common/header/Header';
+import { Footer } from '../../components/footer/Footer';
+import { Header } from '../../components/header/Header';
 import { CommonPageMethods } from './CommonPageMethod';
 import { AdHandler } from '../../utilities/ads-handler';
 
@@ -23,20 +23,11 @@ export abstract class BasePage extends CommonPageMethods {
   get header(): Header {
     return (this._header ??= new Header(this.page));
   }
-
-  /**
-   * Wait for page to reach domcontentloaded state.
-   */
-  protected async ready(timeout = 60000): Promise<void> {
-    await this.page.waitForLoadState('domcontentloaded', { timeout });
-  }
-
   /**
    * Navigate to URL with ad handlers registered.
    */
   protected async goToUrl(url: string): Promise<void> {
     await this.adHandler.registerAutoCloseHandlers();
     await this.page.goto(url);
-    //await this.ready();
   }
 }

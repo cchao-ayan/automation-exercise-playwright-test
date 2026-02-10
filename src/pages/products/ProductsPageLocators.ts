@@ -9,8 +9,7 @@ export const locators = {
   allProductsHeading: (page: Page) => page.getByRole('heading', { name: 'All Products', level: 2 }),
   categoryHeading: (page: Page) => page.getByRole('heading', { name: 'Category', level: 2 }),
   brandHeading: (page: Page) => page.getByRole('heading', { name: 'Brands', level: 2 }),
-  recommendedItemsHeading: (page: Page) =>
-    page.getByRole('heading', { name: 'Recommended Items', level: 2 }),
+  
   addToCartButton: (page: Page) => page.getByRole('button', { name: 'Add to cart' }),
   viewProductLink: (page: Page) => page.getByRole('link', { name: 'View Product' }),
   poloLink: (page: Page) => page.getByRole('link', { name: '(6) Polo' }),

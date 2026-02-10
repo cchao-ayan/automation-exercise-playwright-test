@@ -136,7 +136,7 @@ test.describe('Automation Exercises - Test Cases', () => {
         });
 
         await test.step('4. Verify success message for contact us form', async () => {
-            await pom.contactUsPage.verifySuccessMessageIsVisible();
+            await pom.contactUsPage.verifySuccessMessageState();
         });
 
         await test.step('5. Navigate back to home page', async () => {

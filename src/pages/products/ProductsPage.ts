@@ -1,7 +1,8 @@
 import { BasePage } from '../base/BasePage';
-import { ProductDetails } from '../common/product/ProductDetails';
+import { ProductDetails } from '../common/product/ProductItem';
 import { locators } from './ProductsPageLocators';
 import { testData } from './ProductsTestData';
+import { assertTextEquals } from '../../assertion/generic/textAssertion';
 
 export class ProductsPage extends BasePage {
     async ready() {
@@ -40,19 +41,13 @@ export class ProductsPage extends BasePage {
         await this.expectVisible(featuredItemsHeading);
         await this.expectHaveText(featuredItemsHeading, 'Features Items');
     }
-    async verifyRecommendedItemsSectionIsVisible() {
-        const recommendedItemsHeading = locators.recommendedItemsHeading(this.page);
-        await this.expectVisible(recommendedItemsHeading);
-        await this.expectHaveText(recommendedItemsHeading, 'Recommended Items');
-    }
-
     async getFeaturedProductItemCount(): Promise<number> {
         const featuredItems = locators.featuredItems(this.page);
         return await featuredItems.count();
     }
     async getNameInnerText() {
         const featuredItems = locators.featuredItems(this.page).first();
-        return await this.getInnerText(featuredItems.locator('h2').last());
+        return await featuredItems.locator('h2').last().innerText();
     }
     /* Get Featured Product Item by Index */
     /* Returns a ProductDetails instance for a specific featured product item */
@@ -99,7 +94,7 @@ export class ProductsPage extends BasePage {
 
         for (let i = 0; i < count; i++) {
             const product = this.productAt(i);
-            const details = await product.getProductDetails({ scope: 'card' });
+            const details = await product.getPageDetails();
             products.push(details);
         }
         return products;
@@ -108,9 +103,9 @@ export class ProductsPage extends BasePage {
         const details = await this.getAllProductDetails();
         console.log('Product Details:', details);
         for (const detail of details) {
-            await this.expectToBe(detail.image, testData.featured_item1.img);
-            await this.expectToBe(detail.name, testData.featured_item1.name);
-            await this.expectToBe(detail.price, testData.featured_item1.price);
+            assertTextEquals(detail.image, testData.featured_item1.img);
+            assertTextEquals(detail.name, testData.featured_item1.name);
+            assertTextEquals(detail.price, testData.featured_item1.price);
         }
 
     }

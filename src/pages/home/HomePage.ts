@@ -25,4 +25,10 @@ export class HomePage extends BasePage {
     await this.header.verifyLogoutButtonIsVisible();
     await this.header.verifyLoggedInUser();
   }
+
+  async verifyRecommendedItemsSectionIsVisible() {
+          const recommendedItemsHeading = locators.recommendedItemsHeading(this.page);
+          await this.expectVisible(recommendedItemsHeading);
+          await this.expectHaveText(recommendedItemsHeading, 'Recommended Items');
+      }
 }
