@@ -156,7 +156,8 @@ test.describe('Automation Exercises - Test Cases', () => {
             await pom.TestCasesPage.ready();
         });
     });
-    test('Test Case 8: Verify All Products and product detail page', async ({ pom }) => {
+
+    test('Extra Test Case 1: Verify that all product card details are correct', async ({ pom }) => {
         await test.step('1. Launch application', async () => {
             await pom.homePage.navigateToHomePage('/');
         });
@@ -175,30 +176,8 @@ test.describe('Automation Exercises - Test Cases', () => {
             //await pom.productsPage.clickPololink();
         });
         await test.step('5. Verify feature details', async () => {
-            await pom.productsPage.getAllProductDetails();
-            //await pom.productsPage.getAllFeaturedProductItems();
+            await pom.productsPage.verifyProductCardDetailsAreCorrect();
         });
     });
-    test.fixme('Extra Test Case: Verify All Products and product detail page', async ({ pom }) => {
-        await test.step('1. Launch application', async () => {
-            await pom.homePage.navigateToHomePage('/');
-        });
-        await test.step('2. Verify home page', async () => {
-            await pom.homePage.ready();
-        });
-
-        await test.step('3. Navigate to Products page', async () => {
-            await pom.homePage.header.clickProductsLink();
-        });
-
-        await test.step('4. Verify Products page', async () => {
-            await pom.productsPage.ready();
-            //await pom.productsPage.clickPololink();
-        });
-
-        await test.step('5. Verify feature details', async () => {
-            
-            //await pom.productsPage.getAllFeaturedProductItems();
-        });
-    });
+    
 });

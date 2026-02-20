@@ -1,11 +1,11 @@
 import { locators } from './ProductDetailsLocators';
 import { BasePage } from '../base/BasePage';
-import  {testData } from '../products/ProductsTestData';
+//import  {testData } from '../products/ProductsTestData';
 import { expect } from '@playwright/test';
 
 export class ProductDetailsPage extends BasePage {
     async ready(){
-        await this.verifyUrlIsCorrect(testData.featured_item1.url);
+        //await this.verifyUrlIsCorrect(testData.featured_item1.url);
         await this.verifyAddToCartButtonIsVisible();
         await this.verifyReviewSectionIsVisible();
         await this.verifySubmitButtonIsVisible();

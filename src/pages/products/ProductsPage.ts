@@ -1,8 +1,11 @@
 import { BasePage } from '../base/BasePage';
-import { ProductDetails } from '../common/product/ProductItem';
+import { ProductItems } from '../common/product/ProductItem';
 import { locators } from './ProductsPageLocators';
-import { testData } from './ProductsTestData';
-import { assertTextEquals } from '../../assertion/generic/textAssertion';
+import data from '../../test-data/ProductsTestData.json';
+import { assertGreaterThan, assertTextEquals } from '../../assertion/generic';
+import { compareByKey } from '../../utilities/compare-by-key';
+import { pickFields } from '../../utilities/pick-fields';
+
 
 export class ProductsPage extends BasePage {
     async ready() {
@@ -42,70 +45,28 @@ export class ProductsPage extends BasePage {
         await this.expectHaveText(featuredItemsHeading, 'Features Items');
     }
     async getFeaturedProductItemCount(): Promise<number> {
-        const featuredItems = locators.featuredItems(this.page);
-        return await featuredItems.count();
+        return await locators.featuredItems(this.page).count();
     }
-    async getNameInnerText() {
+    async getNameInnerText(): Promise<string> {
         const featuredItems = locators.featuredItems(this.page).first();
         return await featuredItems.locator('h2').last().innerText();
     }
     /* Get Featured Product Item by Index */
     /* Returns a ProductDetails instance for a specific featured product item */
-    productAt(index: number): ProductDetails {
+    productAt(index: number): ProductItems {
         const featuredItems = locators.featuredItems(this.page);
-        return new ProductDetails(this.page, featuredItems.nth(index));
+        return new ProductItems(this.page, featuredItems.nth(index));
     }
-    /*
-    async getProductDetailsFromCard(option: { scope: 'card'}): Promise<void> {
-        const count = await this.getFeaturedProductItemCount();
-        console.log(`Total Featured Items: ${count}`);
-        await this.expectToBeGreaterThan(count);
-        
-        for (let i = 0; i < count; i++) {
-            const product = this.productAt(i);
-            const details = await product.getProductDetails(); 
-            await this.expectToBe(details.name, testData.featured_item1.name);
-            await this.expectToBe(details.price, testData.featured_item1.price);
-        }
-    }
-    async getProductDetailsFromPage(option: { scope: 'card'}): Promise<void> {
-        const count = await this.getFeaturedProductItemCount();
-        console.log(`Total Featured Items: ${count}`);
-        await this.expectToBeGreaterThan(count);
 
-        for (let i = 0; i < count; i++) {
-            const product = this.productAt(i);
-            const details = await product.getProductDetails();
-
-            await this.expectToBe(details.name, testData.featured_item1.name);
-            await this.expectToBe(details.price, testData.featured_item1.price);
-        }
-    }
-        
-    async getProductDetailsFromCard(index: number) {
-        const product = this.productAt(index);
-        return await product.getProductDetails({ scope: 'card' });
-    }
-        */
-    // Or get all products as array for comparison
-    async getAllProductDetails(): Promise<Array<any>> {
+    async verifyProductCardDetailsAreCorrect(): Promise<void> {
         const count = await this.getFeaturedProductItemCount();
-        const products = [];
-
+        console.log(`Found ${count} featured product items on the page.`);
         for (let i = 0; i < count; i++) {
-            const product = this.productAt(i);
-            const details = await product.getPageDetails();
-            products.push(details);
-        }
-        return products;
-    }
-    async compareProductDetailsWithTestData(): Promise<any> {
-        const details = await this.getAllProductDetails();
-        console.log('Product Details:', details);
-        for (const detail of details) {
-            assertTextEquals(detail.image, testData.featured_item1.img);
-            assertTextEquals(detail.name, testData.featured_item1.name);
-            assertTextEquals(detail.price, testData.featured_item1.price);
+            const cardDetail = this.productAt(i);
+            const actualCard = await cardDetail.getCardDetails();
+            const expectedCard = pickFields(data[i], ['id', 'name', 'price']); // Assuming test data is in the same order as the products on the page
+            // Compare only id, name, and price for the card details
+            compareByKey(actualCard, expectedCard, ['id', 'name', 'price']);
         }
 
     }

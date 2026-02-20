@@ -29,6 +29,9 @@ export class CommonPageMethods {
   protected async expectScreenshot(selector: string | Locator, path: string) {
     await expect(this.toLocator(selector)).toHaveScreenshot(path);
   }
+  protected async expectAttributeValue(selector: string | Locator, attribute: string, value: string) {
+    await expect(this.toLocator(selector)).toHaveAttribute(attribute, value);
+  }
   protected async selectByValue(selector: string | Locator, value: string) {
       await this.toLocator(selector).selectOption({ label: value });
   }

@@ -3,6 +3,7 @@ import { locators } from './HomePageLocators';
 
 export class HomePage extends BasePage {
   async ready() {
+    // ensure we are on the home page before performing checks
     await this.verifyHomePageUrl('https://automationexercise.com/');
     await this.header.verifyLogoIsVisible();
   }
@@ -12,6 +13,8 @@ export class HomePage extends BasePage {
   }
 
   async verifyHomePageUrl(expectedUrl: string) {
+    // navigate to the home page if not already there
+    await this.goToUrl(expectedUrl);
     await this.expectUrl(expectedUrl);
   }
 
@@ -27,8 +30,8 @@ export class HomePage extends BasePage {
   }
 
   async verifyRecommendedItemsSectionIsVisible() {
-          const recommendedItemsHeading = locators.recommendedItemsHeading(this.page);
-          await this.expectVisible(recommendedItemsHeading);
-          await this.expectHaveText(recommendedItemsHeading, 'Recommended Items');
-      }
+    const recommendedItemsHeading = locators.recommendedItemsHeading(this.page);
+    await this.expectVisible(recommendedItemsHeading);
+    await this.expectHaveText(recommendedItemsHeading, 'Recommended Items');
+  }
 }

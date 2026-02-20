@@ -1,6 +1,7 @@
 import { BasePage } from '../base/BasePage';
 import { locators } from './SignUpPageLocators';
 import { testData } from './SignUpTestData';
+import { assertTextEquals } from '../../assertion/generic';
 
 export class SignUpPage extends BasePage {
   async ready() {
@@ -8,6 +9,16 @@ export class SignUpPage extends BasePage {
     await this.header.verifyLogoIsVisible();
     await this.verifyAccountInfoHeadingTestIsVisible();
     await this.verifyAddressInfoHeadingTextIsVisible();
+  }
+
+  async getNameAttributeValue(): Promise<string | null> {
+    const nameText = locators.nameInput(this.page).getAttribute('value');
+    return (nameText !== null) ? nameText : ''; //co-elescing return statement to ensure a string is always returned
+  }  
+  
+  async getEmailAttributeValue(): Promise<string | null> {
+    const emailText = locators.emailInput(this.page).getAttribute('value');
+    return (emailText !== null) ? emailText : ''; //co-elescing return statement to ensure a string is always returned
   }
 
   async navigateToSignUpPage(url: string) {
@@ -57,13 +68,17 @@ export class SignUpPage extends BasePage {
   }
 
   async fillSignUpForm() {
+    const nameText = await this.getNameAttributeValue();
+    //console.log(`Name input inner text: ${nameText}`); // Debug log for name input
+    const emailText = await this.getEmailAttributeValue();
+    //console.log(`Email input inner text: ${emailText}`); // Debug log for email input
     if (testData.signUp.title === 'Mr') {
-      await this.selectRadio(locators.MRTitle(this.page));
+      await this.check(locators.MRTitle(this.page));
     } else if (testData.signUp.title === 'Mrs') {
-      await this.selectRadio(locators.MSTitle(this.page));
+      await this.check(locators.MSTitle(this.page));
     }
-    await this.expectEquals(locators.nameInput(this.page), testData.signUp.name); // Verify name input is pre-filled with the name used during signup
-    await this.expectEquals(locators.emailInput(this.page), testData.signUp.email); // Verify email input is pre-filled with the email used during signup
+    assertTextEquals(nameText as string, testData.signUp.name); // Verify name input is pre-filled with the name used during signup
+    assertTextEquals(emailText as string, testData.signUp.email); // Verify email input is pre-filled with the email used during signup
     await this.fill(locators.passwordInput(this.page), testData.signUp.password);
     await this.selectByValue(locators.dateOfBirthDay(this.page), testData.signUp.day);
     await this.selectByValue(locators.dateOfBirthMonth(this.page), testData.signUp.month);

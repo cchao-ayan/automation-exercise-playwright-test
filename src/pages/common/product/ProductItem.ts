@@ -4,7 +4,7 @@ import { ProductDetailsDTO } from '../../../dto/ProductDetails.dto';
 import { CommonPageMethods } from '../../base/CommonPageMethod';
 import { locators } from './ProductItemLocators';
 
-export class ProductDetails extends CommonPageMethods {
+export class ProductItems extends CommonPageMethods {
   constructor(
     page: Page,
     protected root: Locator,
@@ -13,6 +13,9 @@ export class ProductDetails extends CommonPageMethods {
   }
 
   // ---------- locators ----------
+  getProductID(): Locator {
+    return locators.productID(this.root);
+  }
   getProductImage(): Locator {
     return locators.productImage(this.root);
   }
@@ -23,7 +26,7 @@ export class ProductDetails extends CommonPageMethods {
     return locators.productName(this.root);
   }
   getProductPrice(): Locator {
-    return locators.productPrice(this.root);
+    return locators.productPrice(this.root).first();
   }
   getProductCategory(): Locator {
     return locators.productCategory(this.root);
@@ -48,17 +51,33 @@ export class ProductDetails extends CommonPageMethods {
   }
 
   // ---------- data readers ----------
+  async getProductIDAttributeValue(): Promise<string | null> {
+    //const attrib = await this.getProductID().getAttribute('data-product-id');
+    //console.log('Getting product ID:', attrib);
+    return await this.getProductID().getAttribute('data-product-id');
+  }
   async getProductImageSrc(): Promise<string | null> {
     return this.getProductImage().getAttribute('src');
   }
   async getProductNameText(): Promise<string> {
-    return this.getProductName().innerText();
+    //const name = await this.getProductName().innerText();
+    //console.log('Getting product name:', name);
+    return await this.getProductName().innerText();
   }
   async getProductPriceText(): Promise<string> {
-    return this.getProductPrice().innerText();
+    //const price = await this.getProductPrice().innerText();
+    //console.log('Getting product price:', price);    
+    return await this.getProductPrice().innerText();
   }
   async getProductCategoryText(): Promise<string> {
-    return this.getProductCategory().innerText();
+    const fullString = await this.getProductCategory().innerText();
+    const category = fullString.replace('Category:', '').trim();
+    return category.split('>')[1].trim(); // Assuming format "Category: <category> > <userType>"
+  }
+  async getProductUserTypeText(): Promise<string> {
+    const fullString = await this.getProductCategory().innerText();
+    const userType = fullString.replace('Category:', '').trim();
+    return userType.split('>')[0].trim(); // Assuming format "Category: <category> > <userType>"
   }
   async getProductRatingImageSrc(): Promise<string | null> {
     return this.getProducRatingImage().getAttribute('src');
@@ -85,35 +104,20 @@ export class ProductDetails extends CommonPageMethods {
   // ---------- DTO builders ----------
   async getCardDetails(): Promise<ProductCardDTO> {
     return {
+      id: await this.getProductIDAttributeValue(),
       name: await this.getProductNameText(),
-      price: await this.getProductPriceText(),
-      imageUrl: await this.getProductImageSrc(),
-      /*
-      category: await this.getProductCategoryText(),
-      rating: await this.getProductRatingImage(),
-      quantity: await this.getProductQuantityText(),
-      availability: await this.getProductAvailabilityText(),
-      condition: await this.getProductConditionText(),
-      brand: await this.getProductBrandText(),
-      quantityLabel: await this.getProductQuantityLabelText(),
-      addToCart: await this.isAddToCartButtonVisible(),
-      */
+      price: await this.getProductPriceText()
     };
   }
 
   async getPageDetails(): Promise<ProductDetailsDTO> {
     return {
+      id: await this.getProductIDAttributeValue(),
       name: await this.getProductNameText(),
       price: await this.getProductPriceText(),
-      imageUrl: await this.getProductImageSrc(),
-      category: await this.getProductCategoryText(),
-      rating: await this.getProductRatingImageSrc(),
-      quantity: await this.getProductQuantityText(),
-      availability: await this.getProductAvailabilityText(),
-      condition: await this.getProductConditionText(),
       brand: await this.getProductBrandText(),
-      quantityLabel: await this.isProductQuantityLabelVisible(),
-      addToCart: await this.isAddToCartButtonVisible(),
+      category: await this.getProductCategoryText(),
+      usertype: await this.getProductUserTypeText(),
     };
   }
 }
