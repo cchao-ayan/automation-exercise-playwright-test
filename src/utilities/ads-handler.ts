@@ -1,6 +1,8 @@
 import { Page } from '@playwright/test';
 
 export class AdHandler {
+  private handlersRegistered = false;
+
   constructor(private readonly page: Page) {}
 
   /**
@@ -43,13 +45,18 @@ export class AdHandler {
   async handleDialogs(): Promise<void> {
     this.page.on('dialog', async (dialog) => {
       console.log(`Dialog detected: ${dialog.message()}`);
-      if (dialog.message().includes('Press OK to proceed!')) {
-        console.log('Accepting success dialog');
-        await dialog.accept();
-        return; // exits the method early.
+      try {
+        if (dialog.message().includes('Press OK to proceed!')) {
+          console.log('Accepting success dialog');
+          await dialog.accept();
+          return; // handled
+        }
+        await dialog.dismiss();
+        console.log('Dialog dismissed');
+      } catch (err) {
+        // dialog may already be handled by another listener or the test; ignore duplicate handling
+        console.warn('Dialog handling error (possibly already handled):', (err as Error).message);
       }
-      await dialog.dismiss();
-      console.log('Dialog dismissed');
     });
   }
 
@@ -89,6 +96,9 @@ export class AdHandler {
 
   /** Compile the ads handler in one method */
   async registerAutoCloseHandlers(): Promise<void> {
+    if (this.handlersRegistered) return;
+    this.handlersRegistered = true;
+
     await this.playwrightAdHandler();
     await this.handleDialogs();
     await this.handlePopups();
