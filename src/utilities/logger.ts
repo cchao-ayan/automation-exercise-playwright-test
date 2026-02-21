@@ -14,8 +14,8 @@ export class Logger {
     this.write('INFO', message);
   }
 
-  static error(message: string) {
-    this.write('ERROR', message);
+  static error(message: string, error?: string) {
+    this.write('ERROR', message + (error ? ` | Error: ${error}` : ''));
   }
 
   static warn(message: string) {

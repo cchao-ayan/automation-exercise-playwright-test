@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { Logger } from './logger';
 
 export function compareByKey(
   actual: any | any[],
@@ -30,8 +31,8 @@ export function compareByKey(
     // treat as single objects - compare selected fields
     const actObj = actual;
     const expObj = expected;
-    console.log('Actual:', actual);
-    console.log('Expected:', expected);
+    Logger.info(`Actual: ${JSON.stringify(actual)}`);
+    Logger.info(`Expected: ${JSON.stringify(expected)}`);
 
     for (const k of keys) {
       expect(actObj[k]).toEqual(expObj[k]);

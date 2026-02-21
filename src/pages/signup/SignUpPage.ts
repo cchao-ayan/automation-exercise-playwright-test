@@ -1,6 +1,6 @@
 import { BasePage } from '../base/BasePage';
 import { locators } from './SignUpPageLocators';
-import { testData } from './SignUpTestData';
+import { testData } from '../../test-data/SignUpTestData';
 import { assertTextEquals } from '../../assertion/generic';
 
 export class SignUpPage extends BasePage {

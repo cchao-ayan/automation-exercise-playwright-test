@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+import { Logger } from './logger';
 
 export class AdHandler {
   private handlersRegistered = false;
@@ -28,7 +29,7 @@ export class AdHandler {
     // Playwright will auto-trigger this ONLY if the locator blocks an action
     for (const selector of closeSelectors) {
       await this.page.addLocatorHandler(this.page.locator(selector), async (locator) => {
-        console.log(`Auto-closing popup using selector: ${selector}`);
+        Logger.info(`Auto-closing popup using selector: ${selector}`);
         await locator.click();
       });
     }
@@ -44,18 +45,18 @@ export class AdHandler {
    */
   async handleDialogs(): Promise<void> {
     this.page.on('dialog', async (dialog) => {
-      console.log(`Dialog detected: ${dialog.message()}`);
+      Logger.info(`Dialog detected: ${dialog.message()}`);
       try {
         if (dialog.message().includes('Press OK to proceed!')) {
-          console.log('Accepting success dialog');
+          Logger.info('Accepting success dialog');
           await dialog.accept();
           return; // handled
         }
         await dialog.dismiss();
-        console.log('Dialog dismissed');
+        Logger.info('Dialog dismissed');
       } catch (err) {
         // dialog may already be handled by another listener or the test; ignore duplicate handling
-        console.warn('Dialog handling error (possibly already handled):', (err as Error).message);
+        Logger.error('Dialog handling error (possibly already handled):', (err as Error).message);
       }
     });
   }
@@ -66,7 +67,7 @@ export class AdHandler {
    */
   async handlePopups(): Promise<void> {
     this.page.on('popup', async (popup) => {
-      console.log('Unexpected popup detected — closing it');
+      Logger.info('Unexpected popup detected — closing it');
       await popup.close();
     });
   }
@@ -86,7 +87,7 @@ export class AdHandler {
 
       // Abort requests coming from known ad providers
       if (url.includes('ads') || url.includes('doubleclick') || url.includes('googlesyndication')) {
-        console.log(`Blocking ad request: ${url}`);
+        Logger.info(`Blocking ad request: ${url}`);
         route.abort();
       } else {
         route.continue();
@@ -96,7 +97,7 @@ export class AdHandler {
 
   /** Compile the ads handler in one method */
   async registerAutoCloseHandlers(): Promise<void> {
-    if (this.handlersRegistered) return;
+    if (this.handlersRegistered) return; // ensures handlers are registered only once per test run
     this.handlersRegistered = true;
 
     await this.playwrightAdHandler();

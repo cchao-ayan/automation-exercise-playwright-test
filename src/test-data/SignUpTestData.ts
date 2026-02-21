@@ -1,4 +1,4 @@
-import { testCredentials } from '../../config/TestCredentials';
+import { testCredentials } from '../config/TestCredentials';
 
 export const testData = {
   signUp: {

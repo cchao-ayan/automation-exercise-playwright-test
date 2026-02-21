@@ -40,7 +40,7 @@
   },
 
   // Include all TypeScript files in the project
-  "include": ["src", "tests", "**/*.ts"],
+  "include": ["src", "tests", "**/*.ts", "test-data/ContactUsTestData.jscon"],
 
   // Exclude node_modules and dist from compilation
   "exclude": ["node_modules", "dist"]
