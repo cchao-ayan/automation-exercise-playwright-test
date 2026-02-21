@@ -157,6 +157,36 @@ test.describe('Automation Exercises - Test Cases', () => {
         });
     });
 
+    test('Test Case 8: Verify All Products and product detail page', async ({ pom }) => {
+        await test.step('1. Launch application', async () => {
+            await pom.homePage.navigateToHomePage('/');
+        });
+        await test.step('2. Verify home page', async () => {
+            await pom.homePage.ready();
+        });
+        await test.step('3. Navigate to Products page', async () => {
+            await pom.homePage.header.clickProductsLink();
+        });
+        await test.step('4. Verify Products page', async () => {
+            await pom.productsPage.ready();
+            //await pom.productsPage.clickPololink();
+        });
+        await test.step('4. Verify Products page', async () => {
+            await pom.productsPage.ready();
+            //await pom.productsPage.clickPololink();
+        });
+        await test.step('5. Verify feature details', async () => {
+            await pom.productsPage.compareFirstProductCardDetailsWithTestData();
+        });
+        await test.step('6. Click on first product', async () => {
+            await pom.productsPage
+        });
+        await test.step('7. Verify product detail is visible and correct', async () => {
+            await pom.productDetailsPage.ready();
+            await pom.productDetailsPage.compareProductDetailsWithTestData(0);
+        });
+    });
+
     test('Extra Test Case 1: Verify that all product card details are correct', async ({ pom }) => {
         await test.step('1. Launch application', async () => {
             await pom.homePage.navigateToHomePage('/');

@@ -49,7 +49,7 @@ export class POManager {
   get productsPage(): ProductsPage {
     return (this._products ??= new ProductsPage(this.page));
   }
-  get productsDetails(): ProductDetailsPage {
+  get productDetailsPage(): ProductDetailsPage {
     return (this._productDetails ??= new ProductDetailsPage(this.page));
   }
   // header/footer removed from POManager - now provided by pages via BasePage lazy getters
