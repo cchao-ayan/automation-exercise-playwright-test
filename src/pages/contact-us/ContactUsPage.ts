@@ -1,6 +1,6 @@
-import { BasePage } from '../base/BasePage';
+import { BasePage } from '../../pages';
 import { locators } from './ContactUsPageLocators';
-import data from '../../test-data/ContactUsTestData.json';
+import { contactUsValid, uploadFilePath } from '../../test-data';
 
 export class ContactUsPage extends BasePage {
   async ready() {
@@ -39,14 +39,14 @@ export class ContactUsPage extends BasePage {
     await this.expectVisible(locators.feedbackText4(this.page));
   }
   async fillContactUsForm() {
-    await this.fill(locators.nameInput(this.page), data[0].validSubmission.name);
-    await this.fill(locators.emailInput(this.page), data[0].validSubmission.email);
-    await this.fill(locators.subjectInput(this.page), data[0].validSubmission.subject);
-    await this.fill(locators.messageInput(this.page), data[0].validSubmission.message);
+    await this.fill(locators.nameInput(this.page), contactUsValid.name);
+    await this.fill(locators.emailInput(this.page), contactUsValid.email);
+    await this.fill(locators.subjectInput(this.page), contactUsValid.subject);
+    await this.fill(locators.messageInput(this.page), contactUsValid.message);
   }
   async uploadFile() {
     const uploadData = this.page.locator('input[name="upload_file"]');
-    await uploadData.setInputFiles(data[2].upload.filePath);
+    await uploadData.setInputFiles(uploadFilePath.upload.filePathContactUs);
   }
   async clickSubmitButton() {
     await this.click(locators.submitButton(this.page));

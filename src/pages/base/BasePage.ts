@@ -1,7 +1,6 @@
-import { Page, Locator } from '@playwright/test';
-import { Footer } from '../../components/footer/Footer';
-import { Header } from '../../components/header/Header';
-import { CommonPageMethods } from './CommonPageMethod';
+import { Page } from '@playwright/test';
+import { CommonPageMethods } from './CommonPageMethods';
+import { Footer, Header } from '../../components';
 import { AdHandler } from '../../utilities/ads-handler';
 
 export abstract class BasePage extends CommonPageMethods {

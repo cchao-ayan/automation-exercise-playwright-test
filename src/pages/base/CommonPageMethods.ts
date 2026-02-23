@@ -26,6 +26,9 @@ export class CommonPageMethods {
   protected async expectUrl(url: string) {
     await expect(this.page).toHaveURL(url);
   }
+  protected async expectUrlToContain(substring: string) {
+    await expect(this.page).toHaveURL(new RegExp(`.*${substring}.*`)); // regex to check if url contains the substring
+  }
   protected async expectScreenshot(selector: string | Locator, path: string) {
     await expect(this.toLocator(selector)).toHaveScreenshot(path);
   }

@@ -1,0 +1,12 @@
+[2026-02-21T15:59:46.008Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-21T15:59:48.733Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-21T15:59:52.117Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-21T15:59:52.924Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-21T15:59:52.925Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-21T15:59:53.424Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-22T04:38:45.668Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-22T04:38:48.307Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-22T04:38:50.146Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-22T04:38:50.539Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-22T04:38:50.542Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-22T04:38:51.333Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019

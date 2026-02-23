@@ -1,4 +1,4 @@
-import { BasePage } from '../base/BasePage';
+import { BasePage } from '../../pages';
 import { locators } from './AccountCreatedPageLocators';
 
 export class AccountCreatedPage extends BasePage {

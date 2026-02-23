@@ -1,6 +1,6 @@
-import { BasePage } from '../base/BasePage';
+import { BasePage } from '../../pages';
+import  { signup }  from '../../test-data';
 import { locators } from './SignUpPageLocators';
-import { testData } from '../../test-data/SignUpTestData';
 import { assertTextEquals } from '../../assertion/generic';
 
 export class SignUpPage extends BasePage {
@@ -72,27 +72,27 @@ export class SignUpPage extends BasePage {
     //console.log(`Name input inner text: ${nameText}`); // Debug log for name input
     const emailText = await this.getEmailAttributeValue();
     //console.log(`Email input inner text: ${emailText}`); // Debug log for email input
-    if (testData.signUp.title === 'Mr') {
+    if (signup[0].title === 'Mr') {
       await this.check(locators.MRTitle(this.page));
-    } else if (testData.signUp.title === 'Mrs') {
+    } else if (signup[0].title === 'Mrs') {
       await this.check(locators.MSTitle(this.page));
     }
-    assertTextEquals(nameText as string, testData.signUp.name); // Verify name input is pre-filled with the name used during signup
-    assertTextEquals(emailText as string, testData.signUp.email); // Verify email input is pre-filled with the email used during signup
-    await this.fill(locators.passwordInput(this.page), testData.signUp.password);
-    await this.selectByValue(locators.dateOfBirthDay(this.page), testData.signUp.day);
-    await this.selectByValue(locators.dateOfBirthMonth(this.page), testData.signUp.month);
-    await this.selectByValue(locators.dateOfBirthYear(this.page), testData.signUp.year);
-    await this.fill(locators.firstNameInput(this.page), testData.signUp.firstName);
-    await this.fill(locators.lastNameInput(this.page), testData.signUp.lastName);
-    await this.fill(locators.companyInput(this.page), testData.signUp.company);
-    await this.fill(locators.address1Input(this.page), testData.signUp.address1);
-    await this.fill(locators.address2Input(this.page), testData.signUp.address2);
-    await this.selectByValue(locators.countrySelect(this.page), testData.signUp.country);
-    await this.fill(locators.stateInput(this.page), testData.signUp.state);
-    await this.fill(locators.cityInput(this.page), testData.signUp.city);
-    await this.fill(locators.zipCodeInput(this.page), testData.signUp.zipcode);
-    await this.fill(locators.mobileNumberInput(this.page), testData.signUp.mobileNumber);
+    assertTextEquals(nameText as string, signup[0].name); // Verify name input is pre-filled with the name used during signup
+    assertTextEquals(emailText as string, signup[0].email); // Verify email input is pre-filled with the email used during signup
+    await this.fill(locators.passwordInput(this.page), signup[0].password);
+    await this.selectByValue(locators.dateOfBirthDay(this.page), signup[0].day);
+    await this.selectByValue(locators.dateOfBirthMonth(this.page), signup[0].month);
+    await this.selectByValue(locators.dateOfBirthYear(this.page), signup[0].year);
+    await this.fill(locators.firstNameInput(this.page), signup[0].firstName);
+    await this.fill(locators.lastNameInput(this.page), signup[0].lastName);
+    await this.fill(locators.companyInput(this.page), signup[0].company);
+    await this.fill(locators.address1Input(this.page), signup[0].address1);
+    await this.fill(locators.address2Input(this.page), signup[0].address2);
+    await this.selectByValue(locators.countrySelect(this.page), signup[0].country);
+    await this.fill(locators.stateInput(this.page), signup[0].state);
+    await this.fill(locators.cityInput(this.page), signup[0].city);
+    await this.fill(locators.zipCodeInput(this.page), signup[0].zipcode);
+    await this.fill(locators.mobileNumberInput(this.page), signup[0].mobileNumber);
   }
 
   async clickCreateAccountButton() {

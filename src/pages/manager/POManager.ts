@@ -1,17 +1,12 @@
 import { Page } from '@playwright/test';
-import { LoginPage } from '../login/LoginPage';
-import { HomePage } from '../home/HomePage';
-import { SignUpPage } from '../signup/SignUpPage';
-import { AccountCreatedPage } from '../account-created/AccountCreatedPage';
-import { AccountDeletedPage } from '../account-deleted/AccountDeletedPage';
-import { ContactUsPage } from '../contact-us/ContactUsPage';
-import { TestCasePage } from '../testcases/TestCasesPage';
-import { ProductsPage } from '../products/ProductsPage';
-import { ProductDetailsPage } from '../product-details/ProductDetailsPage';
+import {
+  LoginPage, HomePage, SignUpPage, AccountCreatedPage, AccountDeletedPage,
+  ContactUsPage, TestCasePage, ProductsPage, ProductDetailsPage
+} from '../../pages';
 // Header/Footer are provided by pages via BasePage lazy getters
 
 export class POManager {
-  constructor(private readonly page: Page) {}
+  constructor(private readonly page: Page) { }
 
   // unidenfied pages
   private _login?: LoginPage;

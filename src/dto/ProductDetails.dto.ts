@@ -1,8 +1,8 @@
-import { ProductBaseDTO } from './ProductBase.dto';
-
-export interface ProductDetailsDTO extends ProductBaseDTO {
-    brand: string;    
+export interface ProductDetailsDTO {
+    id: string | null;
+    name: string;
+    price: string;
+    brand: string;
     usertype: string;
-    category: string;    
+    category: string;
 }
-  

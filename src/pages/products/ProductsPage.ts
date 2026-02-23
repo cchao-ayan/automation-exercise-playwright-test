@@ -1,24 +1,24 @@
-import { Page, Locator } from '@playwright/test';
-import { BasePage } from '../base/BasePage';
-import { locators } from './ProductsPageLocators';
-import data from '../../test-data/ProductsTestData.json';
-import { compareByKey, pickFields, Logger } from '../../utilities/util.index';
+import { BasePage } from '../../pages';
+import { products } from '../../test-data';
+import { locators, Locator } from './ProductsPageLocators';
+import { compareByKey, pickFields, Logger } from '../../utilities';
 import { ProductCardDTO } from '../../dto/ProductCard.dto';
 
 export class ProductsPage extends BasePage {
-  // ---------- Helpers ----------
+  // Helper to get the root locator for a product card by index
   productAt(index: number): Locator {
     return locators.featuredItems(this.page).nth(index);
   }
-
-  private async readCardDetailsFromRoot(root: Locator): Promise<ProductCardDTO> {
-    return {
-      id: await locators.productID(root).getAttribute('data-product-id'),
-      name: await locators.productName(root).innerText(),
-      price: await locators.productPrice(root).first().innerText()
-    };
+  // ---------- Getters ----------
+  async getProductID(root: Locator): Promise<string | null> {
+    return await locators.productID(root).getAttribute('data-product-id');
   }
-
+  async getProductName(root: Locator): Promise<string> {
+    return await locators.productName(root).innerText();
+  }
+  async getProductPrice(root: Locator): Promise<string> {
+    return await locators.productPrice(root).first().innerText();
+  }
   // ---------- Methods ----------
   async ready() {
     await this.verifyProductsPageUrl('https://automationexercise.com/products');
@@ -27,7 +27,9 @@ export class ProductsPage extends BasePage {
     await this.verifyBrandSectionIsVisible();
     //   await this.verifyAllProductsSectionIsVisible();
   }
-
+  async clickViewProductButtonByIndex(index: number) {
+    this.click(locators.viewProductButton(this.productAt(index)));
+  }
   async clickPololink() {
     await this.click(locators.poloLink(this.page));
   }
@@ -64,32 +66,33 @@ export class ProductsPage extends BasePage {
     const featuredItems = locators.featuredItems(this.page).first();
     return await featuredItems.locator('h2').last().innerText();
   }
-
+  // checking all product card details are correct by comparing with test data (only id, name, price)
   async verifyProductCardDetailsAreCorrect(): Promise<void> {
     const count = await this.getFeaturedProductItemCount();
     Logger.info(`Found ${count} featured product items on the page.`);
     for (let i = 0; i < count; i++) {
       const root = this.productAt(i);
       const actualCard = await this.readCardDetailsFromRoot(root);
-      const expectedCard = pickFields(data[i], ['id', 'name', 'price']); // Assuming test data is in the same order as the products on the page
+      const expectedCard = pickFields(products[i], ['id', 'name', 'price']); // Assuming test data is in the same order as the products on the page
       // Compare only id, name, and price for the card details
       compareByKey(actualCard, expectedCard, ['id', 'name', 'price']);
     }
   }
-
-  async getFirstProductCardDetails(): Promise<{ id: string | null; name: string; price: string }> {
+  async getFirstProductCardDetails(): Promise<ProductCardDTO> {
     return this.readCardDetailsFromRoot(this.productAt(0));
   }
-
-  async compareFirstProductCardDetailsWithTestData(): Promise<void> {
-    const actualCard = await this.getFirstProductCardDetails();
-    const expectedCard = pickFields(data[0], ['id', 'name', 'price']);
+  async compareProductCardDetailsWithTestDataByIndex(index: number): Promise<void> {
+    const actualCard = await this.readCardDetailsFromRoot(this.productAt(index));
+    const expectedCard = pickFields(products[index], ['id', 'name', 'price']);
     compareByKey(actualCard, expectedCard, ['id', 'name', 'price']);
   }
 
-  // ---------- DTO builders ----------
-  async getCardDetails(): Promise<ProductCardDTO> {
-    const { id, name, price } = await this.getFirstProductCardDetails();
-    return { id, name, price };
+  // ---------- DTO Transformation Helpers ----------
+  private async readCardDetailsFromRoot(root: Locator): Promise<ProductCardDTO> {
+    return {
+      id: await this.getProductID(root),
+      name: await this.getProductName(root),
+      price: await this.getProductPrice(root)
+    };
   }
 }

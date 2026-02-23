@@ -169,23 +169,55 @@ test.describe('Automation Exercises - Test Cases', () => {
         });
         await test.step('4. Verify Products page', async () => {
             await pom.productsPage.ready();
-            //await pom.productsPage.clickPololink();
-        });
-        await test.step('4. Verify Products page', async () => {
-            await pom.productsPage.ready();
-            //await pom.productsPage.clickPololink();
         });
         await test.step('5. Verify feature details', async () => {
-            await pom.productsPage.compareFirstProductCardDetailsWithTestData();
+            await pom.productsPage.compareProductCardDetailsWithTestDataByIndex(0);
         });
-        await test.step('6. Click on first product', async () => {
-            await pom.productsPage
+        await test.step('6. Click on first product and verify URL contains its ID', async () => {
+            // grab the id from the card before we navigate away
+            const productID = await pom.productsPage.getProductID(pom.productsPage.productAt(0));
+
+            // click through to the details page
+            await pom.productsPage.clickViewProductButtonByIndex(0);
+
+            // the page object already checks the static portion of the url, use it again
+            await pom.productDetailsPage.ready(`/product_details/${productID}`);
         });
         await test.step('7. Verify product detail is visible and correct', async () => {
-            await pom.productDetailsPage.ready();
+            // details page should already be loaded from the previous step
             await pom.productDetailsPage.compareProductDetailsWithTestData(0);
         });
     });
+
+    test('Test Case 9: Search Product', async ({ pom }) => {
+        await test.step('1. Launch application', async () => {
+            await pom.homePage.navigateToHomePage('/');
+        });
+        await test.step('2. Verify home page', async () => {
+            await pom.homePage.ready();
+        });
+        await test.step('3. Navigate to Products page', async () => {
+            await pom.homePage.header.clickProductsLink();
+        });
+        await test.step('4. Verify Products page', async () => {
+            await pom.productsPage.ready();
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     test('Extra Test Case 1: Verify that all product card details are correct', async ({ pom }) => {
         await test.step('1. Launch application', async () => {
@@ -199,15 +231,10 @@ test.describe('Automation Exercises - Test Cases', () => {
         });
         await test.step('4. Verify Products page', async () => {
             await pom.productsPage.ready();
-            //await pom.productsPage.clickPololink();
-        });
-        await test.step('4. Verify Products page', async () => {
-            await pom.productsPage.ready();
-            //await pom.productsPage.clickPololink();
         });
         await test.step('5. Verify feature details', async () => {
             await pom.productsPage.verifyProductCardDetailsAreCorrect();
         });
     });
-    
+
 });
