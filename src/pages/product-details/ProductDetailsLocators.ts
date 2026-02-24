@@ -1,15 +1,15 @@
 import { Page, Locator } from '@playwright/test';
 
 export const locators = {
-    productInfo: (page: Page) => page.locator('div.product-information'),
-    productID: (root: Locator): Locator => root.locator('a').first(),
-    productName: (root: Locator): Locator => root.locator('p').first(),
+    productInfo: (page: Page) => page.locator('div.product-information'), // root Locator
+    productID: (root: Locator): Locator => root.locator('#product_id'),
+    productName: (root: Locator): Locator => root.locator('h2').first(),
     productPrice: (root: Locator): Locator => root.getByText('Rs.'),
+    productBrand: (root: Locator): Locator => root.locator('p').last(),
+    productCategory: (root: Locator): Locator => root.locator('p').first(),
     addToCartButton: (root: Locator): Locator => root.getByRole('button', { name: 'Add to cart' }),
     productImage: (root: Locator): Locator => root.locator('img').first(),
     viewProductButton: (root: Locator): Locator => root.getByRole('link', { name: 'View Product' }),
-    productBrand: (root: Locator): Locator => root.getByText('Brand:'),
-    productCategory: (root: Locator): Locator => root.locator('p').nth(1),
     productRating: (root: Locator): Locator => root.locator('img').nth(2),
     productQuantiyLabel: (root: Locator): Locator => root.getByText('Quantity:'),
     productQuantity: (root: Locator): Locator => root.locator('#quantity'),

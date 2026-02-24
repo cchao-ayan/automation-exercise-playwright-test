@@ -36,6 +36,15 @@ export class ProductsPage extends BasePage {
   async navigateToProductsPage(url: string) {
     await this.goToUrl(url);
   }
+  async searchProduct(product: string) {
+    await this.fill(locators.searchProduct(this.page), product)
+  }
+  async clickSearchProductButton(){
+    await this.click(locators.searchButton(this.page));
+  }
+  async verifySearchProductHeading(){
+    await this.expectVisible(locators.searchProductHeading(this.page));
+  }
   async verifyProductsPageUrl(expectedUrl: string) {
     await this.expectUrl(expectedUrl);
   }
@@ -62,10 +71,6 @@ export class ProductsPage extends BasePage {
   async getFeaturedProductItemCount(): Promise<number> {
     return await locators.featuredItems(this.page).count();
   }
-  async getNameInnerText(): Promise<string> {
-    const featuredItems = locators.featuredItems(this.page).first();
-    return await featuredItems.locator('h2').last().innerText();
-  }
   // checking all product card details are correct by comparing with test data (only id, name, price)
   async verifyProductCardDetailsAreCorrect(): Promise<void> {
     const count = await this.getFeaturedProductItemCount();
@@ -78,8 +83,9 @@ export class ProductsPage extends BasePage {
       compareByKey(actualCard, expectedCard, ['id', 'name', 'price']);
     }
   }
-  async getFirstProductCardDetails(): Promise<ProductCardDTO> {
-    return this.readCardDetailsFromRoot(this.productAt(0));
+  // not used for now
+  async getFirstProductCardDetails(index: number): Promise<ProductCardDTO> {
+    return this.readCardDetailsFromRoot(this.productAt(index));
   }
   async compareProductCardDetailsWithTestDataByIndex(index: number): Promise<void> {
     const actualCard = await this.readCardDetailsFromRoot(this.productAt(index));

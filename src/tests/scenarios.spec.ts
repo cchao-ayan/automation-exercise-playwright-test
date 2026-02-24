@@ -202,6 +202,14 @@ test.describe('Automation Exercises - Test Cases', () => {
         await test.step('4. Verify Products page', async () => {
             await pom.productsPage.ready();
         });
+        await test.step('5. Search for a product', async () => {
+            await pom.productsPage.searchProduct('tops');
+            await pom.productsPage.clickSearchProductButton();
+            await pom.productsPage.verifySearchProductHeading();
+        })
+        await test.step('6. Verify all searched products are related to the search key', async () => {
+            
+        })
     });
 
 

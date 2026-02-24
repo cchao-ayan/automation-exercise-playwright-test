@@ -1,5 +1,5 @@
 {
   "upload": {
-    "filePathContactUs": "./pages/contact-us/test-123.txt"
+    "filePathContactUs": "./test-assets/upload-files/ContactUs.txt"
   }
 }

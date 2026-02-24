@@ -1,6 +1,6 @@
+export * from './base/BasePage';
 export * from './account-created/AccountCreatedPage';
 export * from './account-deleted/AccountDeletedPage';
-export * from './base/BasePage';
 export * from './contact-us/ContactUsPage';
 export * from './home/HomePage';
 export * from './login/LoginPage';

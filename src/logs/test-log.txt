@@ -10,3 +10,164 @@
 [2026-02-22T04:38:50.539Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500"}
 [2026-02-22T04:38:50.542Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500"}
 [2026-02-22T04:38:51.333Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:44:34.104Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:44:35.958Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:44:37.400Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:44:38.544Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:44:58.489Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:45:00.286Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:45:01.524Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:45:01.954Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-23T16:45:01.954Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-23T16:45:02.674Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:53:17.059Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:53:18.881Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:53:20.230Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T16:53:20.657Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-23T16:53:20.657Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-23T16:53:21.177Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T17:00:28.122Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T17:00:29.800Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T17:00:31.480Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T17:00:31.735Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-23T17:00:31.735Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-23T17:00:32.745Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-23T17:00:32.938Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500","brand":"Brand:","category":"Availability: In Stock"}
+[2026-02-23T17:00:32.938Z] [INFO] Expected: {"id":1,"name":"Blue Top","price":"Rs. 500","brand":"Polo","category":{"usertype":{"usertype":"Women"},"category":"Tops"}}
+[2026-02-24T00:06:31.746Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:31.793Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:31.938Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:32.376Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:32.431Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:32.554Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:33.975Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:34.088Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:34.299Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:35.773Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:35.997Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:36.345Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:36.679Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:37.033Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:37.088Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:38.648Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:38.674Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:38.738Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:39.189Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:39.533Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:39.632Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:39.910Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:39.943Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:39.987Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:41.424Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:41.941Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:42.747Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:43.260Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:43.354Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:43.739Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:44.332Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:44.598Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:45.173Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:45.697Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:46.770Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:47.523Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:48.628Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:49.400Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-24T00:06:49.401Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-24T00:06:49.839Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:49.994Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:50.412Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500","brand":"Brand:","usertype":"Tops","category":"Women"}
+[2026-02-24T00:06:50.413Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500","brand":"Polo","usertype":"Women","category":"Tops"}
+[2026-02-24T00:06:51.259Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:52.119Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:53.900Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:54.938Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:06:55.243Z] [INFO] Found 34 featured product items on the page.
+[2026-02-24T00:06:55.262Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-24T00:06:55.263Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-24T00:06:55.285Z] [INFO] Actual: {"id":"2","name":"Men Tshirt","price":"Rs. 400"}
+[2026-02-24T00:06:55.286Z] [INFO] Expected: {"id":"2","name":"Men Tshirt","price":"Rs. 400"}
+[2026-02-24T00:06:55.322Z] [INFO] Actual: {"id":"3","name":"Sleeveless Dress","price":"Rs. 1000"}
+[2026-02-24T00:06:55.323Z] [INFO] Expected: {"id":"3","name":"Sleeveless Dress","price":"Rs. 1000"}
+[2026-02-24T00:06:55.371Z] [INFO] Actual: {"id":"4","name":"Stylish Dress","price":"Rs. 1500"}
+[2026-02-24T00:06:55.372Z] [INFO] Expected: {"id":"4","name":"Stylish Dress","price":"Rs. 1500"}
+[2026-02-24T00:06:55.404Z] [INFO] Actual: {"id":"5","name":"Winter Top","price":"Rs. 600"}
+[2026-02-24T00:06:55.404Z] [INFO] Expected: {"id":"5","name":"Winter Top","price":"Rs. 600"}
+[2026-02-24T00:06:55.430Z] [INFO] Actual: {"id":"6","name":"Summer White Top","price":"Rs. 400"}
+[2026-02-24T00:06:55.431Z] [INFO] Expected: {"id":"6","name":"Summer White Top","price":"Rs. 400"}
+[2026-02-24T00:06:55.450Z] [INFO] Actual: {"id":"7","name":"Madame Top For Women","price":"Rs. 1000"}
+[2026-02-24T00:06:55.450Z] [INFO] Expected: {"id":"7","name":"Madame Top For Women","price":"Rs. 1000"}
+[2026-02-24T00:06:55.466Z] [INFO] Actual: {"id":"8","name":"Fancy Green Top","price":"Rs. 700"}
+[2026-02-24T00:06:55.467Z] [INFO] Expected: {"id":"8","name":"Fancy Green Top","price":"Rs. 700"}
+[2026-02-24T00:06:55.483Z] [INFO] Actual: {"id":"11","name":"Sleeves Printed Top - White","price":"Rs. 499"}
+[2026-02-24T00:06:55.483Z] [INFO] Expected: {"id":"11","name":"Sleeves Printed Top - White","price":"Rs. 499"}
+[2026-02-24T00:06:55.501Z] [INFO] Actual: {"id":"12","name":"Half Sleeves Top Schiffli Detailing - Pink","price":"Rs. 359"}
+[2026-02-24T00:06:55.501Z] [INFO] Expected: {"id":"12","name":"Half Sleeves Top Schiffli Detailing - Pink","price":"Rs. 359"}
+[2026-02-24T00:06:55.517Z] [INFO] Actual: {"id":"13","name":"Frozen Tops For Kids","price":"Rs. 278"}
+[2026-02-24T00:06:55.517Z] [INFO] Expected: {"id":"13","name":"Frozen Tops For Kids","price":"Rs. 278"}
+[2026-02-24T00:06:55.533Z] [INFO] Actual: {"id":"14","name":"Full Sleeves Top Cherry - Pink","price":"Rs. 679"}
+[2026-02-24T00:06:55.533Z] [INFO] Expected: {"id":"14","name":"Full Sleeves Top Cherry - Pink","price":"Rs. 679"}
+[2026-02-24T00:06:55.550Z] [INFO] Actual: {"id":"15","name":"Printed Off Shoulder Top - White","price":"Rs. 315"}
+[2026-02-24T00:06:55.550Z] [INFO] Expected: {"id":"15","name":"Printed Off Shoulder Top - White","price":"Rs. 315"}
+[2026-02-24T00:06:55.567Z] [INFO] Actual: {"id":"16","name":"Sleeves Top and Short - Blue & Pink","price":"Rs. 478"}
+[2026-02-24T00:06:55.567Z] [INFO] Expected: {"id":"16","name":"Sleeves Top and Short - Blue & Pink","price":"Rs. 478"}
+[2026-02-24T00:06:55.593Z] [INFO] Actual: {"id":"18","name":"Little Girls Mr. Panda Shirt","price":"Rs. 1200"}
+[2026-02-24T00:06:55.593Z] [INFO] Expected: {"id":"18","name":"Little Girls Mr. Panda Shirt","price":"Rs. 1200"}
+[2026-02-24T00:06:55.616Z] [INFO] Actual: {"id":"19","name":"Sleeveless Unicorn Patch Gown - Pink","price":"Rs. 1050"}
+[2026-02-24T00:06:55.617Z] [INFO] Expected: {"id":"19","name":"Sleeveless Unicorn Patch Gown - Pink","price":"Rs. 1050"}
+[2026-02-24T00:06:55.643Z] [INFO] Actual: {"id":"20","name":"Cotton Mull Embroidered Dress","price":"Rs. 1190"}
+[2026-02-24T00:06:55.644Z] [INFO] Expected: {"id":"20","name":"Cotton Mull Embroidered Dress","price":"Rs. 1190"}
+[2026-02-24T00:06:55.670Z] [INFO] Actual: {"id":"21","name":"Blue Cotton Indie Mickey Dress","price":"Rs. 1530"}
+[2026-02-24T00:06:55.670Z] [INFO] Expected: {"id":"21","name":"Blue Cotton Indie Mickey Dress","price":"Rs. 1530"}
+[2026-02-24T00:06:55.690Z] [INFO] Actual: {"id":"22","name":"Long Maxi Tulle Fancy Dress Up Outfits -Pink","price":"Rs. 1600"}
+[2026-02-24T00:06:55.691Z] [INFO] Expected: {"id":"22","name":"Long Maxi Tulle Fancy Dress Up Outfits -Pink","price":"Rs. 1600"}
+[2026-02-24T00:06:55.715Z] [INFO] Actual: {"id":"23","name":"Sleeveless Unicorn Print Fit & Flare Net Dress - Multi","price":"Rs. 1100"}
+[2026-02-24T00:06:55.715Z] [INFO] Expected: {"id":"23","name":"Sleeveless Unicorn Print Fit & Flare Net Dress - Multi","price":"Rs. 1100"}
+[2026-02-24T00:06:55.734Z] [INFO] Actual: {"id":"24","name":"Colour Blocked Shirt – Sky Blue","price":"Rs. 849"}
+[2026-02-24T00:06:55.735Z] [INFO] Expected: {"id":"24","name":"Colour Blocked Shirt – Sky Blue","price":"Rs. 849"}
+[2026-02-24T00:06:55.750Z] [INFO] Actual: {"id":"28","name":"Pure Cotton V-Neck T-Shirt","price":"Rs. 1299"}
+[2026-02-24T00:06:55.751Z] [INFO] Expected: {"id":"28","name":"Pure Cotton V-Neck T-Shirt","price":"Rs. 1299"}
+[2026-02-24T00:06:55.767Z] [INFO] Actual: {"id":"29","name":"Green Side Placket Detail T-Shirt","price":"Rs. 1000"}
+[2026-02-24T00:06:55.768Z] [INFO] Expected: {"id":"29","name":"Green Side Placket Detail T-Shirt","price":"Rs. 1000"}
+[2026-02-24T00:06:55.799Z] [INFO] Actual: {"id":"30","name":"Premium Polo T-Shirts","price":"Rs. 1500"}
+[2026-02-24T00:06:55.800Z] [INFO] Expected: {"id":"30","name":"Premium Polo T-Shirts","price":"Rs. 1500"}
+[2026-02-24T00:06:55.820Z] [INFO] Actual: {"id":"31","name":"Pure Cotton Neon Green Tshirt","price":"Rs. 850"}
+[2026-02-24T00:06:55.820Z] [INFO] Expected: {"id":"31","name":"Pure Cotton Neon Green Tshirt","price":"Rs. 850"}
+[2026-02-24T00:06:55.839Z] [INFO] Actual: {"id":"33","name":"Soft Stretch Jeans","price":"Rs. 799"}
+[2026-02-24T00:06:55.839Z] [INFO] Expected: {"id":"33","name":"Soft Stretch Jeans","price":"Rs. 799"}
+[2026-02-24T00:06:55.857Z] [INFO] Actual: {"id":"35","name":"Regular Fit Straight Jeans","price":"Rs. 1200"}
+[2026-02-24T00:06:55.857Z] [INFO] Expected: {"id":"35","name":"Regular Fit Straight Jeans","price":"Rs. 1200"}
+[2026-02-24T00:06:55.874Z] [INFO] Actual: {"id":"37","name":"Grunt Blue Slim Fit Jeans","price":"Rs. 1400"}
+[2026-02-24T00:06:55.874Z] [INFO] Expected: {"id":"37","name":"Grunt Blue Slim Fit Jeans","price":"Rs. 1400"}
+[2026-02-24T00:06:55.895Z] [INFO] Actual: {"id":"38","name":"Rose Pink Embroidered Maxi Dress","price":"Rs. 2300"}
+[2026-02-24T00:06:55.896Z] [INFO] Expected: {"id":"38","name":"Rose Pink Embroidered Maxi Dress","price":"Rs. 2300"}
+[2026-02-24T00:06:55.921Z] [INFO] Actual: {"id":"39","name":"Cotton Silk Hand Block Print Saree","price":"Rs. 3000"}
+[2026-02-24T00:06:55.921Z] [INFO] Expected: {"id":"39","name":"Cotton Silk Hand Block Print Saree","price":"Rs. 3000"}
+[2026-02-24T00:06:55.940Z] [INFO] Actual: {"id":"40","name":"Rust Red Linen Saree","price":"Rs. 3500"}
+[2026-02-24T00:06:55.941Z] [INFO] Expected: {"id":"40","name":"Rust Red Linen Saree","price":"Rs. 3500"}
+[2026-02-24T00:06:55.961Z] [INFO] Actual: {"id":"41","name":"Beautiful Peacock Blue Cotton Linen Saree","price":"Rs. 5000"}
+[2026-02-24T00:06:55.962Z] [INFO] Expected: {"id":"41","name":"Beautiful Peacock Blue Cotton Linen Saree","price":"Rs. 5000"}
+[2026-02-24T00:06:55.982Z] [INFO] Actual: {"id":"42","name":"Lace Top For Women","price":"Rs. 1400"}
+[2026-02-24T00:06:55.982Z] [INFO] Expected: {"id":"42","name":"Lace Top For Women","price":"Rs. 1400"}
+[2026-02-24T00:06:56.013Z] [INFO] Actual: {"id":"43","name":"GRAPHIC DESIGN MEN T SHIRT - BLUE","price":"Rs. 1389"}
+[2026-02-24T00:06:56.013Z] [INFO] Expected: {"id":"43","name":"GRAPHIC DESIGN MEN T SHIRT - BLUE","price":"Rs. 1389"}
+[2026-02-24T00:17:55.117Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:17:56.818Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:17:58.119Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:17:58.395Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-24T00:17:58.396Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500"}
+[2026-02-24T00:17:58.839Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:17:59.024Z] [INFO] Actual: {"id":"1","name":"Blue Top","price":"Rs. 500","brand":"Polo","usertype":"Women","category":"Tops"}
+[2026-02-24T00:17:59.024Z] [INFO] Expected: {"id":"1","name":"Blue Top","price":"Rs. 500","brand":"Polo","usertype":"Women","category":"Tops"}
+[2026-02-24T00:18:45.110Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:18:46.824Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:18:48.471Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:20:16.120Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:20:18.033Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:20:19.748Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:24:04.180Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:24:06.110Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:24:08.820Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:24:09.803Z] [INFO] Dialog detected: Press OK to proceed!
+[2026-02-24T00:24:09.803Z] [INFO] Accepting success dialog
+[2026-02-24T00:24:10.403Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019
+[2026-02-24T00:24:10.905Z] [INFO] Blocking ad request: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1677597403311019

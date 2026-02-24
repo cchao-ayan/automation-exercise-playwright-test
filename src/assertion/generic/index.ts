@@ -1,2 +1,2 @@
-export * from './text';
-export * from './number';
+export * from './text/expectEquals';
+export * from './number/expectGreaterThan';

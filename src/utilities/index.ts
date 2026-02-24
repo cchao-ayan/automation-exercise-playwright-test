@@ -3,3 +3,4 @@ export * from './logger';
 export * from './compare-by-key';
 export * from './pick-fields';
 export * from './broken-links-checker';
+export * from './product-mapper';
