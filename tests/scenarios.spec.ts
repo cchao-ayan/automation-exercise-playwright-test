@@ -1,6 +1,8 @@
-import { test } from '../fixture/pom.fixture';
-import { testCredentials } from '../config/TestCredentials';
-import { invalidCredentials } from '../config/InvalidCredentials';
+import { test } from '@/fixture/pom.fixture';
+import { testCredentials } from '@/config/TestCredentials';
+import { invalidCredentials } from '@/config/InvalidCredentials';
+import { filterByKeyword, Logger } from '@/utilities';
+import productsData from '@/test-data/products/products.test-data.json';
 
 test.describe('Automation Exercises - Test Cases', () => {
     test('Test Case 1: Register User', async ({ pom }) => {
@@ -208,7 +210,9 @@ test.describe('Automation Exercises - Test Cases', () => {
             await pom.productsPage.verifySearchProductHeading();
         })
         await test.step('6. Verify all searched products are related to the search key', async () => {
-            
+            const result = filterByKeyword(productsData, 'tops');
+            //Logger.info(JSON.stringify(result, null, 2));
+            //console.log(result);
         })
     });
 

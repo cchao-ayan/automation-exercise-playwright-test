@@ -38,7 +38,7 @@ export class POManager {
   get contactUsPage(): ContactUsPage {
     return (this._contactUs ??= new ContactUsPage(this.page));
   }
-  get TestCasesPage(): TestCasePage {
+  get testCasesPage(): TestCasePage {
     return (this._testCase ??= new TestCasePage(this.page));
   }
   get productsPage(): ProductsPage {

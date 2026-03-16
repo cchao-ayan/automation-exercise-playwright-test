@@ -1,5 +1,3 @@
-import { ProductDetailsDTO } from "../dto/ProductDetails.dto";
-
 export function normalizeProductData(expected: any) {
   return {
     id: String(expected.id),

@@ -1,8 +1,8 @@
 import { BasePage } from '../../pages';
 import { products } from '../../test-data';
 import { locators, Locator } from './ProductsPageLocators';
-import { compareByKey, pickFields, Logger } from '../../utilities';
-import { ProductCardDTO } from '../../dto/ProductCard.dto';
+import { compareByKey, pickFields, Logger, filterProducts } from '../../utilities';
+import { ProductCardDTO } from '../../dto/product-card.dto';
 
 export class ProductsPage extends BasePage {
   // Helper to get the root locator for a product card by index
@@ -18,6 +18,9 @@ export class ProductsPage extends BasePage {
   }
   async getProductPrice(root: Locator): Promise<string> {
     return await locators.productPrice(root).first().innerText();
+  }
+    async getFeaturedProductItemCount(): Promise<number> {
+    return await locators.featuredItems(this.page).count();
   }
   // ---------- Methods ----------
   async ready() {
@@ -68,8 +71,27 @@ export class ProductsPage extends BasePage {
     await this.expectVisible(featuredItemsHeading);
     await this.expectHaveText(featuredItemsHeading, 'Features Items');
   }
-  async getFeaturedProductItemCount(): Promise<number> {
-    return await locators.featuredItems(this.page).count();
+  async searchForAProduct(keyword: string){
+    await this.searchProduct(keyword);
+    await this.clickSearchProductButton();
+  }
+  async getSearchProductFromTestData(){
+    
+  }
+  async verifySearchedProductAreDisplayedAndCorrect(): Promise<void> {
+    const count = await this.getFeaturedProductItemCount();
+    Logger.info(`Found ${count} featured product items on the page.`);
+    
+    for (let i = 0; i < count; i++) {
+      const root = this.productAt(i);
+      const actualCard = await this.readCardDetailsFromRoot(root);
+      const pick = pickFields(products[i], ['id', 'name', 'price']); // Assuming test data is in the same order as the products on the page
+      const expectedCard = pick.filterProducts(products, 'tops');
+      Logger.info(expectedCard);
+      // Compare only id, name, and price for the card details
+      compareByKey(actualCard, expectedCard, ['id', 'name', 'price']);
+    }
+
   }
   // checking all product card details are correct by comparing with test data (only id, name, price)
   async verifyProductCardDetailsAreCorrect(): Promise<void> {

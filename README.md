@@ -1,45 +1,163 @@
-🧪 Automation Exercise – Playwright Test Framework - 
+## Project Structure Overview
 
-This repository contains an end-to-end UI automation framework built with Playwright + TypeScript, following Page Object Model (POM) and custom fixtures to support scalable, maintainable test automation.
+```
+src/
+├── .github/
+│   └── workflows/
+│       └── playwright.yml            # GitHub Actions CI pipeline
+│
+├── config/
+│   ├── .env                          # Environment variables (credentials, URLs)
+│   └── TestCredentials.ts            # Centralized credential handling
+│
+├── fixture/
+│   ├── pom.fixture.ts                # Page Object Model fixtures
+│   └── ui.fixture.ts                 # UI fixtures and setup
+│
+├── pages/
+│   ├── account-created/              # Account creation confirmation page
+│   ├── account-deleted/              # Account deletion confirmation page
+│   │
+│   ├── base/
+│   │   ├── BasePage.ts               # Base navigation & lifecycle logic
+│   │   └── CommonPageMethods.ts      # Shared reusable page methods
+│   │
+│   ├── common/
+│   │   ├── header/                   # Header component objects
+│   │   └── footer/                   # Footer component objects
+│   │
+│   ├── home/
+│   │   ├── HomePage.ts
+│   │   └── HomePageLocators.ts
+│   │
+│   ├── login/
+│   │   ├── LoginPage.ts
+│   │   └── LoginPageLocators.ts
+│   │
+│   ├── signup/
+│   │   ├── SignUpPage.ts
+│   │   └── SignUpPageLocators.ts
+│   │
+│   ├── manager/
+│   │   ├── POManager.ts              # Page Object factory / manager
+│   │   └── POManager2.ts             # Alternative PO manager implementation
+│
+├── tests/                            # Test specifications
+│
+├── utilities/
+│   ├── broken-links-checker.ts       # Broken link validation utility
+│   ├── step-decorator.ts             # Step logging
+│   └── step-decorator2.ts
+│
+├── playwright-report/                # HTML execution report
+├── test-results/                     # Raw Playwright results
+├── test-screenshots/                 # Failure screenshots
+│
+├── playwright.config.ts              # Playwright global configuration
+├── package.json
+├── package-lock.json
+└── README.md
+```
 
-The project automates core user flows of the Automation Exercise application such as signup, login, account management, and UI validations.
+## Framework Design & Key Concepts
 
-## 🌐 Application Under Test (AUT)
+✅ Page Object Model (POM)
 
-- **Website:** https://automationexercise.com
-- **Test Cases Reference:** https://automationexercise.com/test_cases
-- **Type:** Public demo e-commerce site for automation practice
+Each page has:
 
+- Page class (actions & behaviors)
+- Locator class (selectors only)
+- Separating locators improves:
+- Maintainability
+- Readability
+- Easier UI updates
 
-🏆 Best Practices Applied
+Example:
+`await loginPage.login(username, password);`
 
-✔ Page Object Model (POM)
+✅ Base Page Architecture
+Located in pages/base/
 
-✔ Custom Playwright Fixtures
+- BasePage.ts
+- Centralized navigation logic
+- URL handling
+- CommonPageMethods.ts
+- Shared methods like page readiness, common waits, reusable actions
+- This ensures consistent behavior across all pages.
 
-✔ Environment-based configuration
+✅ Common Components
+Located in pages/common/
 
-✔ No hardcoded credentials
+- Header and Footer components
+- Reusable UI elements shared across multiple pages
+- Prevents duplicated locators and logic
 
-✔ Auto-waiting (no fixed sleeps)
+✅ Page Object Manager Pattern
+Located in pages/manager/
 
-✔ CI-ready test execution
+- Central factory for initializing page objects
+- Keeps test files clean
+- Supports scalable test growth
 
+✅ Custom Fixtures
+Located in fixture/
 
-🎯 Intended Use
+- pom.fixture.ts - Injects page objects into tests
+- ui.fixture.ts - Shared UI setup logic
 
-This framework is suitable for:
+Example usage:
 
-UI regression testing
+`test('User can sign up', async ({ signupPage }) => {
+  await signupPage.registerUser();
+});`
 
-Smoke testing
+✅ Environment Configuration
+Located in config/
 
-Learning and demonstrating Playwright best practices
+- .env - Stores credentials and environment values
+- TestCredentials.ts - Central access layer for environment variables, Avoids hardcoding sensitive data.
 
-📌 Notes
+✅ Utilities
+Located in utilities/
 
-Playwright’s built-in auto-waiting is leveraged instead of explicit waits.
+- broken-links-checker.ts - Validates broken links on a page
+- step-decorator.ts - Adds readable step logging to tests, Improves reporting and debugging
 
-Selectors prioritize accessibility and stability.
+## How to Run the Tests
 
-Tests are designed to be independent and repeatable.
+🔹 Prerequisites
+
+Node.js (v16+)
+
+npm
+
+🔹 Install Dependencies
+`npm install`
+
+🔹 Install Playwright Browsers
+`npx playwright install`
+
+🔹 Run All Tests
+`npx playwright test`
+
+🔹 Run Tests in Headed Mode
+`npx playwright test --headed`
+
+🔹 View HTML Report
+`npx playwright show-report`
+
+## CI/CD Integration
+
+The project includes a GitHub Actions workflow:
+.github/workflows/playwright.yml
+
+- This pipeline:
+- Installs dependencies
+- Runs Playwright tests
+- Generates test results automatically on push or pull request
+
+## Test Evidence & Reporting
+
+- Screenshots captured on failure → test-screenshots/
+- HTML reports → playwright-report/
+- Execution artifacts → test-results/

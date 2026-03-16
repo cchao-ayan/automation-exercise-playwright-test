@@ -2,7 +2,7 @@ import { locators } from './ProductDetailsLocators';
 import { BasePage } from '../../pages';
 import { products } from '../../test-data';
 import { Locator } from '@playwright/test';
-import { ProductDetailsDTO } from '../../dto/ProductDetails.dto';
+import { ProductDetailsDTO } from '../../dto/product-detail.dto';
 import { compareByKey, normalizeProductData } from '../../utilities';
 
 export class ProductDetailsPage extends BasePage {

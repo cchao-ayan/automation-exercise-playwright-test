@@ -1,42 +1,26 @@
 import { BasePage } from '../../pages';
-import { locators } from './AccountDeletedPageLocators';
+import { expect } from '@playwright/test';
+import { ROUTES } from '@/constant/routes.const';
 
 export class AccountDeletedPage extends BasePage {
-  async verifyAccountDeletedPageURL(expectedUrl: string) {
-    await this.expectUrl(expectedUrl);
-  }
+  // ======================
+  // Locators
+  // ======================  
+  private get accountDeletedHeading() { return this.page.locator('b:has-text("Account Deleted!")') };
+  private get text1() { return this.page.locator('p:has-text("Your account has been permanently deleted!")') };
+  private get text2() { return this.page.locator('p:has-text("You can create new account to take advantage")') };
+  private get continueButton() { return this.page.getByTestId('continue-button') };
 
-  async verifyHeadingisVisible() {
-    const headingLocator = this.toLocator(locators.accountDeletedHeading);
-    await this.expectVisible(headingLocator);
-    await this.expectHaveText(headingLocator, 'Account Deleted!');
+  // ======================
+  // State methods
+  // ======================
+  protected async assertPageLoaded(): Promise<void> {
+    await expect(this.page).toHaveURL(new RegExp(`${ROUTES.ACCOUNT_DELETED}$`));
+    await expect(this.accountDeletedHeading).toBeVisible();
+    await expect(this.text1).toBeVisible();
+    await expect(this.text2).toBeVisible();
   }
-
-  async verifyText1isVisible() {
-    const text1Locator = this.toLocator(locators.text1);
-    await this.expectVisible(text1Locator);
-    await this.expectHaveText(text1Locator, 'Your account has been permanently deleted!');
-  }
-
-  async verifyText2isVisible() {
-    const text2Locator = this.toLocator(locators.text2);
-    await this.expectVisible(text2Locator);
-    await this.expectHaveText(
-      text2Locator,
-      'You can create new account to take advantage of member privileges to enhance your online shopping experience with us.',
-    );
-  }
-
   async clickContinueButton() {
-    await this.click(locators.continueButton(this.page));
-  }
-
-  async verifyAccountIsDeleted() {
-    await this.verifyAccountDeletedPageURL('https://automationexercise.com/delete_account');
-    await this.header.verifyLogoIsVisible();
-    await this.verifyHeadingisVisible();
-    await this.verifyText1isVisible();
-    await this.verifyText2isVisible();
-    await this.clickContinueButton();
+    await this.continueButton.click();
   }
 }

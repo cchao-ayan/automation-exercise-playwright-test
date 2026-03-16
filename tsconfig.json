@@ -36,11 +36,19 @@
     "outDir": "dist",
 
     // Include type definitions for Node.js and @playwright/test
-    "types": ["node", "@playwright/test"]
+    "types": ["node", "@playwright/test"],
+
+    // Allows clean absolute imports instead of "../../../"
+    "baseUrl": ".",
+
+    // Path alias: @/ maps to src/
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
 
   // Include all TypeScript files in the project
-  "include": ["src", "tests", "**/*.ts", "test-data/ContactUsTestData.jscon"],
+  "include": ["src", "tests", "**/*.ts"],
 
   // Exclude node_modules and dist from compilation
   "exclude": ["node_modules", "dist"]
