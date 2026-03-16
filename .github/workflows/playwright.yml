@@ -34,7 +34,7 @@ jobs:
           TEST_LAST_NAME: ${{ secrets.TEST_LAST_NAME }}
         run: npx playwright test
       
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report

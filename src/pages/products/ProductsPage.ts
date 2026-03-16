@@ -3,8 +3,14 @@ import { products } from '../../test-data';
 import { locators, Locator } from './ProductsPageLocators';
 import { compareByKey, pickFields, Logger, filterProducts } from '../../utilities';
 import { ProductCardDTO } from '../../dto/product-card.dto';
+import { ROUTES } from '@/constant/routes.const';
 
 export class ProductsPage extends BasePage {
+  protected async assertPageLoaded(): Promise<void> {
+    await expect(this.page).toHaveURL(new RegExp(`${ROUTES.SIGNUP_LOGIN}$`));
+    await expect(this.logInHeading).toBeVisible();
+    await expect(this.newUserHeading).toBeVisible();
+  }
   // Helper to get the root locator for a product card by index
   productAt(index: number): Locator {
     return locators.featuredItems(this.page).nth(index);
@@ -19,7 +25,7 @@ export class ProductsPage extends BasePage {
   async getProductPrice(root: Locator): Promise<string> {
     return await locators.productPrice(root).first().innerText();
   }
-    async getFeaturedProductItemCount(): Promise<number> {
+  async getFeaturedProductItemCount(): Promise<number> {
     return await locators.featuredItems(this.page).count();
   }
   // ---------- Methods ----------
@@ -42,10 +48,10 @@ export class ProductsPage extends BasePage {
   async searchProduct(product: string) {
     await this.fill(locators.searchProduct(this.page), product)
   }
-  async clickSearchProductButton(){
+  async clickSearchProductButton() {
     await this.click(locators.searchButton(this.page));
   }
-  async verifySearchProductHeading(){
+  async verifySearchProductHeading() {
     await this.expectVisible(locators.searchProductHeading(this.page));
   }
   async verifyProductsPageUrl(expectedUrl: string) {
@@ -71,17 +77,17 @@ export class ProductsPage extends BasePage {
     await this.expectVisible(featuredItemsHeading);
     await this.expectHaveText(featuredItemsHeading, 'Features Items');
   }
-  async searchForAProduct(keyword: string){
+  async searchForAProduct(keyword: string) {
     await this.searchProduct(keyword);
     await this.clickSearchProductButton();
   }
-  async getSearchProductFromTestData(){
-    
+  async getSearchProductFromTestData() {
+
   }
   async verifySearchedProductAreDisplayedAndCorrect(): Promise<void> {
     const count = await this.getFeaturedProductItemCount();
     Logger.info(`Found ${count} featured product items on the page.`);
-    
+
     for (let i = 0; i < count; i++) {
       const root = this.productAt(i);
       const actualCard = await this.readCardDetailsFromRoot(root);
