@@ -1,26 +1,26 @@
-import { role, css, text } from '@/base/locator'
+import { Locator } from '@playwright/test';
 
-export const HEADER_LOCATORS = {
+export const HEADER_LOCATORS = (root: Locator) => ({
     link: {
-        logo: role('link', 'Website for practice'),
-        home: role('link', 'Home'),
-        products: role('link', 'Products'),
-        cart: role('link', 'Cart'),
-        signup_login: role('link', 'Signup / Login'),
-        test_case: role('link', 'Test Cases'),
-        api_testing: role('link', 'API Testing'),
-        video_tutorial: role('link', 'Video Tutorials'),
-        contact_us: role('link', 'Contact us'),
-        delete_account: role('link', 'Delete Account'),
-        logout: role('link', 'Logout')
+        logo: root.getByRole('link', { name: 'Website for practice' }),
+        home: root.getByRole('link', { name: 'Home' }),
+        products: root.getByRole('link', { name: 'Products' }),
+        cart: root.getByRole('link', { name: 'Cart' }),
+        signup_login: root.getByRole('link', { name: 'Signup / Login' }),
+        test_case: root.getByRole('link', { name: 'Test Cases' }),
+        api_testing: root.getByRole('link', { name: 'API Testing' }),
+        video_tutorial: root.getByRole('link', { name: 'Video Tutorials' }),
+        contact_us: root.getByRole('link', { name: 'Contact us' }),
+        delete_account: root.getByRole('link', { name: 'Delete Account' }),
+        logout: root.getByRole('link', { name: 'Logout' })
     },
     image: {
-        logo: css('img[src*="/home/logo.png"]')
+        logo: root.locator('img[src*="/home/logo.png"]')
     },
     text: {
-        logged_in_as: text('Logged in as')
+        logged_in_as: root.getByText('Logged in as')
     }
-}
+});
 
 
 

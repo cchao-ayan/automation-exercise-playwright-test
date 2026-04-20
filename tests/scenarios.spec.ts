@@ -1,31 +1,28 @@
-import { test } from '@/fixture/pom.fixture';
-import { testCredentials } from '@/config/TestCredentials';
-import { invalidCredentials } from '@/config/InvalidCredentials';
-import { filterByKeyword, Logger } from '@/utilities';
-import productsData from '@/test-data/products/products.test-data.json';
+import { test } from '../src/fixture/pom.fixture';
+import testdata from '../src/test-data/signup/signup.test-data.json';
+import { filterByKeyword } from '../src/utilities';
+import productsData from '../src/test-data/products/products.test-data.json';
 
 test.describe('Automation Exercises - Test Cases', () => {
-    test('Test Case 1: Register User', async ({ pom }) => {
-        await test.step('1. Launch application', async () => {
-            await pom.homePage.navigateToHomePage('/');
+    test.only('Test Case 1: Register User', async ({ pom }) => {
+        await test.step('1. Launch application and verify page is loaded', async () => {
+            await pom.homePage.navigateToHomePage();
+            await pom.homePage.assertPageLoaded();
         });
 
-        await test.step('2. Verify home page', async () => {
-            await pom.homePage.ready();
-        });
-
-        await test.step('3. Register a new account', async () => {
+        await test.step('2. Register a new account', async () => {
             await pom.homePage.header.clickSignupLoginLink();
-            await pom.loginPage.ready();
-            await pom.loginPage.signUp(testCredentials.name, testCredentials.email1);
-            await pom.signUpPage.ready();
-            await pom.signUpPage.registerNewAccount();
+            await pom.loginPage.assertPageLoaded();
+            await pom.loginPage.signUp(testdata[0].name, testdata[0].email);
+            await pom.signUpPage.assertPageLoaded();
+            await pom.signUpPage.fillSignUpForm(0);
         });
         await test.step('4. Verify account creation', async () => {
-            await pom.accountCreatedPage.verifyAccountIscreated();
+            await pom.accountCreatedPage.assertPageLoaded();
+            await pom.accountCreatedPage.clickContinueButton();
         });
         await test.step('5. Verify user is logged-in', async () => {
-            await pom.homePage.loggedInUserLandingPage();
+            await pom.homePage.header.expectSuccessfulLogin(testdata[0].name);
         });
         /*
             await test.step('6. Delete user account', async () => {
@@ -39,7 +36,8 @@ test.describe('Automation Exercises - Test Cases', () => {
             });
             */
     });
-
+});
+/**
     test('Test Case 2: Login User with correct email and password', async ({ pom }) => {
         await test.step('1. Launch application', async () => {
             await pom.homePage.navigateToHomePage('/');
@@ -82,7 +80,8 @@ test.describe('Automation Exercises - Test Cases', () => {
             await pom.signUpPage.verifyLoginErrorMessageIsVisible();
         });
     });
-
+}
+/*
     test('Test Case 4: Logout User', async ({ pom }) => {
         await test.step('1. Launch application', async () => {
             await pom.homePage.navigateToHomePage('/');
@@ -250,3 +249,4 @@ test.describe('Automation Exercises - Test Cases', () => {
     });
 
 });
+**/

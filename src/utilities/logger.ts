@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 
 export class Logger {
-  private static logFilePath = path.resolve('logs', 'test-log.txt');
+  private static logFilePath = path.resolve('src', 'logs', 'test-log.txt');
 
   private static write(level: string, message: string) {
     const timestamp = new Date().toISOString();

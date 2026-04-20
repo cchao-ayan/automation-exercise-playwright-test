@@ -1,39 +1,39 @@
-import { role, testId, css } from '@/base/locator'
+import { Page } from '@playwright/test';
 
-export const SIGNUP_LOCATORS = {
+export const SIGNUP = (page: Page) => ({
     header: {
-        accountInfo: role('heading', 'Enter Account Information'),
-        addressInfo: role('heading', 'Address Information'),
+        accountInfo: page.getByRole('heading', { name: 'Enter Account Information' }),
+        addressInfo: page.getByRole('heading', { name: 'Address Information' }),
     },
     input: {
-        name: testId('name'),
-        email: testId('email'),
-        password: testId('password'),
-        dayOfBirth: css('Day'),
-        monthOfBirth: css('Month'),
-        yearOfBirth: css('Year'),
-        firstName: testId('first_name'),
-        lastName: testId('last_name'),
-        company: testId('company'),
-        address1: testId('address'),
-        address2: testId('address2'),
-        state: testId('state'),
-        city: testId('city'),
-        country: testId('country'),
-        zipcode: testId('zipcode'),
-        mobileNumber: testId('mobile_number'),
+        name: page.getByTestId('name'),
+        email: page.getByTestId('email'),
+        password: page.getByTestId('password'),
+        dayOfBirth: page.locator('Day'),
+        monthOfBirth: page.locator('Month'),
+        yearOfBirth: page.locator('Year'),
+        firstName: page.getByTestId('first_name'),
+        lastName: page.getByTestId('last_name'),
+        company: page.getByTestId('company'),
+        address1: page.getByTestId('address'),
+        address2: page.getByTestId('address2'),
+        state: page.getByTestId('state'),
+        city: page.getByTestId('city'),
+        country: page.getByTestId('country'),
+        zipcode: page.getByTestId('zipcode'),
+        mobileNumber: page.getByTestId('mobile_number'),
     },
     radiobutton: {
-        mr: role('radio', 'Mr.'),
-        mrs: role('radio', 'Mrs.')
+        mr: page.getByRole('radio', { name: 'Mr.' }),
+        mrs: page.getByRole('radio', { name: 'Mrs.' })
     },
     checkbox: {
-        newsletter: role('checkbox', 'newsletter'),
-        offers: role('checkbox', 'optin')
+        newsletter: page.getByRole('checkbox', { name: 'newsletter' }),
+        offers: page.getByRole('checkbox', { name: 'optin' })
     },
     button: {
-        createAccount: testId('create-account')
+        createAccount: page.getByTestId('create-account')
     }
 
-}
+});
 

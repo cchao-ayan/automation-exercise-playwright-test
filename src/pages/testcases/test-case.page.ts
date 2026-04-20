@@ -1,6 +1,6 @@
-import { BasePage } from '@/base/base.page';
+import { BasePage } from '../../base/base.page';
 import { expect } from '@playwright/test';
-import { ROUTES } from '@/constant/routes.const';
+import { ROUTES } from '../../constant/routes.const';
 
 export class TestCasePage extends BasePage {
   // ======================

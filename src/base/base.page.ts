@@ -1,17 +1,14 @@
-import { Page, Locator } from '@playwright/test';
-import { FooterComponent, HeaderComponent } from '@/components';
-import { AdHandler } from '@/utilities/ads-handler';
-import { LocatorFactory, LocatorDefinition } from '@/base/locator';
+import { Page } from '@playwright/test';
+import { FooterComponent, HeaderComponent } from '../components';
+import { AdHandler } from '../utilities/ads-handler';
 
 export abstract class BasePage {
   private _footer?: FooterComponent;
   private _header?: HeaderComponent;
   private readonly adHandler: AdHandler;
-  protected readonly factory: LocatorFactory;
 
   constructor(protected readonly page: Page) {
     this.adHandler = new AdHandler(this.page);
-    this.factory = new LocatorFactory(this.page);
   }
 
   /**
@@ -40,9 +37,5 @@ export abstract class BasePage {
     await this.adHandler.registerAutoCloseHandlers();
     await this.page.goto(url);
     await this.assertPageLoaded();
-  }
-
-  protected locator(locator: LocatorDefinition): Locator {
-    return this.factory.create(locator);
   }
 }
