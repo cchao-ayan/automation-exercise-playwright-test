@@ -12,7 +12,7 @@ export class LoginPage extends BasePage {
   }
 
   public async assertPageLoaded(): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(`${ROUTES.SIGNUP_LOGIN}$`));
+    await expect(this.page).toHaveURL(new RegExp(`${ROUTES.LOGIN}$`));
     await expect(this.loginLocator.logInHeading).toBeVisible();
     await expect(this.loginLocator.newUserHeading).toBeVisible();
   }

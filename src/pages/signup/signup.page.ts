@@ -15,7 +15,7 @@ export class SignUpPage extends BasePage {
   }
 
   public async assertPageLoaded(): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(`${ROUTES.SIGNUP_LOGIN}$`));
+    await expect(this.page).toHaveURL(new RegExp(`${ROUTES.SIGNUP}$`));
     await expect(this.signUpLocator.header.accountInfo).toBeVisible();
     await expect(this.signUpLocator.header.addressInfo).toBeVisible();
   }
