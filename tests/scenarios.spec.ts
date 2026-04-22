@@ -4,7 +4,7 @@ import { filterByKeyword } from '../src/utilities';
 import productsData from '../src/test-data/products/products.test-data.json';
 
 test.describe('Automation Exercises - Test Cases', () => {
-    test.only('Test Case 1: Register User', async ({ pom }) => {
+    test('Test Case 1: Register User', async ({ pom }) => {
         await test.step('1. Launch application and verify page is loaded', async () => {
             await pom.homePage.navigateToHomePage();
             await pom.homePage.assertPageLoaded();
