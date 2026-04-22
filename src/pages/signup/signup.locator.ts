@@ -9,9 +9,9 @@ export const SIGNUP = (page: Page) => ({
         name: page.getByTestId('name'),
         email: page.getByTestId('email'),
         password: page.getByTestId('password'),
-        dayOfBirth: page.locator('Day'),
-        monthOfBirth: page.locator('Month'),
-        yearOfBirth: page.locator('Year'),
+        dayOfBirth: page.getByTestId('days'),
+        monthOfBirth: page.getByTestId('months'),
+        yearOfBirth: page.getByTestId('years'),
         firstName: page.getByTestId('first_name'),
         lastName: page.getByTestId('last_name'),
         company: page.getByTestId('company'),
@@ -28,8 +28,8 @@ export const SIGNUP = (page: Page) => ({
         mrs: page.getByRole('radio', { name: 'Mrs.' })
     },
     checkbox: {
-        newsletter: page.getByRole('checkbox', { name: 'newsletter' }),
-        offers: page.getByRole('checkbox', { name: 'optin' })
+        newsletter: page.getByRole('checkbox', { name: 'Sign up for our newsletter!' }),
+        offers: page.getByRole('checkbox', { name: 'Receive special offers from' })
     },
     button: {
         createAccount: page.getByTestId('create-account')

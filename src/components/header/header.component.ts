@@ -30,7 +30,12 @@ export class HeaderComponent {
     await expect(this.headerLocator.link.signup_login).not.toBeVisible();
     await expect(this.headerLocator.text.logged_in_as).toHaveText(`Logged in as ${username}`);
   }
-
+  public async verifyThatUserIsLoggedOut(): Promise<void> {
+    await this.expectLogoLoaded();
+    await expect(this.headerLocator.link.signup_login).toBeVisible();
+    await expect(this.headerLocator.link.logout).not.toBeVisible();
+    await expect(this.headerLocator.text.logged_in_as).not.toBeVisible();
+  }
   public async clickSignupLoginLink(): Promise<void> {
     await this.headerLocator.link.signup_login.click();
   }

@@ -14,13 +14,13 @@ export class AccountDeletedPage extends BasePage {
   // ======================
   // State methods
   // ======================
-  protected async assertPageLoaded(): Promise<void> {
+  public async assertPageLoaded(): Promise<void> {
     await expect(this.page).toHaveURL(new RegExp(`${ROUTES.ACCOUNT_DELETED}$`));
     await expect(this.accountDeletedLocator.accountDeletedHeading).toBeVisible();
     await expect(this.accountDeletedLocator.text1).toBeVisible();
     await expect(this.accountDeletedLocator.text2).toBeVisible();
   }
-  private async clickContinueButton() {
+  public async clickContinueButton() {
     await this.accountDeletedLocator.continueButton.click();
   }
 }

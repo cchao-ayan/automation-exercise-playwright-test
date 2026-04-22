@@ -9,5 +9,5 @@ export const ROUTES = {
     VIDEO_TUTORIAL: 'https://www.youtube.com/c/AutomationExercise',
     CONTACT_US: '/contact_us',
     ACCOUNT_CREATED: '/account_created',
-    ACCOUNT_DELETED: '/account_deleted'
+    ACCOUNT_DELETED: '/delete_account'
 } as const;

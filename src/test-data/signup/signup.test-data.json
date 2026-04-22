@@ -23,18 +23,18 @@
     "name": "Arnold",
     "email": "Arnold1.1.TEST@gmail.com",
     "password": "Arnold123!",
-    "day": "15",
-    "month": "May",
-    "year": "1990",
+    "day": "5",
+    "month": "June",
+    "year": "1991",
     "firstName": "Arnold",
     "lastName": "Smith",
-    "company": "Galaxy Corp",
-    "address1": "123 Star Lane",
-    "address2": "Unit 45",
+    "company": "Universe Corp",
+    "address1": "123 Inside Lane",
+    "address2": "Unit 12B",
     "country": "Canada",
     "state": "Aurora",
     "city": "Aurora",
-    "zipcode": "23001",
-    "mobileNumber": "123456789123"
+    "zipcode": "23002",
+    "mobileNumber": "123456789124"
   }
 ]
