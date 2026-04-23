@@ -29,4 +29,9 @@ export class LoginPage extends BasePage {
     await this.loginLocator.byTestID('signup-email').fill(email);
     await this.loginLocator.byTestID('signup-button').click();
   }
+
+  public async assertLoginFail(): Promise<void> {
+    await expect(this.loginLocator.loginErrorMessage).toBeVisible();
+    await expect(this.loginLocator.loginErrorMessage).toHaveText('Your email or password is incorrect!');
+  }
 }
