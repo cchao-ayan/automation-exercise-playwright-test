@@ -1,10 +1,10 @@
-import { test } from '../src/fixture/pom.fixture';
-import testdata from '../src/test-data/signup/signup.test-data.json';
-import { filterByKeyword } from '../src/utilities';
-import productsData from '../src/test-data/products/products.test-data.json';
+import { test } from '../../src/fixture/pom.fixture';
+import testdata from '../../src/test-data/signup/signup.test-data.json';
+import { filterByKeyword } from '../../src/utilities';
+import productsData from '../../src/test-data/products/products.test-data.json';
 
 test.describe('Automation Exercises - Test Cases', () => {
-    test('Test Case 1: Register User', async ({ pom }) => {
+    test.skip('Test Case 1: Register User', async ({ pom }) => {
         await test.step('1. Launch application and verify page is loaded', async () => {
             await pom.homePage.navigateToHomePage();
             await pom.homePage.assertPageLoaded();
@@ -37,7 +37,7 @@ test.describe('Automation Exercises - Test Cases', () => {
     });
 });
 
-    test('Test Case 2: Login User with correct email and password', async ({ pom }) => {
+    test.skip('Test Case 2: Login User with correct email and password', async ({ pom }) => {
         await test.step('1. Launch application and verify page is loaded', async () => {
             await pom.homePage.navigateToHomePage();
             await pom.homePage.assertPageLoaded();

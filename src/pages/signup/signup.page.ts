@@ -1,13 +1,15 @@
 import { BasePage } from '../../base/base.page';
-import { signup } from '../../test-data';
+import { signup, filePath } from '../../test-data';
 import { expect, Page } from '@playwright/test';
 import { ROUTES } from '../../constant/routes.const';
 import { SIGNUP } from '../../pages/signup/signup.locator';
 import { assertTextEquals } from '../../assertion/generic';
+import { CsvReader } from '../../utilities/csv-reader';
 
 
 export class SignUpPage extends BasePage {
  private readonly signUpLocator;
+ private readonly userData = CsvReader.readCsv(filePath.userData.csvFilePath);
  
   constructor(protected readonly page: Page) {
     super(page);

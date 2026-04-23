@@ -1,0 +1,8 @@
+{
+  "uploadFilePath": {
+    "filePathContactUs": "./test-assets/upload-files/ContactUs.txt"
+  },
+  "userData": {
+    "csvFilePath": "./src/test-assets/users/Users.csv"
+  }
+}

@@ -18,6 +18,7 @@ export class LoginPage extends BasePage {
   }
 
   public async login(email: string, password: string): Promise<void> {
+    //console.log(`Attempting to login with email: ${email} and password: ${password}`); // Debug log for login credentials
     await this.loginLocator.byTestID('login-email').fill(email);
     await this.loginLocator.byTestID('login-password').fill(password);
     await this.loginLocator.byTestID('login-button').click();
