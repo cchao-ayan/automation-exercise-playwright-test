@@ -1,8 +1,8 @@
-import { test } from '../../src/fixture/pom.fixture';
-import { CsvReader } from '../../src/utilities/csv-reader';
-import { filePath } from '../../src/test-data/index';
+import { test } from '/fixture/pom.fixture';
+import { CsvReader } from '/utilities/csv-reader';
+import { paths } from '/config/paths';
 
-const data = CsvReader.readCsv(filePath.userData.csvFilePath);
+const data = CsvReader.readCsv(paths.data.usersCsv);
 
 test.describe('Login Functionality', () => {
     test.beforeEach(async ({ pom }) => {
@@ -21,7 +21,7 @@ test.describe('Login Functionality', () => {
             } else if (row.password === '') {
                 await pom.loginPage.assertRequiredTooltip('password',row.tooltip); // Add assertion to verify required field tooltip for empty credentials
             }  else {
-                await pom.homePage.header.expectSuccessfulLogin(row.name); // Add assertion to verify successful login for valid credentials
+                await pom.homePage.header.successfulLogin(row.name); // Add assertion to verify successful login for valid credentials
             }
         });
     }
