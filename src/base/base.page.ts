@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { FooterComponent, HeaderComponent } from '../components';
+import { FooterComponent, HeaderComponent } from '../pages/components';
 import { AdHandler } from '../utilities/ads-handler';
 
 export abstract class BasePage {
@@ -28,7 +28,7 @@ export abstract class BasePage {
    * Each page must implement its own load verification logic.
    * This is invoked internally after navigation to ensure stability.
    */
-  protected abstract assertPageLoaded(): Promise<void>;
+  protected abstract assertPageLoaded(index?: number): Promise<void>;
 
   /**
    * Navigate to URL with ad handlers registered.

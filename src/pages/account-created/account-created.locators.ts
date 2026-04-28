@@ -1,8 +1,10 @@
 import { Page } from '@playwright/test';
 
-export const ACCOUNT_CREATED = (page: Page) => ({
-    accountCreatedHeading: page.getByRole('heading', { name: 'Account Created!' }),
-    text1: page.getByText('Congratulations! Your new account has been successfully created!'),
-    text2: page.getByText('You can now take advantage of member privileges to enhance your online shopping experience with us.',),
-    continueButton: page.getByTestId('continue-button')
-});
+export class AccountCreatedLocators {
+    constructor(private readonly page: Page) {}
+
+    readonly accountCreatedHeading = this.page.getByRole('heading', { name: 'Account Created!' });
+    readonly message1 = this.page.getByText('Congratulations! Your new account has been successfully created!');
+    readonly message2 = this.page.getByText('You can now take advantage of member privileges to enhance your online shopping experience with us.',);
+    readonly continueButton = this.page.getByTestId('continue-button');
+}

@@ -1,18 +1,18 @@
-import { BasePage } from '../../base/base.page';
-import { expect } from '@playwright/test';
-import { ROUTES } from '../../constant/routes.const';
+import { BasePage } from '/base/base.page';
+import { expect, Page } from '@playwright/test';
+import { routes } from '/config/routes';
+import { TestCaseLocators } from './test-case.locators';
 
 export class TestCasePage extends BasePage {
-  // ======================
-  // Locators - uses different approach (not using locator factory)
-  // ======================
-
-  private get testCaseHeading() { return this.page.getByRole('heading', { name: 'Test Cases', level: 2 }) };
-  private get feedbackHeading() { return this.page.getByRole('heading', { name: 'Feedback For Us' }) };
+  private readonly locators: TestCaseLocators;
+  constructor(protected readonly page: Page) {
+    super(page);
+    this.locators = new TestCaseLocators(this.page);
+  }
 
   protected async assertPageLoaded(): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(`${ROUTES.SIGNUP_LOGIN}$`));
-    await expect(this.testCaseHeading).toBeVisible();
-    await expect(this.feedbackHeading).toBeVisible();
+    await expect(this.page).toHaveURL(new RegExp(`${routes.testCases}$`));
+    await expect(this.locators.testCaseHeading).toBeVisible();
+    await expect(this.locators.feedbackHeading).toBeVisible();
   }
 }

@@ -1,0 +1,6 @@
+name,email,password,title,birth_date,birth_month,birth_year,firstname,lastname,address1,address2,country,zipcode,state,city,mobile_number,scenario,message,tooltip
+Andrew,andrewboi@yahoo.com,andrew,Mr,2,February,2000,Andrew,A,address1,,Canada,222,F,K,11111,Wrong email,Your email or password is incorrect!,
+Elaine,el-el@hotmail.com,elaine,Mrs,5,June,2000,Elaine,B,address1,,India,333,G,L,22222,Wrong password,Your email or password is incorrect!,
+Helione,,helione,Mrs,12,March,2000,Helione,C,address1,,Australia,444,H,M,33333,Empty email,,Please fill out this field.
+Zoorie,ozonewin@gmail.com,,Mr,22,December,2000,Zoorie,D,address1,,Israel,555,I,N,44444,Empty password,,Please fill out this field.
+Youzin,zoozoo-un@gmail.com,youzin,Mr,22,August,2000,Youzin,E,address1,,United States,666,J,O,55555,Valid credentials,,

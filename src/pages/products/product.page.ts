@@ -1,53 +1,53 @@
-import { BasePage } from '../../base/base.page';
-import { products } from '../../test-data';
-import { compareByKey, pickFields, Logger, filterProducts } from '../../utilities';
-import { ProductCardDTO } from '../../dto/product-card.dto';
-import { ROUTES } from '../../constant/routes.const';
+import { BasePage } from '/base/base.page';
+import { products } from '/test-data';
+import { compareByKey, pickFields, Logger, filterProducts } from '/utilities';
+import { ProductCardDTO } from '/models/product-card.model';
+import { routes } from '/config/routes';
 import { expect, Page, Locator } from '@playwright/test';
-import { PRODUCT } from './product.locator';
+import { ProductLocators } from './product.locator';
 
 export class ProductsPage extends BasePage {
-  private readonly productLocator;
+  private readonly locators: ProductLocators;
   
   constructor(protected readonly page: Page) {
     super(page);
-    this.productLocator = PRODUCT(page);
+    this.locators = new ProductLocators(page);
   }
 
   protected async assertPageLoaded(): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(`${ROUTES.PRODUCTS}$`));
-    await expect(this.productLocator.section.allProducts).toBeVisible();
-    await expect(this.productLocator.section.brand).toBeVisible();
-    await expect(this.productLocator.section.category).toBeVisible();
+    await expect(this.page).toHaveURL(new RegExp(`${routes.products}$`));
+    await expect(this.locators.allProductsSection).toBeVisible();
+    await expect(this.locators.brandSection).toBeVisible();
+    await expect(this.locators.categorySection).toBeVisible();
   }
   // ---------- Methods ----------
-  private getFeatureItems(): Locator {
-    return this.productLocator.container.product.locator(this.productLocator.container.perPoduct); // locator('.features_items').locator('.col-sm-4')
+  public getFeatureItems(): Locator {
+    return this.locators.productContainer.locator(this.locators.perPoductContainer); // locator('.features_items').locator('.col-sm-4')
   }
-  private async getProductID(): Promise<string | null> {
-    const productID = this.productLocator.container.product.locator(this.productLocator.container.perPoduct).first().getAttribute('data-product-id');
+  public async getProductID(): Promise<string | null> {
+    const productID = this.getFeatureItems().first().getAttribute('data-product-id');
     return productID;
   }
-  private async getProductName(): Promise<string> {
+  public async getProductName(): Promise<string> {
     return await this.getFeatureItems().innerText();
   }
-  private async getProductPrice(): Promise<string> {
+  public async getProductPrice(): Promise<string> {
     return await this.getFeatureItems().first().innerText();
   }
-  private async getFeaturedProductItemCount(): Promise<number> {
+  public async getFeaturedProductItemCount(): Promise<number> {
     return await this.getFeatureItems().count();
   }
-  private productAt(index: number): Locator {
+  public productAt(index: number): Locator {
     return this.getFeatureItems().nth(index);
   }
-  async clickViewProductButtonByIndex(index: number): Promise<void> {
-    await this.productLocator.link.view.click();
+  public async clickViewProductButtonByIndex(index: number): Promise<void> {
+    await this.locators.viewLink.click();
   }
-  async searchProduct(search: string): Promise<void> {
-    await this.productLocator.input.searchProduct.fill(search);
-    await this.productLocator.button.search.click();
+  public async searchProduct(search: string): Promise<void> {
+    await this.locators.searchProductInput.fill(search);
+    await this.locators.searchButton.click();
   }
-  async verifySearchedProductAreDisplayedAndCorrect(): Promise<void> {
+  public async verifySearchedProductAreDisplayedAndCorrect(): Promise<void> {
     const count = await this.getFeaturedProductItemCount();
     Logger.info(`Found ${count} featured product items on the page.`);
 
@@ -63,7 +63,7 @@ export class ProductsPage extends BasePage {
 
   }
   // checking all product card details are correct by comparing with test data (only id, name, price)
-  async verifyProductCardDetailsAreCorrect(): Promise<void> {
+  public async verifyProductCardDetailsAreCorrect(): Promise<void> {
     const count = await this.getFeaturedProductItemCount();
     Logger.info(`Found ${count} featured product items on the page.`);
     for (let i = 0; i < count; i++) {
@@ -84,7 +84,7 @@ export class ProductsPage extends BasePage {
   // }
 
   // ---------- DTO Transformation Helpers ----------
-  private async readCardDetailsFromRoot(): Promise<ProductCardDTO> {
+  public async readCardDetailsFromRoot(): Promise<ProductCardDTO> {
     return {
       id: await this.getProductID(),
       name: await this.getProductName(),

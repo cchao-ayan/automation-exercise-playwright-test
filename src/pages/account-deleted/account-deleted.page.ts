@@ -1,26 +1,26 @@
-import { BasePage } from '../../base/base.page';
+import { BasePage } from '/base/base.page';
+import { routes } from '/config/routes';
 import { expect, Page } from '@playwright/test';
-import { ROUTES } from '../../constant/routes.const';
-import { ACCOUNT_DELETED } from './account-deleted.locators';
+import { AccountDeletedLocators } from './account-deleted.locators';
 
 export class AccountDeletedPage extends BasePage {
-  private readonly accountDeletedLocator;
+  private readonly locators: AccountDeletedLocators;
 
   constructor(protected readonly page: Page) {
     super(page);
-    this.accountDeletedLocator = ACCOUNT_DELETED(this.page); 
+    this.locators = new AccountDeletedLocators(this.page);
   }
 
   // ======================
   // State methods
   // ======================
   public async assertPageLoaded(): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(`${ROUTES.ACCOUNT_DELETED}$`));
-    await expect(this.accountDeletedLocator.accountDeletedHeading).toBeVisible();
-    await expect(this.accountDeletedLocator.text1).toBeVisible();
-    await expect(this.accountDeletedLocator.text2).toBeVisible();
+    await expect(this.page).toHaveURL(new RegExp(`${routes.accountDeleted}$`));
+    await expect(this.locators.accountDeletedHeading).toBeVisible();
+    await expect(this.locators.message1).toBeVisible();
+    await expect(this.locators.message2).toBeVisible();
   }
   public async clickContinueButton() {
-    await this.accountDeletedLocator.continueButton.click();
+    await this.locators.continueButton.click();
   }
 }

@@ -37,11 +37,12 @@
 
     // Include type definitions for Node.js and @playwright/test
     "types": ["node", "@playwright/test"],
-
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
     // Path alias: @/ maps to src/
-    // "paths": {
-    //   "/*": ["src/*"]
-    // }
+    "paths": {
+      "/*": ["src/*"]
+    }
   },
 
   // Include all TypeScript files in the project

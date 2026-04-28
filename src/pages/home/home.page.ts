@@ -1,29 +1,29 @@
-import { BasePage } from '../../base/base.page';
+import { BasePage } from '/base/base.page';
 import { expect, Page } from '@playwright/test';
-import { ROUTES } from '../../constant/routes.const';
-import { HOME } from './home.locators';
+import { routes } from '/config/routes';
+import { HomeLocators } from './home.locators';
 
 export class HomePage extends BasePage {
-  private readonly homeLocator;
+  private readonly locators: HomeLocators;
 
   constructor(protected readonly page: Page) {
     super(page);
-    this.homeLocator = HOME(this.page);
+    this.locators = new HomeLocators(this.page);
   }
 
   public async navigateToHomePage(): Promise<void> {
-    await this.navigate(ROUTES.HOME);
+    await this.navigate(routes.home);
   }
 
   // ======================
   // State methods
   // ======================
   public async assertPageLoaded(): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(`${ROUTES.HOME}$`));
-    await expect(this.homeLocator.slider).toBeVisible();
-    await expect(this.homeLocator.heading('Recommended Items')).toBeVisible();
-    await expect(this.homeLocator.heading('Category')).toBeVisible();
-    await expect(this.homeLocator.heading('Features Items')).toBeVisible();
-    await expect(this.homeLocator.heading('Brands')).toBeVisible();
+    await expect(this.page).toHaveURL(new RegExp(`${routes.home}$`));
+    await expect(this.locators.slider).toBeVisible();
+    await expect(this.locators.recommendedListHeading).toBeVisible();
+    await expect(this.locators.categoryHeading).toBeVisible();
+    await expect(this.locators.featuresItemsHeadin).toBeVisible();
+    await expect(this.locators.brandsHeading).toBeVisible();
   }
 }

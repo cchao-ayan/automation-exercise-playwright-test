@@ -1,38 +1,29 @@
 import { Page } from '@playwright/test';
 
-export const PRODUCT = (page: Page) => ({
-    section: {
-        featureItems: page.getByRole('heading', { name: 'Features Items' }),
-        allProducts: page.getByRole('heading', { name: 'All Products' }),
-        category: page.getByRole('heading', { name: 'Category' }),
-        brand: page.getByRole('heading', { name: 'Brands' }),
-        searchProduct: page.getByRole('heading', { name: 'Searched Products' }),
-        recommended: page.locator('div.recommended-items'),
-    },
-    button: {
-        addToCart: page.getByRole('button', { name: 'Add to cart' }),
-
-        search: page.locator('#submit_search'),
-    },
-    input: {
-        searchProduct: page.getByRole('textbox', { name: 'Search Product' }),
-    },
-    text: {
-        id: page.locator('a').first(), //.first(),
-        name: page.locator('p').first(), //.first(),
-        price: page.locator('Rs.'),
-    },
-    image: {
-        product: page.locator('img').first()
-    },
-    link: {
-        polo: page.getByRole('link', { name: 'Polo' }),
-        view: page.getByRole('link', { name: 'View Product' })
-    },
-    container: {
-        product: page.locator('.features_items'),
-        perPoduct: page.locator('.col-sm-4'),
-        singleProduct: page.locator('.single-products')
-    }
-});
-
+export class ProductLocators {
+    constructor(private readonly page: Page) { }
+    // Sections
+    readonly featureItemsSection = this.page.getByRole('heading', { name: 'Features Items' });
+    readonly allProductsSection = this.page.getByRole('heading', { name: 'All Products' });
+    readonly categorySection = this.page.getByRole('heading', { name: 'Category' });
+    readonly brandSection = this.page.getByRole('heading', { name: 'Brands' });
+    readonly searchProductSection = this.page.getByRole('heading', { name: 'Searched Products' });
+    readonly recommendedSection = this.page.locator('div.recommended-items');
+    // Buttons
+    readonly addToCartButton = this.page.getByRole('button', { name: 'Add to cart' });
+    readonly searchButton = this.page.locator('#submit_search');
+    readonly searchProductInput = this.page.getByRole('textbox', { name: 'Search Product' });
+    // Texts
+    readonly idText = this.page.locator('a').first();
+    readonly nameText = this.page.locator('p').first();
+    readonly priceText = this.page.locator('Rs.');
+    // Images
+    readonly productImage = this.page.locator('img').first();
+    // Link
+    readonly poloLink = this.page.getByRole('link', { name: 'Polo' });
+    readonly viewLink = this.page.getByRole('link', { name: 'View Product' });
+    // Containers
+    readonly productContainer = this.page.locator('.features_items');
+    readonly perPoductContainer = this.page.locator('.col-sm-4');
+    readonly singleProductContainer = this.page.locator('.single-products');
+}

@@ -6,7 +6,7 @@ export * from './home/home.page';
 export * from './login/login.page';
 export * from './manager/POManager';
 export * from './manager/POManagerAutoPageInit';
-export * from './product-details/ProductDetailsPage';
+export * from './product-details/product-details.page';
 export * from './products/product.page';
 export * from './signup/signup.page';
 export * from './testcases/test-case.page';

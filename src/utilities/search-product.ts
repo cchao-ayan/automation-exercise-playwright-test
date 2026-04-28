@@ -1,4 +1,4 @@
-import { ProductCardDTO } from "../dto/product-card.dto";
+import { ProductCardDTO } from "../models/product-card.model";
 
 export function filterProducts(products: ProductCardDTO[], keyword: string): ProductCardDTO[] {
     const lowerCaseKeyword = keyword.toLowerCase();
