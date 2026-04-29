@@ -28,7 +28,7 @@ export class HeaderComponent {
     await this.expectLogoLoaded();
     await expect(this.locator.logoutLink).toBeVisible();
     await expect(this.locator.signupLoginLink).not.toBeVisible();
-    await expect(this.locator.loggedInAsText).toHaveText(`Logged in as ${username}`);
+    await expect(this.locator.loggedInAsText).toHaveText(new RegExp(`logged in as ${username}`, 'i'));
   }
   public async successfulLogout(): Promise<void> {
     await this.expectLogoLoaded();

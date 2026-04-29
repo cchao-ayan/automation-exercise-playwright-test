@@ -5,6 +5,6 @@ export const paths = {
     contactUs: path.resolve('test-assets/upload-files/ContactUs.txt'),
   },
   data: {
-    usersCsv: path.resolve('src/test-data/users/Users.csv'),
+    usersCsv: path.resolve('src/test-data/users/users.csv'),
   },
 };
