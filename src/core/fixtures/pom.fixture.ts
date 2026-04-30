@@ -1,5 +1,5 @@
 import { test as base } from '@playwright/test';
-import { POManager } from '../pages/manager/POManager';
+import { POManager } from '../manager/pom.manager';
 //import { checkForBrokenLink, checkForBrokenLinks } from '../utilities/broken-links-checker';
 
 type MyFixtures = {

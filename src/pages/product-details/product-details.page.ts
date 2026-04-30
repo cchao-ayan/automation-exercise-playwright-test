@@ -1,9 +1,9 @@
 import { ProductDetailsLocators } from './product-details.locators';
-import { BasePage } from '/base/base.page';
+import { BasePage } from '../base/base.page';
 import { products } from '/test-data';
 import { Locator, Page, expect } from '@playwright/test';
 import { ProductDetailsDTO } from '/models/product-detail.model';
-import { compareByKey, normalizeProductData } from '/utilities';
+import { compareByKey, normalizeProductData } from '../../utils';
 import { routes } from '/config/routes';
 
 export class ProductDetailsPage extends BasePage {

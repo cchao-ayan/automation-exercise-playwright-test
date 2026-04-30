@@ -1,4 +1,4 @@
-import { BasePage } from '/base/base.page';
+import { BasePage } from '../base/base.page';
 import { contactUsValid} from '/test-data';
 import { routes } from '/config/routes';
 import { paths } from '/config/paths';

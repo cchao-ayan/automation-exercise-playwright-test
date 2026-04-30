@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
-import { FooterComponent, HeaderComponent } from '../pages/components';
-import { AdHandler } from '../utilities/ads-handler';
+import { FooterComponent, HeaderComponent } from '../components';
+import { AdHandler } from '../../utils/ads-handler';
 
 export abstract class BasePage {
   private _footer?: FooterComponent;

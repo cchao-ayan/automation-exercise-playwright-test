@@ -2,7 +2,7 @@ import { Page } from '@playwright/test';
 import {
   LoginPage, HomePage, SignUpPage, AccountCreatedPage, AccountDeletedPage,
   ContactUsPage, TestCasePage, ProductsPage, ProductDetailsPage
-} from '../index';
+} from '../../pages/index';
 // Header/Footer are provided by pages via BasePage lazy getters
 
 export class POManager {

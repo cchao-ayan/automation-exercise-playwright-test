@@ -1,4 +1,4 @@
-import { BasePage } from '/base/base.page';
+import { BasePage } from '../base/base.page';
 import { routes } from '/config/routes';
 import { expect, Page } from '@playwright/test';
 import { AccountCreatedLocators } from './account-created.locators';

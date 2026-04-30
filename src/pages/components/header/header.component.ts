@@ -36,6 +36,10 @@ export class HeaderComponent {
     await expect(this.locator.logoutLink).not.toBeVisible();
     await expect(this.locator.loggedInAsText).not.toBeVisible();
   }
+
+  // ======================
+  // Action methods
+  // ======================
   public async clickSignupLoginLink(): Promise<void> {
     await this.locator.signupLoginLink.click();
   }

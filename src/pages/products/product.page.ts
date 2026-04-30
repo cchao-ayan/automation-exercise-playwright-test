@@ -1,6 +1,6 @@
-import { BasePage } from '/base/base.page';
+import { BasePage } from '../base/base.page';
 import { products } from '/test-data';
-import { compareByKey, pickFields, Logger, filterProducts } from '/utilities';
+import { compareByKey, pickFields, Logger, filterProducts } from '../../utils';
 import { ProductCardDTO } from '/models/product-card.model';
 import { routes } from '/config/routes';
 import { expect, Page, Locator } from '@playwright/test';

@@ -1,10 +1,10 @@
-import { BasePage } from '/base/base.page';
+import { BasePage } from '../base/base.page';
 import { paths } from '/config/paths';
 import { expect, Page } from '@playwright/test';
 import { routes } from '/config/routes';
 import { SignUpLocators } from '/pages/signup/signup.locator';
 import { assertTextEquals } from '/assertion/generic';
-import { getUserData } from '/utilities/data-helper'
+import { getUserData } from '../../utils/data-helper'
 
 export class SignUpPage extends BasePage {
   private readonly locators: SignUpLocators;

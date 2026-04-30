@@ -1,7 +1,6 @@
-import { test } from '../../src/fixture/pom.fixture';
-import { registerUserFlow } from '../../src/flows/user.flow';
-import testdata from '../../src/test-data/signup/signup.test-data.json';
-import { filterByKeyword } from '../../src/utilities';
+import { test } from '../../src/core/fixtures/pom.fixture';
+import { registerUserFlow } from '../../src/flows/auth/register.flow';
+import { filterByKeyword } from '../../src/utils';
 import productsData from '../../src/test-data/products/products.test-data.json';
 
 test.describe('Automation Exercises - Test Cases', () => {
@@ -18,7 +17,7 @@ test.describe('Automation Exercises - Test Cases', () => {
             await pom.accountCreatedPage.clickContinueButton();
         });
         await test.step('Verify user is logged-in', async () => {
-            await pom.homePage.header.expectSuccessfulLogin('Youzin');
+            await pom.homePage.header.successfulLogin('Youzin');
         });
         await test.step('Delete user account', async () => {
             await pom.homePage.header.clickDeleteAccountLink();
@@ -28,7 +27,7 @@ test.describe('Automation Exercises - Test Cases', () => {
             await pom.accountDeletedPage.clickContinueButton();
         });
         await test.step('Verify landing page and user is logged out', async () => {
-            await pom.homePage.header.verifyThatUserIsLoggedOut();
+            await pom.homePage.header.successfulLogout();
         });
     });
 });
@@ -40,7 +39,7 @@ test.skip('Test Case 2: Login User with correct email and password', async ({ po
         await pom.loginPage.login('zoozoo-un@gmail.com', 'youzin');
     });
     await test.step('3. Verify user is logged-in', async () => {
-        await pom.homePage.header.expectSuccessfulLogin('Youzin');
+        await pom.homePage.header.successfulLogin('Youzin');
     });
     await test.step('4. Delete user account', async () => {
         await pom.homePage.header.clickDeleteAccountLink();
@@ -51,7 +50,7 @@ test.skip('Test Case 2: Login User with correct email and password', async ({ po
     });
     await test.step('6. Verify landing page and user is logged out', async () => {
         await pom.homePage.assertPageLoaded();
-        await pom.homePage.header.verifyThatUserIsLoggedOut();
+        await pom.homePage.header.successfulLogout();
     });
 });
 /**
