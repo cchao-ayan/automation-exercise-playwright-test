@@ -35,7 +35,7 @@ export class SignUpPage extends BasePage {
   }
 
   public async fillSignUpForm(username: string): Promise<void> {
-    const user = getUserData('Youzin',paths.data.usersCsv);
+    const user = getUserData(username,paths.data.usersCsv);
     this.titleSelection(user);
     await this.verifyNameAndEmailPrefilled(user);
     await this.locators.passwordInput.fill(user.password);

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pw:run": "playwright test",
+    "pw:api": "playwright test tests/api/test.spec.ts",
     "pw:run:headed": "playwright test --headed",
     "pw:ui": "playwright test --ui",
     "pw:scenario": "playwright test tests/e2e/scenarios.spec.ts",

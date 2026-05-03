@@ -1,12 +1,11 @@
-import { test } from '../../src/core/fixtures/pom.fixture';
-import { registerUserFlow } from '../../src/flows/auth/register.flow';
-import { filterByKeyword } from '../../src/utils';
-import productsData from '../../src/test-data/products/products.test-data.json';
+import { test } from '/core/fixtures/app.fixture';
+import { registerUserFlow } from '/flows/auth/register.flow';
+import { filterByKeyword } from '/utils';
 
 test.describe('Automation Exercises - Test Cases', () => {
     test.beforeEach(async ({ pom }) => {
-            await pom.homePage.navigateToHomePage();
-            await pom.homePage.assertPageLoaded();
+        await pom.homePage.navigateToHomePage();
+        await pom.homePage.assertPageLoaded();
     });
     test('Test Case 1: Register User', async ({ pom }) => {
         await test.step('Register a new account', async () => {

@@ -1,5 +1,5 @@
-import { test } from '../../src/core/fixtures/pom.fixture';
-import { CsvReader } from '../../src/utils/csv-reader';
+import { test } from '/core/fixtures/app.fixture';
+import { CsvReader } from '/utils/csv-reader';
 import { paths } from '/config/paths';
 
 const data = CsvReader.readCsv(paths.data.usersCsv);

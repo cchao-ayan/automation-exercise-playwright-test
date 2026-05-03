@@ -1,14 +1,17 @@
-import { BasePage } from '../base/base.page';
-import { products } from '/test-data';
-import { compareByKey, pickFields, Logger, filterProducts } from '../../utils';
-import { ProductCardDTO } from '/models/product-card.model';
+import { BasePage } from '/pages/base/base.page';
 import { routes } from '/config/routes';
 import { expect, Page, Locator } from '@playwright/test';
 import { ProductLocators } from './product.locator';
+import { ProductApiModel, ProductCardModel } from '/models/product.model';
+import { compareByKey } from '/utils/compare-by-key';
+import { normalizeProductData } from '/models/product.model';
+import { ProductAPI } from '/api/product.api';
+
+type ProductView = 'info' | 'overlay';
 
 export class ProductsPage extends BasePage {
   private readonly locators: ProductLocators;
-  
+
   constructor(protected readonly page: Page) {
     super(page);
     this.locators = new ProductLocators(page);
@@ -21,74 +24,56 @@ export class ProductsPage extends BasePage {
     await expect(this.locators.categorySection).toBeVisible();
   }
   // ---------- Methods ----------
-  public getFeatureItems(): Locator {
-    return this.locators.productContainer.locator(this.locators.perPoductContainer); // locator('.features_items').locator('.col-sm-4')
-  }
-  public async getProductID(): Promise<string | null> {
-    const productID = this.getFeatureItems().first().getAttribute('data-product-id');
-    return productID;
-  }
-  public async getProductName(): Promise<string> {
-    return await this.getFeatureItems().innerText();
-  }
-  public async getProductPrice(): Promise<string> {
-    return await this.getFeatureItems().first().innerText();
-  }
-  public async getFeaturedProductItemCount(): Promise<number> {
-    return await this.getFeatureItems().count();
-  }
   public productAt(index: number): Locator {
-    return this.getFeatureItems().nth(index);
+    return this.locators.productsContainer.locator(this.locators.perPoductContainer).nth(index); // locator('.features_items').locator('.col-sm-4')
   }
-  public async clickViewProductButtonByIndex(index: number): Promise<void> {
-    await this.locators.viewLink.click();
+  public productViewAt(index: number, view: ProductView): Locator {
+    return view === 'info'
+      ? this.productAt(index).locator(this.locators.productInfo)
+      : this.productAt(index).locator(this.locators.productOverlay);
+    // if (view === 'info') {
+    //   return this.productAt(index).locator(this.locators.productInfo);
+    // }
+    // if (view === 'overlay') {
+    //   return this.productAt(index).locator(this.locators.productOverlay);
+    // }
+    // return this.productAt(index);
+  }
+  public async productID(index: number, view: ProductView): Promise<string | null> {
+    return this.productViewAt(index, view).locator(this.locators.idText).getAttribute('data-product-id');
+  }
+  public async productName(index: number, view: ProductView): Promise<string> {
+    return this.productViewAt(index, view).locator(this.locators.nameText).innerText();
+  }
+  public async productPrice(index: number, view: ProductView): Promise<string> {
+    return this.productViewAt(index, view).locator(this.locators.priceText).innerText();
+  }
+  public async clickAddToCartButton(index: number, view: ProductView): Promise<void> {
+    await this.productViewAt(index, view).locator(this.locators.addToCartButton).click();
+  }
+  public async clickViewProductButton(index: number): Promise<void> {
+    await this.productAt(index).locator(this.locators.viewProductLink).click();
   }
   public async searchProduct(search: string): Promise<void> {
     await this.locators.searchProductInput.fill(search);
     await this.locators.searchButton.click();
   }
-  public async verifySearchedProductAreDisplayedAndCorrect(): Promise<void> {
-    const count = await this.getFeaturedProductItemCount();
-    Logger.info(`Found ${count} featured product items on the page.`);
 
-    for (let i = 0; i < count; i++) {
-      const root = this.productAt(i);
-      const actualCard = await this.readCardDetailsFromRoot();
-      const pick = pickFields(products[i], ['id', 'name', 'price']); // Assuming test data is in the same order as the products on the page
-      const expectedCard = pick.filterProducts(products, 'tops');
-      Logger.info(expectedCard);
-      // Compare only id, name, and price for the card details
-      compareByKey(actualCard, expectedCard, ['id', 'name', 'price']);
-    }
-
-  }
-  // checking all product card details are correct by comparing with test data (only id, name, price)
-  public async verifyProductCardDetailsAreCorrect(): Promise<void> {
-    const count = await this.getFeaturedProductItemCount();
-    Logger.info(`Found ${count} featured product items on the page.`);
-    for (let i = 0; i < count; i++) {
-      const index = this.productAt(i);
-      const actualCard = await this.readCardDetailsFromRoot();
-      const expectedCard = pickFields(products[i], ['id', 'name', 'price']); // Assuming test data is in the same order as the products on the page
-      compareByKey(actualCard, expectedCard, ['id', 'name', 'price']); // Compare only id, name, and price for the card details
-    }
-  }
-  // // not used for now
-  // async getFirstProductCardDetails(index: number): Promise<ProductCardDTO> {
-  //   return this.readCardDetailsFromRoot(this.productAt(index));
-  // }
-  // async compareProductCardDetailsWithTestDataByIndex(index: number): Promise<void> {
-  //   const actualCard = await this.readCardDetailsFromRoot(this.productAt(index));
-  //   const expectedCard = pickFields(products[index], ['id', 'name', 'price']);
-  //   compareByKey(actualCard, expectedCard, ['id', 'name', 'price']);
-  // }
-
-  // ---------- DTO Transformation Helpers ----------
-  public async readCardDetailsFromRoot(): Promise<ProductCardDTO> {
+  public async productCard(index: number, view: ProductView): Promise<ProductCardModel> {
     return {
-      id: await this.getProductID(),
-      name: await this.getProductName(),
-      price: await this.getProductPrice()
-    };
+      id: await this.productID(index, view),
+      name: await this.productName(index, view),
+      price: await this.productPrice(index, view),
+    }
+  };
+
+  public async compareProductCardWithApi(index: number, view: ProductView, productApi: ProductApiModel[]): Promise<void> {
+    const actual = await this.productCard(index, view);
+    const productsFromApi = productApi.find(p => String(p.id) === actual.id);
+    if (!productsFromApi) {
+      throw new Error('No product data returned from API');
+    }
+    const expected = normalizeProductData(productsFromApi);
+    compareByKey(actual, expected, ['id', 'name', 'price']);
   }
 }

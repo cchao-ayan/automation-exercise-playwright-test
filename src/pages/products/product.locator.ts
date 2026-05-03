@@ -21,9 +21,10 @@ export class ProductLocators {
     readonly productImage = this.page.locator('img').first();
     // Link
     readonly poloLink = this.page.getByRole('link', { name: 'Polo' });
-    readonly viewLink = this.page.getByRole('link', { name: 'View Product' });
+    readonly viewProductLink = this.page.getByRole('link', { name: 'View Product' });
     // Containers
-    readonly productContainer = this.page.locator('.features_items');
+    readonly productsContainer = this.page.locator('.features_items');
     readonly perPoductContainer = this.page.locator('.col-sm-4');
-    readonly singleProductContainer = this.page.locator('.single-products');
+    readonly productInfo = this.page.locator('.productinfo');
+    readonly productOverlay = this.page.locator('.product-overlay');
 }
