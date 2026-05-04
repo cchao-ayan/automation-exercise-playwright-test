@@ -1,16 +1,16 @@
 [
-    {
-        "user1": {
-            "email": "invalid@example.com",
-            "password": "wrongpassword"
-        },
-        "user2": {
-            "email": "invalidEmail",
-            "password": "password123"
-        },
-        "user3": {
-            "email": "",
-            "password": ""
-        }
+  {
+    "user1": {
+      "email": "invalid@example.com",
+      "password": "wrongpassword"
+    },
+    "user2": {
+      "email": "invalidEmail",
+      "password": "password123"
+    },
+    "user3": {
+      "email": "",
+      "password": ""
     }
+  }
 ]

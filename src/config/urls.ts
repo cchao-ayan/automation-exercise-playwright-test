@@ -1,3 +1,3 @@
-export const urls = {    
-    videoTutorial: 'https://www.youtube.com/c/AutomationExercise'
-}
+export const urls = {
+  videoTutorial: 'https://www.youtube.com/c/AutomationExercise',
+};

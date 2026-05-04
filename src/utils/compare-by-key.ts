@@ -4,15 +4,13 @@ import { Logger } from './logger';
 export function compareByKey<T, K extends keyof T>(
   actual: T | T[],
   expected: T | T[],
-  key: K | K[]
+  key: K | K[],
 ): void {
   const keys = Array.isArray(key) ? key : [key];
 
   // Ensure both are same type (array or object)
   if (Array.isArray(actual) !== Array.isArray(expected)) {
-    throw new Error(
-      'Both actual and expected must be either arrays or objects'
-    );
+    throw new Error('Both actual and expected must be either arrays or objects');
   }
 
   // ✅ ARRAY CASE
@@ -20,18 +18,18 @@ export function compareByKey<T, K extends keyof T>(
     expect(actual.length).toBe(expected.length);
     // Create a map for quick lookup of actual items by composite key
     const map = new Map<string, T>(
-      actual.map(item => {
-        const composite = JSON.stringify(keys.map(k => item[k]));
+      actual.map((item) => {
+        const composite = JSON.stringify(keys.map((k) => item[k]));
         return [composite, item]; // example: {id: 1, name: 'A'} with key 'id' => map.set('1', {id: 1, name: 'A'})
-      })
+      }),
     );
     // For each expected item, find the corresponding actual item using the composite key and compare
     for (const exp of expected) {
-      const composite = JSON.stringify(keys.map(k => exp[k]));
+      const composite = JSON.stringify(keys.map((k) => exp[k]));
       const act = map.get(composite); // example: map.get('1') => {id: 1, name: 'A'}
 
       expect(act).toBeDefined();
-      expect(act as unknown).toEqual(exp as unknown); // ✅ deep equality 
+      expect(act as unknown).toEqual(exp as unknown); // ✅ deep equality
     }
 
     return; // exit after array comparison

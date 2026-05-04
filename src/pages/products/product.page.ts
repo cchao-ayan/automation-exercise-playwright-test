@@ -40,7 +40,9 @@ export class ProductsPage extends BasePage {
     // return this.productAt(index);
   }
   public async productID(index: number, view: ProductView): Promise<string | null> {
-    return this.productViewAt(index, view).locator(this.locators.idText).getAttribute('data-product-id');
+    return this.productViewAt(index, view)
+      .locator(this.locators.idText)
+      .getAttribute('data-product-id');
   }
   public async productName(index: number, view: ProductView): Promise<string> {
     return this.productViewAt(index, view).locator(this.locators.nameText).innerText();
@@ -64,12 +66,16 @@ export class ProductsPage extends BasePage {
       id: await this.productID(index, view),
       name: await this.productName(index, view),
       price: await this.productPrice(index, view),
-    }
-  };
+    };
+  }
 
-  public async compareProductCardWithApi(index: number, view: ProductView, productApi: ProductApiModel[]): Promise<void> {
+  public async compareProductCardWithApi(
+    index: number,
+    view: ProductView,
+    productApi: ProductApiModel[],
+  ): Promise<void> {
     const actual = await this.productCard(index, view);
-    const productsFromApi = productApi.find(p => String(p.id) === actual.id);
+    const productsFromApi = productApi.find((p) => String(p.id) === actual.id);
     if (!productsFromApi) {
       throw new Error('No product data returned from API');
     }

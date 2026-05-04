@@ -1,5 +1,5 @@
-import path from "path";
-import fs from "fs";
+import path from 'path';
+import fs from 'fs';
 
 export class Logger {
   private static logFilePath = path.resolve('src', 'logs', 'test-log.txt');

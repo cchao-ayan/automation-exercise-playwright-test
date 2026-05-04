@@ -4,11 +4,10 @@ import { expect, Page } from '@playwright/test';
 import { routes } from '/config/routes';
 import { SignUpLocators } from '/pages/signup/signup.locator';
 import { assertTextEquals } from '/assertion/generic';
-import { getUserData } from '../../utils/data-helper'
+import { getUserData } from '../../utils/data-helper';
 
 export class SignUpPage extends BasePage {
   private readonly locators: SignUpLocators;
-
 
   constructor(protected readonly page: Page) {
     super(page);
@@ -35,7 +34,7 @@ export class SignUpPage extends BasePage {
   }
 
   public async fillSignUpForm(username: string): Promise<void> {
-    const user = getUserData(username,paths.data.usersCsv);
+    const user = getUserData(username, paths.data.usersCsv);
     this.titleSelection(user);
     await this.verifyNameAndEmailPrefilled(user);
     await this.locators.passwordInput.fill(user.password);

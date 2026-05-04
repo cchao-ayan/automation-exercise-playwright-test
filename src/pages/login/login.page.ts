@@ -5,7 +5,7 @@ import { AccountCreatedLocators } from './login.locators';
 
 export class LoginPage extends BasePage {
   private readonly locators: AccountCreatedLocators;
-  
+
   constructor(protected readonly page: Page) {
     super(page);
     this.locators = new AccountCreatedLocators(this.page);
@@ -18,7 +18,6 @@ export class LoginPage extends BasePage {
   }
 
   public async login(email: string, password: string): Promise<void> {
-    //console.log(`Attempting to login with email: ${email} and password: ${password}`); // Debug log for login credentials
     await this.locators.loginEmail.fill(email);
     await this.locators.loginPassword.fill(password);
     await this.locators.loginButton.click();
@@ -37,12 +36,14 @@ export class LoginPage extends BasePage {
 
   public async assertRequiredTooltip(field: string, tooltip: string): Promise<void> {
     if (field === 'email') {
-      const tooltipMessage = await this.locators.loginEmail.evaluate((el: HTMLInputElement) => el.validationMessage);
-      // Logger.info(`Email field validation message: ${tooltipMessage}`); // Log the actual tooltip message for debugging
+      const tooltipMessage = await this.locators.loginEmail.evaluate(
+        (el: HTMLInputElement) => el.validationMessage,
+      );
       expect(tooltipMessage).toContain(tooltip);
     } else if (field === 'password') {
-      const tooltipMessage = await this.locators.loginPassword.evaluate((el: HTMLInputElement) => el.validationMessage);
-      // Logger.info(`Password field validation message: ${tooltipMessage}`); // Log the actual tooltip message for debugging
+      const tooltipMessage = await this.locators.loginPassword.evaluate(
+        (el: HTMLInputElement) => el.validationMessage,
+      );
       expect(tooltipMessage).toContain(tooltip);
     }
   }

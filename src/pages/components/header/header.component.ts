@@ -1,5 +1,5 @@
 import { Locator, expect } from '@playwright/test';
-import { HeaderLocators } from './header.locators'
+import { HeaderLocators } from './header.locators';
 
 export class HeaderComponent {
   private readonly locator: HeaderLocators;
@@ -16,10 +16,7 @@ export class HeaderComponent {
     await expect(logo).toBeVisible();
     await expect
       .poll(async () => {
-        return logo.evaluate(
-          (img: HTMLImageElement) =>
-            img.complete && img.naturalWidth > 0
-        );
+        return logo.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0);
       })
       .toBe(true);
   }
@@ -28,7 +25,9 @@ export class HeaderComponent {
     await this.expectLogoLoaded();
     await expect(this.locator.logoutLink).toBeVisible();
     await expect(this.locator.signupLoginLink).not.toBeVisible();
-    await expect(this.locator.loggedInAsText).toHaveText(new RegExp(`logged in as ${username}`, 'i'));
+    await expect(this.locator.loggedInAsText).toHaveText(
+      new RegExp(`logged in as ${username}`, 'i'),
+    ); // Case-insensitive match for "Logged in as [username]"
   }
   public async successfulLogout(): Promise<void> {
     await this.expectLogoLoaded();

@@ -2,7 +2,6 @@ import { Locator, expect } from '@playwright/test';
 import { FooterLocators } from './footer.locators';
 
 export class FooterComponent {
-
   private readonly locator: FooterLocators;
 
   constructor(private readonly root: Locator) {
@@ -22,16 +21,15 @@ export class FooterComponent {
   // ======================
 
   public async isSubscriptionHeadingVisible(): Promise<boolean> {
-    return await this.locator.subscriptionHeading.isVisible(); 
+    return await this.locator.subscriptionHeading.isVisible();
   }
 
   public async getSubscriptionDescriptionText(): Promise<string> {
-    return await this.locator.subscriptionDescription.textContent() ?? '';
+    return (await this.locator.subscriptionDescription.textContent()) ?? '';
   }
 
   async expectSuccessSubscription(): Promise<void> {
     await expect(this.locator.successMessage).toBeVisible();
     await expect(this.locator.successMessage).toHaveText('You have been successfully subscribed!');
   }
-
 }

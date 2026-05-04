@@ -23,7 +23,7 @@ export abstract class BasePage {
     return (this._header ??= new HeaderComponent(this.page.locator('#header'))); // header componen root locator
   }
 
-  /** 
+  /**
    * Defines the page-specific readiness check.
    * Each page must implement its own load verification logic.
    * This is invoked internally after navigation to ensure stability.

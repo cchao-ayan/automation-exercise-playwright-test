@@ -1,14 +1,13 @@
 import { BasePage } from '../base/base.page';
-import { contactUsValid} from '/test-data';
+import { contactUsValid } from '/test-data';
 import { routes } from '/config/routes';
 import { paths } from '/config/paths';
 import { Page, expect } from '@playwright/test';
 import { ContactUsLocators } from './contact-us.locators';
 
 export class ContactUsPage extends BasePage {
-
   private readonly locators: ContactUsLocators;
-  
+
   constructor(protected readonly page: Page) {
     super(page);
     this.locators = new ContactUsLocators(this.page);
@@ -49,4 +48,3 @@ export class ContactUsPage extends BasePage {
     await this.locators.homeButton.click();
   }
 }
-

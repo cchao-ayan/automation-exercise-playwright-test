@@ -14,14 +14,23 @@ test.describe('Login Functionality', () => {
     for (const row of data) {
         test(`${row.scenario } - ${row.email}`, async ({ pom }) => {
             await pom.loginPage.login(row.email, row.password);
-            if (row.message) {
-                await pom.loginPage.assertLoginFailMessage(row.message); // Add assertion to verify login failure for invalid credentials
-            } else if (row.email === '') {
-                await pom.loginPage.assertRequiredTooltip('email',row.tooltip); // Add assertion to verify required field tooltip for empty credentials
-            } else if (row.password === '') {
-                await pom.loginPage.assertRequiredTooltip('password',row.tooltip); // Add assertion to verify required field tooltip for empty credentials
-            }  else {
-                await pom.homePage.header.successfulLogin(row.name); // Add assertion to verify successful login for valid credentials
+            switch (row.scenario.toLowerCase()) {
+                case 'valid credentials':
+                    await pom.homePage.header.successfulLogin(row.name); // Add assertion to verify successful login for valid credentials
+                    break;
+                case 'invalid credentials':
+                    await pom.loginPage.assertLoginFailMessage(row.message); // Add assertion to verify login failure for invalid credentials
+                    break;
+                case 'empty credentials':
+                    if (row.email === '') {
+                        await pom.loginPage.assertRequiredTooltip('email',row.tooltip); // Add assertion to verify required field tooltip for empty credentials
+                    }
+                    if (row.password === '') {
+                        await pom.loginPage.assertRequiredTooltip('password',row.tooltip); // Add assertion to verify required field tooltip for empty credentials
+                    }
+                    break;
+                default:
+                    throw new Error(`The scenario is ${row.scenario} not supported. Please check the CSV file for valid scenarios.`);
             }
         });
     }

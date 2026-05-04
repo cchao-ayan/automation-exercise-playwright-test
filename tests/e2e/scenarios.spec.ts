@@ -1,56 +1,50 @@
 import { test } from '/core/fixtures/app.fixture';
-import { registerUserFlow } from '/flows/auth/register.flow';
-import { filterByKeyword } from '/utils';
 
 test.describe('Automation Exercises - Test Cases', () => {
-    test.beforeEach(async ({ pom }) => {
-        await pom.homePage.navigateToHomePage();
-        await pom.homePage.assertPageLoaded();
+  test.beforeEach(async ({ pom }) => {
+    await pom.homePage.navigateToHomePage();
+    await pom.homePage.assertPageLoaded();
+  });
+  test('Test Case 1: Register User', async ({ pom, flow }) => {
+    await test.step('Register a new account', async () => {
+      await flow.authFlow.registerUserFlow('youzin', 'zoozoo-un@gmail.com');
     });
-    test('Test Case 1: Register User', async ({ pom }) => {
-        await test.step('Register a new account', async () => {
-            await registerUserFlow(pom, 'youzin', 'zoozoo-un@gmail.com');
-        });
-        await test.step('Verify account creation', async () => {
-            await pom.accountCreatedPage.assertPageLoaded();
-            await pom.accountCreatedPage.clickContinueButton();
-        });
-        await test.step('Verify user is logged-in', async () => {
-            await pom.homePage.header.successfulLogin('Youzin');
-        });
-        await test.step('Delete user account', async () => {
-            await pom.homePage.header.clickDeleteAccountLink();
-        });
-        await test.step('Verify account deletion', async () => {
-            await pom.accountDeletedPage.assertPageLoaded();
-            await pom.accountDeletedPage.clickContinueButton();
-        });
-        await test.step('Verify landing page and user is logged out', async () => {
-            await pom.homePage.header.successfulLogout();
-        });
+    await test.step('Verify that the user account was created successfully', async () => {
+      await pom.accountCreatedPage.assertPageLoaded();
+      await pom.accountCreatedPage.clickContinueButton();
+      await pom.homePage.header.successfulLogin('Youzin');
     });
+    await test.step('Delete the user account', async () => {
+      await pom.homePage.header.clickDeleteAccountLink();
+      await pom.accountDeletedPage.assertPageLoaded();
+      await pom.accountDeletedPage.clickContinueButton();
+    });
+    await test.step('Verify that the user account was deleted successfully', async () => {
+      await pom.homePage.header.successfulLogout();
+    });
+  });
 });
 
 test.skip('Test Case 2: Login User with correct email and password', async ({ pom }) => {
-    await test.step('2. Login valid credentials', async () => {
-        await pom.homePage.header.clickSignupLoginLink();
-        await pom.loginPage.assertPageLoaded();
-        await pom.loginPage.login('zoozoo-un@gmail.com', 'youzin');
-    });
-    await test.step('3. Verify user is logged-in', async () => {
-        await pom.homePage.header.successfulLogin('Youzin');
-    });
-    await test.step('4. Delete user account', async () => {
-        await pom.homePage.header.clickDeleteAccountLink();
-    });
-    await test.step('5. Verify user deletion', async () => {
-        await pom.accountDeletedPage.assertPageLoaded();
-        await pom.accountDeletedPage.clickContinueButton();
-    });
-    await test.step('6. Verify landing page and user is logged out', async () => {
-        await pom.homePage.assertPageLoaded();
-        await pom.homePage.header.successfulLogout();
-    });
+  await test.step('2. Login valid credentials', async () => {
+    await pom.homePage.header.clickSignupLoginLink();
+    await pom.loginPage.assertPageLoaded();
+    await pom.loginPage.login('zoozoo-un@gmail.com', 'youzin');
+  });
+  await test.step('3. Verify user is logged-in', async () => {
+    await pom.homePage.header.successfulLogin('Youzin');
+  });
+  await test.step('4. Delete user account', async () => {
+    await pom.homePage.header.clickDeleteAccountLink();
+  });
+  await test.step('5. Verify user deletion', async () => {
+    await pom.accountDeletedPage.assertPageLoaded();
+    await pom.accountDeletedPage.clickContinueButton();
+  });
+  await test.step('6. Verify landing page and user is logged out', async () => {
+    await pom.homePage.assertPageLoaded();
+    await pom.homePage.header.successfulLogout();
+  });
 });
 /**
 

@@ -1,12 +1,19 @@
 import { Page } from '@playwright/test';
 import {
-  LoginPage, HomePage, SignUpPage, AccountCreatedPage, AccountDeletedPage,
-  ContactUsPage, TestCasePage, ProductsPage, ProductDetailsPage
-} from '../../pages/index';
+  LoginPage,
+  HomePage,
+  SignUpPage,
+  AccountCreatedPage,
+  AccountDeletedPage,
+  ContactUsPage,
+  TestCasePage,
+  ProductsPage,
+  ProductDetailsPage,
+} from '/pages/index';
 // Header/Footer are provided by pages via BasePage lazy getters
 
 export class POManager {
-  constructor(private readonly page: Page) { }
+  constructor(private readonly page: Page) {}
 
   // unidenfied pages
   private _login?: LoginPage;
