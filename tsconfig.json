@@ -41,7 +41,11 @@
     "baseUrl": ".",
     // Path alias: @/ maps to src/
     "paths": {
-      "/*": ["src/*"]
+      "@core/*": ["src/core/*"],
+      "@shared/*": ["src/shared/*"],
+      "@features/*": ["src/features/*"],
+      "@tests/*": ["tests/*"],
+      "@config/*": ["src/config/*"],
     }
   },
 

@@ -1,7 +1,7 @@
 import { test as base } from '@playwright/test';
-import { POManager } from '../managers/pom.manager';
+import { POManager } from '@core/managers/pom.manager';
 import { ProductAPI } from '/api/product.api';
-import { FlowManager } from '../managers/flow.manager';
+import { FlowManager } from '@core/managers/flow.manager';
 
 type MyFixtures = {
   pom: POManager;

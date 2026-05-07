@@ -1,0 +1,9 @@
+numberscenariocategoryinternal_typeemailpassworderror_messagetooltip_message
+1invalid credentialsWrong emailZoozoo-un123@gmail.comyouzinYour email or password is incorrect! 
+2invalid credentialsWrong passwordZoozoo-un@gmail.comyouzin123Your email or password is incorrect! 
+3invalid credentialsEmail has no @symbolZoozoo-unyouzinPlease include an ‘@’ in the email address.
+4invalid credentialsEmail has no mail server and domainZoozoo-un@youzinPlease enter a part following ‘@’.
+5invalid credentialsEmail has no username@gmail.comyouzinPlease enter a part followed by ‘@’.
+6invalid credentialsEmpty emailyouzinPlease fill out this field
+7invalid credentialsEmpty passwordZoozoo-un@gmail.comPlease fill out this field
+8invalid credentialsEmpty email and passwordPlease fill out this field
