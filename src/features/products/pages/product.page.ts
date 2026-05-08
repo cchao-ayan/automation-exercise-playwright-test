@@ -3,7 +3,6 @@ import { routes } from '@config/routes';
 import { expect, Page, Locator } from '@playwright/test';
 import { ProductApi, ProductCard, normalizeProductData } from '@features/products/types/product.type';
 import { compareByKey } from '@shared/utils/compare-by-key';
-import { ProductAPI } from '/api/product.api';
 
 type ProductView = 'info' | 'overlay';
 
@@ -12,37 +11,48 @@ export class ProductsPage extends BasePage {
   constructor(protected readonly page: Page) {
     super(page);
   }
-  readonly featureItemsSection = this.page.getByRole('heading', { name: 'Features Items' });
-  readonly allProductsSection = this.page.getByRole('heading', { name: 'All Products' });
-  readonly categorySection = this.page.getByRole('heading', { name: 'Category' });
-  readonly brandSection = this.page.getByRole('heading', { name: 'Brands' });
-  readonly searchProductSection = this.page.getByRole('heading', { name: 'Searched Products' });
-  readonly recommendedSection = this.page.locator('div.recommended-items');
+  
+  // ======================
+  // Locators
+  // ======================
+  private readonly featureItemsSection = this.page.getByRole('heading', { name: 'Features Items' });
+  private readonly allProductsSection = this.page.getByRole('heading', { name: 'All Products' });
+  private readonly categorySection = this.page.getByRole('heading', { name: 'Category' });
+  private readonly brandSection = this.page.getByRole('heading', { name: 'Brands' });
+  private readonly searchProductSection = this.page.getByRole('heading', { name: 'Searched Products' });
+  private readonly recommendedSection = this.page.locator('div.recommended-items');
   // Buttons
-  readonly addToCartButton = this.page.getByRole('button', { name: 'Add to cart' });
-  readonly searchButton = this.page.locator('#submit_search');
-  readonly searchProductInput = this.page.getByRole('textbox', { name: 'Search Product' });
+  private readonly addToCartButton = this.page.getByRole('button', { name: 'Add to cart' });
+  private readonly searchButton = this.page.locator('#submit_search');
+  private readonly searchProductInput = this.page.getByRole('textbox', { name: 'Search Product' });
   // Texts
-  readonly idText = this.page.locator('a').first();
-  readonly nameText = this.page.locator('p').first();
-  readonly priceText = this.page.locator('Rs.');
+  private readonly idText = this.page.locator('a').first();
+  private readonly nameText = this.page.locator('p').first();
+  private readonly priceText = this.page.locator('Rs.');
   // Images
-  readonly productImage = this.page.locator('img').first();
+  private readonly productImage = this.page.locator('img').first();
   // Link
-  readonly poloLink = this.page.getByRole('link', { name: 'Polo' });
-  readonly viewProductLink = this.page.getByRole('link', { name: 'View Product' });
+  private readonly poloLink = this.page.getByRole('link', { name: 'Polo' });
+  private readonly viewProductLink = this.page.getByRole('link', { name: 'View Product' });
   // Containers
-  readonly productsContainer = this.page.locator('.features_items');
-  readonly perPoductContainer = this.page.locator('.col-sm-4');
-  readonly productInfo = this.page.locator('.productinfo');
-  readonly productOverlay = this.page.locator('.product-overlay');
+  private readonly productsContainer = this.page.locator('.features_items');
+  private readonly perPoductContainer = this.page.locator('.col-sm-4');
+  private readonly productInfo = this.page.locator('.productinfo');
+  private readonly productOverlay = this.page.locator('.product-overlay');
+
+  // ======================
+  // State Methods
+  // ======================
   protected async assertPageLoaded(): Promise<void> {
     await expect(this.page).toHaveURL(new RegExp(`${routes.products}$`));
     await expect(this.allProductsSection).toBeVisible();
     await expect(this.brandSection).toBeVisible();
     await expect(this.categorySection).toBeVisible();
   }
-  // ---------- Methods ----------
+
+  // ======================
+  // Action Methods
+  // ======================
   public productAt(index: number): Locator {
     return this.productsContainer.locator(this.perPoductContainer).nth(index); // locator('.features_items').locator('.col-sm-4')
   }
@@ -80,6 +90,9 @@ export class ProductsPage extends BasePage {
     await this.searchButton.click();
   }
 
+  // ======================
+  // Helper Methods
+  // ======================
   public async productCard(index: number, view: ProductView): Promise<ProductCard> {
     return {
       id: await this.productID(index, view),
@@ -87,7 +100,6 @@ export class ProductsPage extends BasePage {
       price: await this.productPrice(index, view),
     };
   }
-
   public async compareProductCardWithApi(
     index: number,
     view: ProductView,

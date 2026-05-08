@@ -1,11 +1,11 @@
 import { test as base } from '@playwright/test';
 import { POManager } from '@core/managers/pom.manager';
-import { ProductAPI } from '/api/product.api';
+import { APIManager } from '@core/managers/api.manager';
 import { FlowManager } from '@core/managers/flow.manager';
 
 type MyFixtures = {
   pom: POManager;
-  api: ProductAPI;
+  api: APIManager;
   flow: FlowManager;
 };
 
@@ -14,7 +14,7 @@ export const test = base.extend<MyFixtures>({
     await use(new POManager(page));
   },
   api: async ({ request }, use) => {
-    await use(new ProductAPI(request));
+    await use(new APIManager(request));
   },
   flow: async ({ pom }, use) => {
     await use(new FlowManager(pom));

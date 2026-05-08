@@ -28,6 +28,7 @@ export class DataReader {
       columns: true,
       skip_empty_lines: true,
     });
+    console.log(records); // Debug log to check the parsed CSV data
     return records;
   }
 }

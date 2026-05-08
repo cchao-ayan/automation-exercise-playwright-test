@@ -1,4 +1,6 @@
-import { AuthFlow, ProductsFlow, CheckoutFlow } from '/flows/index';
+import { AuthFlow } from '@features/auth/flows/auth.flow';
+import { ProductsFlow } from '@features/products/flows/products.flow';
+import { CheckoutFlow } from '@features/checkout/flows/checkout.flow';
 import { POManager } from './pom.manager';
 
 export class FlowManager {
@@ -8,13 +10,13 @@ export class FlowManager {
   private _products?: ProductsFlow;
   private _checkout?: CheckoutFlow;
 
-  get authFlow(): AuthFlow {
+  public get authFlow(): AuthFlow {
     return (this._auth ??= new AuthFlow(this.pom));
   }
-  get productsFlow(): ProductsFlow {
+  public get productsFlow(): ProductsFlow {
     return (this._products ??= new ProductsFlow(this.pom));
   }
-  get checkoutFlow(): CheckoutFlow {
+  public get checkoutFlow(): CheckoutFlow {
     return (this._checkout ??= new CheckoutFlow(this.pom));
   }
 }

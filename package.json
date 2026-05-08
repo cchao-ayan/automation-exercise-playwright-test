@@ -9,7 +9,7 @@
     "pw:run:headed": "playwright test --headed",
     "pw:ui": "playwright test --ui",
     "pw:scenario": "playwright test tests/e2e/scenarios.spec.ts",
-    "pw:login": "playwright test tests/functional/login.spec.ts",
+    "pw:login": "playwright test tests/ui/login.spec.ts",
     "pw:scenario:ui": "playwright test tests/scenarios.spec.ts --ui",
     "pw:codegen": "playwright codegen automationexercise.com",
     "pw:headed": "playwright test --headed",

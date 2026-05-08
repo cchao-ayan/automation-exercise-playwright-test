@@ -10,9 +10,10 @@ export class SignUpPage extends BasePage {
   constructor(protected readonly page: Page) {
     super(page);
   }
-private readonly accountInfoHeading = this.page.getByRole('heading', {
-    name: 'Enter Account Information',
-  });
+  // ======================
+  // Locators
+  // ======================
+  private readonly accountInfoHeading = this.page.getByRole('heading', {name: 'Enter Account Information' });
   private readonly addressInfoHeading = this.page.getByRole('heading', { name: 'Address Information' });
   // Inputs
   private readonly nameInput = this.page.getByTestId('name');
@@ -36,20 +37,28 @@ private readonly accountInfoHeading = this.page.getByRole('heading', {
   private readonly mrRadioButton = this.page.getByRole('radio', { name: 'Mr.' });
   private readonly mrsRadioButton = this.page.getByRole('radio', { name: 'Mrs.' });
   // Checkboxes
-  private readonly newsletterCheckbox = this.page.getByRole('checkbox', {
-    name: 'Sign up for our newsletter!',
-  });
-  private readonly offersCheckbox = this.page.getByRole('checkbox', {
-    name: 'Receive special offers from',
-  });
+  private readonly newsletterCheckbox = this.page.getByRole('checkbox', { name: 'Sign up for our newsletter!' });
+  private readonly offersCheckbox = this.page.getByRole('checkbox', { name: 'Receive special offers from' });
   //Button
   private readonly createAccountButton = this.page.getByTestId('create-account');
-
+  // ======================
+  // State Methods
+  // ======================
   public async assertPageLoaded(): Promise<void> {
     await expect(this.page).toHaveURL(new RegExp(`${routes.signup}$`));
     await expect(this.accountInfoHeading).toBeVisible();
     await expect(this.addressInfoHeading).toBeVisible();
   }
+  //Assertion Methods
+  public async verifyNameAndEmailPrefilled(user: any): Promise<void> {
+    const nameText = await this.nameInput.getAttribute('value');
+    const emailText = await this.emailInput.getAttribute('value');
+    assertTextEquals(nameText as string, user.name); // Verify name input is pre-filled with the name used during signup
+    assertTextEquals(emailText as string, user.email); // Verify email input is pre-filled with the email used during signup
+  }
+  // ======================
+  // Action Methods
+  // ======================
   public async titleSelection(user: any): Promise<void> {
     if (user.title.toLowerCase() === 'mr') {
       await this.mrRadioButton.click();
@@ -57,13 +66,6 @@ private readonly accountInfoHeading = this.page.getByRole('heading', {
       await this.mrsRadioButton.click();
     }
   }
-  public async verifyNameAndEmailPrefilled(user: any): Promise<void> {
-    const nameText = await this.nameInput.getAttribute('value');
-    const emailText = await this.emailInput.getAttribute('value');
-    assertTextEquals(nameText as string, user.name); // Verify name input is pre-filled with the name used during signup
-    assertTextEquals(emailText as string, user.email); // Verify email input is pre-filled with the email used during signup
-  }
-
   public async fillSignUpForm(username: string): Promise<void> {
     const user = getUserData(username, paths.data.signup.registerUsers);
     this.titleSelection(user);
@@ -85,7 +87,6 @@ private readonly accountInfoHeading = this.page.getByRole('heading', {
     await this.zipcodeInput.fill(user.zipcode);
     await this.mobileNumberInput.fill(user.mobile_number);
   }
-
   public async clickCreateAccountButton(): Promise<void> {
     await this.createAccountButton.click();
   }

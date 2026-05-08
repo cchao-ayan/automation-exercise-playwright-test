@@ -1,0 +1,48 @@
+import { LoginInternalType } from "../types/auth.type";
+
+//const isValidEmail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+export function validateLoginInput(email?: string, password?: string): LoginInternalType {
+    const e = email ?? '';
+    const p = password ?? '';
+    if (!e && !p) {
+        return {
+            type: 'missing_email_and_password',
+            message: 'Please fill out this field.'
+        };
+    }
+    if (!e) {
+        return {
+            type: 'missing_email',
+            message: 'Please fill out this field.'
+        };
+    }
+    if (!p) {
+        return {
+            type: 'missing_password',
+            message: 'Please fill out this field.'
+        };
+    }
+
+    if (!e.includes('@')) {
+        return {
+            type: 'missing_at',
+            message: `Please include an '@' in the email address. '${e}' is missing an '@'.`
+        };
+    }
+    if (e.startsWith('@')) {
+        return {
+            type: 'missing_before_at',
+            message: `Please enter a part followed by '@'. '${e}' is incomplete.`
+        };
+    }
+    if (e.endsWith('@')) {
+        return {
+            type: 'missing_after_at',
+            message: `Please enter a part following '@'. '${e}' is incomplete.`
+        };
+    }
+    return {
+        type: 'invalid_credentials',
+        message: 'Your email or password is incorrect!'
+    }; 
+}

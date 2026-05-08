@@ -7,15 +7,15 @@ export class HomePage extends BasePage {
   constructor(protected readonly page: Page) {
     super(page);
   }
+
+  // ======================
+  // Locators
+  // ======================
   private readonly recommendedListHeading = this.page.getByRole('heading', { name: 'Recommended Items' });
   private readonly categoryHeading = this.page.getByRole('heading', { name: 'Category' });
   private readonly featuresItemsHeadin = this.page.getByRole('heading', { name: 'Features Items' });
   private readonly brandsHeading = this.page.getByRole('heading', { name: 'Brands' });
   private readonly slider = this.page.locator('#slider');
-
-  public async navigateToHomePage(): Promise<void> {
-    await this.navigate(routes.home);
-  }
 
   // ======================
   // State methods
@@ -27,5 +27,12 @@ export class HomePage extends BasePage {
     await expect(this.categoryHeading).toBeVisible();
     await expect(this.featuresItemsHeadin).toBeVisible();
     await expect(this.brandsHeading).toBeVisible();
+  }
+  
+  // ======================
+  // Action methods
+  // ======================
+  public async navigateToHomePage(): Promise<void> {
+    await this.navigate(routes.home);
   }
 }

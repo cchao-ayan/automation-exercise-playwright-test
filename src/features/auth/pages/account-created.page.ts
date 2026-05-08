@@ -23,7 +23,9 @@ export class AccountCreatedPage extends BasePage {
     await expect(this.message1).toBeVisible();
     await expect(this.message2).toBeVisible();
   }
-
+  // ======================
+  // Action Methods
+  // ======================
   public async clickContinueButton() {
     await this.continueButton.click();
   }
