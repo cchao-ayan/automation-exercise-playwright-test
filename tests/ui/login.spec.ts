@@ -2,8 +2,9 @@ import { test } from '@core/fixtures/app.fixture';
 import { DataReader } from '@shared/utils/data-reader';
 import { paths } from '@config/paths';
 import { validateLoginInput } from '@features/auth/utils/login.validator';
+import { InvalidLoginTestData } from '@features/auth/types/auth.type';
 
-const data = DataReader.read(paths.data.login.invalidUsers);
+const data = DataReader.read<InvalidLoginTestData>(paths.data.login.invalidUsers);
 
 test.describe('Login Functionality', () => {
     test.beforeEach(async ({ pom }) => {
@@ -13,9 +14,9 @@ test.describe('Login Functionality', () => {
         await pom.loginPage.assertPageLoaded();
     });
     for (const row of data) {
-        test(`${row.number}. ${row.scenario}`, async ({ pom }) => {
+        test(`${row.id}. ${row.scenario}`, async ({ pom }) => {
             await pom.loginPage.login(row.email, row.password);
-            const result = validateLoginInput(row.email, row.password);
+            const result = validateLoginInput(row);
             await pom.loginPage.assertLoginInputValidation(result);
            
         });

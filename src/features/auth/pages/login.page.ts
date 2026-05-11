@@ -1,10 +1,10 @@
 import { BasePage } from '@core/base/base.page';
 import { expect, Page, Locator } from '@playwright/test';
 import { routes } from '@config/routes';
-import { LoginFields, LoginInternalType, InvalidCredentialScenario } from '../types/auth.type';
-import { validateLoginInput } from '../utils/login.validator';
+import { LoginFields, LoginValidationResult } from '../types/auth.type';
 
 export class LoginPage extends BasePage {
+
 
   constructor(protected readonly page: Page) {
     super(page);
@@ -42,9 +42,13 @@ export class LoginPage extends BasePage {
   // ======================
   // Action Methods
   // ======================
-  public async login(email: string, password: string): Promise<void> {
-    await this.loginEmail.fill(email);
-    await this.loginPassword.fill(password);
+  public async login(email?: string, password?: string): Promise<void> {
+    if (email !== undefined) {
+      await this.loginEmail.fill(email);
+    }
+    if (password !== undefined) {
+      await this.loginPassword.fill(password);
+    }
     await this.loginButton.click();
   }
 
@@ -61,26 +65,26 @@ export class LoginPage extends BasePage {
     await expect(this.loginErrorMessage).toHaveText(message);
   }
 
-  // This method asserts the validation tooltip for required fields on the login form.
-  public async assertRequiredTooltip(field: LoginFields, tooltip: string): Promise<void> {
-    const tooltipMessage = await this.loginField[field].evaluate(
-      (el: HTMLInputElement) => el.validationMessage
-    );
-    expect(tooltipMessage).toContain(tooltip);
-  }
+  // // This method asserts the validation tooltip for required fields on the login form.
+  // public async assertRequiredTooltip(field: LoginFields, tooltip: string): Promise<void> {
+  //   const tooltipMessage = await this.loginField[field].evaluate(
+  //     (el: HTMLInputElement) => el.validationMessage
+  //   );
+  //   expect(tooltipMessage).toContain(tooltip);
+  // }
 
-  public async assertLoginInputValidation(result: LoginInternalType): Promise<void> {
+  public async assertLoginInputValidation(result: LoginValidationResult): Promise<void> {
     switch (result.type) {
       case 'missing_email':
       case 'missing_at':
       case 'missing_email_and_password':
       case 'missing_before_at':
       case 'missing_after_at':
-        await this.assertRequiredTooltip('email', result.message);
+        await this.assertErrorMessage(this.loginField['email'], result.message);
         break;
 
       case 'missing_password':
-        await this.assertRequiredTooltip('password', result.message);
+        await this.assertErrorMessage(this.loginField['password'], result.message);
         break;
 
       case 'invalid_credentials':

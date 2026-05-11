@@ -4,31 +4,43 @@ import * as XLSX from 'xlsx';
 import { parse } from 'csv-parse/sync';
 
 export class DataReader {
-  static read(filePath: string): any[] {
+
+  public static read<T>(filePath: string): T[] {
     const ext = path.extname(filePath).toLowerCase();
-    if (ext === '.xlsx' || ext === '.xls') {
-      return this.readExcel(filePath);
+
+    switch (ext) {
+      case '.xlsx':
+      case '.xls':
+        return this.readExcel<T>(filePath);
+
+      case '.csv':
+        return this.readCsv<T>(filePath);
+
+      default:
+        throw new Error(`Unsupported file format: ${ext}`);
     }
-    if (ext === '.csv') {
-      return this.readCsv(filePath);
-    }
-    throw new Error(`Unsupported file format: ${ext}`);
   }
 
-  static readExcel(filePath: string): any[] {
+  private static readExcel<T>(filePath: string): T[] {
     const workbook = XLSX.readFile(filePath);
-    const sheetName = workbook.SheetNames[0]; 
+
+    const sheetName = workbook.SheetNames[0];
+
+    if (!sheetName) {
+      throw new Error('Excel file contains no sheets.');
+    }
+
     const sheet = workbook.Sheets[sheetName];
-    const data = XLSX.utils.sheet_to_json(sheet);
-    return data;
+
+    return XLSX.utils.sheet_to_json<T>(sheet);
   }
-  static readCsv(filePath: string): any[] {
+
+  private static readCsv<T>(filePath: string): T[] {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const records = parse(fileContent, {
+
+    return parse(fileContent, {
       columns: true,
       skip_empty_lines: true,
-    });
-    console.log(records); // Debug log to check the parsed CSV data
-    return records;
+    }) as T[];
   }
 }

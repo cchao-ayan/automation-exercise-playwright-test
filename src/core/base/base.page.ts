@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 import { FooterComponent, HeaderComponent } from '@shared/components';
 import { AdHandler } from '@shared/utils/ads-handler';
 
@@ -37,5 +37,12 @@ export abstract class BasePage {
     await this.adHandler.registerAutoCloseHandlers();
     await this.page.goto(url);
     await this.assertPageLoaded();
+  }
+
+  protected async assertErrorMessage(locator: Locator, expectedErrorMessage: string): Promise<void> {
+    const tooltipMessage = await locator.evaluate(
+      (el: HTMLInputElement) => el.validationMessage
+    );
+    expect(tooltipMessage).toContain(expectedErrorMessage);
   }
 }

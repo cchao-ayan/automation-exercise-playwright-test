@@ -1,4 +1,4 @@
-number,scenario,email,password,error_message,internal_type
+id,scenario,email,password,error_message,internal_type
 1,Wrong email,Zoozoo-un123@gmail.com,youzin,Your email or password is incorrect! ,invalid_credentials
 2,Wrong password,Zoozoo-un@gmail.com,youzin123,Your email or password is incorrect! ,invalid_credentials
 3,Wrong email and password,Zoozoo-un123@gmail.com,youzin123,Your email or password is incorrect! ,invalid_credentials

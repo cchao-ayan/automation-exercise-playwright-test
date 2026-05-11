@@ -1,9 +1,8 @@
-import { LoginInternalType } from "../types/auth.type";
+import { LoginFieldsData, LoginValidationResult } from "../types/auth.type";
 
-//const isValidEmail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-export function validateLoginInput(email?: string, password?: string): LoginInternalType {
-    const e = email ?? '';
-    const p = password ?? '';
+export function validateLoginInput(data: LoginFieldsData): LoginValidationResult {
+    const e = data.email ?? '';
+    const p = data.password ?? '';
     if (!e && !p) {
         return {
             type: 'missing_email_and_password',
