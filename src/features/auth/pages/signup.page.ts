@@ -203,7 +203,7 @@ export class SignUpPage extends BasePage {
       case 'missing_firstname':
       case 'missing_lastname':
       case 'missing_address1':
-      case 'missing_country':
+      case 'missing_city':
       case 'missing_state':
       case 'missing_zipcode':
       case 'missing_mobile_number':

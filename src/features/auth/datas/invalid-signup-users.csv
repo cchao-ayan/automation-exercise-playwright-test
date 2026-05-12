@@ -1,0 +1,9 @@
+id,scenario,name,email,password,title,birth_date,birth_month,birth_year,firstname,lastname,company,address1,address2,country,zipcode,state,city,mobile_number,internal_type
+1,No password input,Andrew,andrewboi@yahoo.com,,Mr,2,February,2000,Andrew,A,ABC,address1,address2,Canada,222,F,K,11111,missing_password
+2,No first name input,Elaine,el-el@hotmail.com,elaine,Mrs,5,June,2000,,B,DEF,address1,address2,India,333,G,L,22222,missing_firstname
+3,No lastname input,Helione,hell-ion@gmail.com,helione,Mrs,12,March,2000,Helione,,GHI,address1,address2,Australia,444,H,M,33333,missing_lastname
+4,No address1 input,Zoorie,ozonewin@gmail.com,Ezo-ezo,Mr,22,December,2000,Zoorie,D,JKL,,address2,Israel,555,I,N,44444,missing_address1
+5,No city input,Youzin,zoozoo-un-un@gmail.com,youzin,Mr,22,August,2000,Youzin,E,MNN,address1,address2,United States,312,J,,55555,missing_city
+6,No state input,Youzin,zoozoo-un-un@gmail.com,youzin,Mr,22,August,2000,Youzin,E,OPQ,address1,address2,United States,666,,O,55555,missing_state
+7,No zipcode input,Youzin,zoozoo-un-un@gmail.com,youzin,Mr,22,August,2000,Youzin,E,QRS,address1,address2,United States,,J,P,55555,missing_zipcode
+8,No mobile number input,Youzin,zoozoo-un-un@gmail.com,youzin,Mr,22,August,2000,Youzin,E,TWX,address1,address2,United States,666,J,O,,missing_mobile_number

@@ -1,4 +1,5 @@
 import { LoginFieldsData, LoginValidationResult } from "../types/auth.type";
+import { getFirstSpecialCharacterAfterAt } from "@shared/utils/data-helper";
 
 export function validateLoginInput(data: LoginFieldsData): LoginValidationResult {
     const e = data.email ?? '';
@@ -38,6 +39,13 @@ export function validateLoginInput(data: LoginFieldsData): LoginValidationResult
         return {
             type: 'missing_after_at',
             message: `Please enter a part following '@'. '${e}' is incomplete.`
+        };
+    }
+    const specialCharAfterAt = getFirstSpecialCharacterAfterAt(e);
+    if (specialCharAfterAt) {
+        return {
+            type: 'special_char_after_at',
+            message: `A part following '@' should not contain the symbol '${specialCharAfterAt}'.`
         };
     }
     return {

@@ -40,9 +40,10 @@ export abstract class BasePage {
   }
 
   protected async assertErrorMessage(locator: Locator, expectedErrorMessage: string): Promise<void> {
-    const tooltipMessage = await locator.evaluate(
-      (el: HTMLInputElement) => el.validationMessage
-    );
-    expect(tooltipMessage).toContain(expectedErrorMessage);
+    await expect(locator).toBeVisible();
+    // Polling the validationMessage property of the input element until it contains the expected error message or the timeout is reached
+    await expect.poll(() => locator.evaluate((el: HTMLInputElement) => el.validationMessage), {
+      message: `Expected validation message to contain "${expectedErrorMessage}" but it did not.`,
+    }).toContain(expectedErrorMessage);
   }
 }

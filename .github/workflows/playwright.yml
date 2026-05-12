@@ -32,6 +32,7 @@ jobs:
       
       - name: Run Playwright tests
         run: npm run pw:login
+        run: npm run pw:signup
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4

@@ -15,7 +15,7 @@ test.describe('Signup Functionality', () => {
     });
     for (const row of data) {
         test(`${row.id}. ${row.scenario}`, async ({ pom }) => {
-            await pom.loginPage.signUp(row.email, row.password);
+            await pom.loginPage.signUp(row.name, row.email);
             await pom.signUpPage.assertPageLoaded();
             await pom.signUpPage.submitSignupForm(row);
             const result = validateSignupInput(row);

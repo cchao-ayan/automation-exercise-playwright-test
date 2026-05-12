@@ -80,6 +80,7 @@ export class LoginPage extends BasePage {
       case 'missing_email_and_password':
       case 'missing_before_at':
       case 'missing_after_at':
+      case 'special_char_after_at':
         await this.assertErrorMessage(this.loginField['email'], result.message);
         break;
 

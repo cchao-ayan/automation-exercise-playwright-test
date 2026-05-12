@@ -68,6 +68,7 @@ export type SignupRequiredFields =
   | 'lastname'
   | 'address1'
   | 'country'
+  | 'city'
   | 'state'
   | 'zipcode'
   | 'mobile_number';
@@ -78,6 +79,7 @@ export const signupRequiredFields: SignupRequiredFields[] = [
   'lastname',
   'address1',
   'country',
+  'city',
   'state',
   'zipcode',
   'mobile_number'
@@ -88,7 +90,7 @@ export type SignupInternalType =
   | 'missing_firstname'
   | 'missing_lastname'
   | 'missing_address1'
-  | 'missing_country'
+  | 'missing_city'
   | 'missing_state'
   | 'missing_zipcode'
   | 'missing_mobile_number';
