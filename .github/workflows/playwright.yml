@@ -30,9 +30,10 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
       
-      - name: Run Playwright tests
-        run: npm run pw:login
-        run: npm run pw:signup
+      - name: Run Playwright tests - Login and Signup
+        run: |
+          run: npm run pw:login
+          run: npm run pw:signup
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
