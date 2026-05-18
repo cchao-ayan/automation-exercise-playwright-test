@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { FooterComponent, HeaderComponent } from '@shared/components';
-import { AdHandler } from '@shared/utils/ads-handler';
+import { AdHandler } from '@shared/utils/browser/ads-handler';
 
 export abstract class BasePage {
   private _footer?: FooterComponent;
@@ -42,8 +42,11 @@ export abstract class BasePage {
   protected async assertErrorMessage(locator: Locator, expectedErrorMessage: string): Promise<void> {
     await expect(locator).toBeVisible();
     // Polling the validationMessage property of the input element until it contains the expected error message or the timeout is reached
-    await expect.poll(() => locator.evaluate((el: HTMLInputElement) => el.validationMessage), {
-      message: `Expected validation message to contain "${expectedErrorMessage}" but it did not.`,
-    }).toContain(expectedErrorMessage);
+    await expect.poll(() => locator.evaluate((el: HTMLInputElement) => el.validationMessage),
+      {
+        message: `Expected validation message: "${expectedErrorMessage}" `,
+        timeout: 5000,
+      }
+    ).toContain(expectedErrorMessage);
   }
 }

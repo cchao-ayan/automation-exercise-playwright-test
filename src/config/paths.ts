@@ -6,11 +6,12 @@ export const paths = {
   },
   data: {
     login: {
-      invalidUsers: path.resolve('src/features/auth/datas/invalid-login-users.csv'),
+      invalidLoginInput: path.resolve('src/features/auth/datas/invalid-login-input.csv'),
       registeredUsers: path.resolve('src/features/auth/datas/registered-users.csv'),
     },
     signup: {
-      invalidSignupUsers: path.resolve('src/features/auth/datas/invalid-signup-users.csv'),
+      invalidSignupInput: path.resolve('src/features/auth/datas/invalid-signup-input.csv'),
+      invalidSignupFormInput: path.resolve('src/features/auth/datas/invalid-signup-form-input.csv'),
       registerUsers: path.resolve('src/features/auth/datas/register-users.csv'),
     }
   },

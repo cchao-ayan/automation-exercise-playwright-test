@@ -1,8 +1,8 @@
 import { DataReader } from './data-reader';
-import { InvalidSignupTestData } from '@features/auth/types/signup-form.type';
+import { InvalidSignupFormTestData } from '@features/auth/types/signup-form.type';
 
-export function getUserData(username: string, path: string): InvalidSignupTestData | undefined {
-  const userData = DataReader.read<InvalidSignupTestData>(path);
+export function getUserData(username: string, path: string): InvalidSignupFormTestData | undefined {
+  const userData = DataReader.read<InvalidSignupFormTestData>(path);
   return userData.find((row) => row.name?.toLowerCase() === username.toLowerCase()) ?? undefined;
 }
 

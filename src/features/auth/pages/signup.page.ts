@@ -1,10 +1,8 @@
 import { BasePage } from '@core/base/base.page';
-import { paths } from '@config/paths';
 import { expect, Page, Locator } from '@playwright/test';
 import { routes } from '@config/routes';
 import { assertTextEquals } from '@shared/assertion/generic';
-import { getUserData } from '@shared/utils/data-helper';
-import { SignupFields, InvalidSignupTestData, SignupValidationResult } from '../types/auth.type';
+import { SignupFormFields, InvalidSignupFormTestData, SignupFormValidationResult } from '@features/auth/types/index';
 
 export class SignUpPage extends BasePage {
 
@@ -47,7 +45,7 @@ export class SignUpPage extends BasePage {
   // ======================
   // Locator Map
   // ======================
-  private readonly signupField: Record<SignupFields, Locator> = {
+  private readonly signupFormField: Record<SignupFormFields, Locator> = {
     title: this.mrRadioButton,
     name: this.nameInput,
     email: this.emailInput,
@@ -159,7 +157,7 @@ export class SignUpPage extends BasePage {
       await this.mobileNumberInput.fill(data.mobile_number);
     }
   }
-  public async fillSignUpForm(user: InvalidSignupTestData): Promise<void> {
+  public async fillSignUpForm(user: InvalidSignupFormTestData): Promise<void> {
     await this.enterAccountInfo({
       username: user.name,
       email: user.email,
@@ -192,12 +190,12 @@ export class SignUpPage extends BasePage {
     await this.createAccountButton.click();
   }
 
-  public async submitSignupForm(user: InvalidSignupTestData): Promise<void> {
+  public async submitSignupForm(user: InvalidSignupFormTestData): Promise<void> {
     await this.fillSignUpForm(user);
     await this.clickCreateAccountButton();
   }
 
-  public async assertSignupInputValidation(result: SignupValidationResult): Promise<void> {
+  public async assertSignupInputValidation(result: SignupFormValidationResult): Promise<void> {
     switch (result.type) {
       case 'missing_password':
       case 'missing_firstname':
@@ -208,8 +206,8 @@ export class SignUpPage extends BasePage {
       case 'missing_zipcode':
       case 'missing_mobile_number':
         // Extract the field name from the validation type and assert the error message on the corresponding field
-        const field = result.type.replace('missing_', '') as SignupFields;
-        await this.assertErrorMessage(this.signupField[field], result.message);
+        const field = result.type.replace('missing_', '') as SignupFormFields;
+        await this.assertErrorMessage(this.signupFormField[field], result.message);
         break;
 
       default:

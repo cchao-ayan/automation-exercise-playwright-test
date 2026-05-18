@@ -1,7 +1,9 @@
+import { EmailValidationType } from "@shared/types/validations/email-validation.type";
+import { ValidationResult } from "../../../shared/types/validations/validation.type";
 // ======================================================================//
-// ===============      Signup Types and Interfaces       ===============//
+// ===============      Signup Form Types and Interfaces       ===============//
 // ======================================================================//
-export interface InvalidSignupTestData {
+export interface InvalidSignupFormTestData {
   id: string;
   scenario: string;
   title?: string;
@@ -24,10 +26,10 @@ export interface InvalidSignupTestData {
   zipcode: string;
   mobile_number: string;
   error_message: string;
-  internal_type: SignupInternalType;
+  internal_type: SignupFormInternalType;
 }
 
-export interface SignupMandatoryData {
+export interface SignupFormMandatoryData {
   name: string;
   email: string;
   password: string;
@@ -41,7 +43,7 @@ export interface SignupMandatoryData {
   mobile_number: string;
 }
 
-export type SignupFields =
+export type SignupFormFields =
   | 'title'
   | 'name'
   | 'email'
@@ -62,7 +64,7 @@ export type SignupFields =
   | 'zipcode'
   | 'mobile_number';
 
-export type SignupRequiredFields =
+export type SignupFormRequiredFields =
   | 'password'
   | 'firstname'
   | 'lastname'
@@ -73,7 +75,7 @@ export type SignupRequiredFields =
   | 'zipcode'
   | 'mobile_number';
 
-export const signupRequiredFields: SignupRequiredFields[] = [
+export const signupFormRequiredFields: SignupFormRequiredFields[] = [
   'password',
   'firstname',
   'lastname',
@@ -85,56 +87,20 @@ export const signupRequiredFields: SignupRequiredFields[] = [
   'mobile_number'
 ];
 
-export type SignupInternalType =
+export type SignupFormInternalType =
   | 'missing_password'
   | 'missing_firstname'
   | 'missing_lastname'
   | 'missing_address1'
+  | 'missing_country'
   | 'missing_city'
   | 'missing_state'
   | 'missing_zipcode'
   | 'missing_mobile_number';
 
-export interface SignupValidationResult {
-  type: SignupInternalType;
-  message: string;
-}
+  // Reusing the generic ValidationResult type for signup form validation results
+export type SignupFormValidationResult = ValidationResult<SignupFormInternalType>;
 
-// ======================================================================//
-// ===============       Login Types and Interfaces       ===============//
-// ======================================================================//
-export interface InvalidLoginTestData {
-  id: string;
-  scenario: string;
-  email?: string;
-  password?: string;
-  error_message: string;
-  internal_type: LoginInternalType;
-}
-
-export interface LoginFieldsData {
-  email?: string;
-  password?: string;  
-}
-
-export type LoginFields =
-  | 'email'
-  | 'password';
-
-export type LoginInternalType =
-  | 'missing_email'
-  | 'missing_email_and_password'
-  | 'missing_password'
-  | 'missing_at'
-  | 'missing_before_at'
-  | 'missing_after_at'
-  | 'special_char_after_at'
-  | 'invalid_credentials';
-
-export interface LoginValidationResult {
-  type: LoginInternalType;
-  message: string;
-}
 
 
 

@@ -1,8 +1,7 @@
 import { BasePage } from '@core/base/base.page';
 import { expect, Page, Locator } from '@playwright/test';
 import { routes } from '@config/routes';
-import { LoginFields, LoginValidationResult } from '../types/auth.type';
-
+import { LoginFields, LoginValidationResult, SignupFields, SignupValidationResult } from '@features/auth/types/index';
 export class LoginPage extends BasePage {
 
 
@@ -31,6 +30,11 @@ export class LoginPage extends BasePage {
     password: this.loginPassword,
   }
 
+  private readonly signupField: Record<SignupFields, Locator> = {
+    name: this.signupName,
+    email: this.signupEmail,
+  }
+
   // ======================
   // State Methods
   // ======================
@@ -52,9 +56,13 @@ export class LoginPage extends BasePage {
     await this.loginButton.click();
   }
 
-  public async signUp(username: string, email: string): Promise<void> {
-    await this.signupName.fill(username);
-    await this.signupEmail.fill(email);
+  public async signUp(name?: string, email?: string): Promise<void> {
+    if (name !== undefined) {
+      await this.signupName.fill(name);
+    }
+    if (email !== undefined) {
+      await this.signupEmail.fill(email);
+    }
     await this.signupButton.click();
   }
   // ======================
@@ -63,6 +71,11 @@ export class LoginPage extends BasePage {
   public async assertLoginFailMessage(message: string): Promise<void> {
     await expect(this.loginErrorMessage).toBeVisible();
     await expect(this.loginErrorMessage).toHaveText(message);
+  }
+
+    public async assertExistingEmailMessage(message: string): Promise<void> {
+    await expect(this.existingEmailErrMsg).toBeVisible();
+    await expect(this.existingEmailErrMsg).toHaveText(message);
   }
 
   // // This method asserts the validation tooltip for required fields on the login form.
@@ -80,7 +93,7 @@ export class LoginPage extends BasePage {
       case 'missing_email_and_password':
       case 'missing_before_at':
       case 'missing_after_at':
-      case 'special_char_after_at':
+      case 'invalid_domain_char':
         await this.assertErrorMessage(this.loginField['email'], result.message);
         break;
 
@@ -90,6 +103,30 @@ export class LoginPage extends BasePage {
 
       case 'invalid_credentials':
         await this.assertLoginFailMessage(result.message);
+        break;
+
+      default:
+        throw new Error(`Unhandled validation type: ${(result as any).type}`);
+    }
+  }
+
+  public async assertSignupInputValidation(result: SignupValidationResult): Promise<void> {
+    switch (result.type) {
+      case 'missing_email':
+      case 'missing_at':
+      case 'missing_before_at':
+      case 'missing_after_at':
+      case 'invalid_domain_char':
+        await this.assertErrorMessage(this.signupField['email'], result.message);
+        break;
+
+      case 'missing_name_and_email':
+      case 'missing_name':
+        await this.assertErrorMessage(this.signupField['name'], result.message);
+        break;
+
+      case 'email_exists':
+        await this.assertExistingEmailMessage(result.message);
         break;
 
       default:

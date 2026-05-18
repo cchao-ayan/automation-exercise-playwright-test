@@ -1,10 +1,10 @@
 import { test } from '@core/fixtures/app.fixture';
-import { DataReader } from '@shared/utils/data-reader';
+import { DataReader } from '@shared/utils/data/data-reader';
 import { paths } from '@config/paths';
-import { validateSignupInput } from '@features/auth/utils/signup.validator';
-import { InvalidSignupTestData } from '@features/auth/types/auth.type';
+import { validateSignupFormInput } from '@features/auth/utils/signup-form.validator';
+import { InvalidSignupFormTestData } from '@features/auth/types/signup-form.type';
 
-const data = DataReader.read<InvalidSignupTestData>(paths.data.signup.invalidSignupUsers);
+const data = DataReader.read<InvalidSignupFormTestData>(paths.data.signup.invalidSignupFormInput);
 
 test.describe('Signup Functionality', () => {
     test.beforeEach(async ({ pom }) => {
@@ -18,7 +18,7 @@ test.describe('Signup Functionality', () => {
             await pom.loginPage.signUp(row.name, row.email);
             await pom.signUpPage.assertPageLoaded();
             await pom.signUpPage.submitSignupForm(row);
-            const result = validateSignupInput(row);
+            const result = validateSignupFormInput(row);
             await pom.signUpPage.assertSignupInputValidation(result);
            
         });
