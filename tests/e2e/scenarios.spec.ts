@@ -1,4 +1,4 @@
-import { test } from '/core/fixtures/app.fixture';
+import { test } from '@core/fixtures/app.fixture';
 
 test.describe('Automation Exercises - Test Cases', () => {
   test.beforeEach(async ({ pom }) => {

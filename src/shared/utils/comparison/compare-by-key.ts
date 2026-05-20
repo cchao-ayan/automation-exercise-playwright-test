@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { Logger } from '@shared/utils/logger';
+import { Logger } from '@shared/utils/logger/logger';
 
 export function compareByKey<T, K extends keyof T>(
   actual: T | T[],
