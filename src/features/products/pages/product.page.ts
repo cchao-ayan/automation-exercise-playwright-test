@@ -2,7 +2,7 @@ import { BasePage } from '@core/base/base.page';
 import { routes } from '@config/routes';
 import { expect, Page, Locator } from '@playwright/test';
 import { ProductApi, ProductCard, normalizeProductData } from '@features/products/types/product.type';
-import { compareByKey } from '@shared/utils/compare-by-key';
+import { compareByKey } from '@shared/utils/comparison/compare-by-key';
 
 type ProductView = 'info' | 'overlay';
 
