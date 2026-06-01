@@ -1,7 +1,7 @@
 import { getFirstSpecialCharacterAfterAt } from "@shared/utils/data/data-helper";
-import { LoginInternalType } from "@features/auth/types/signup-form.type";
+import { EmailValidationType } from "@shared/types/validations/email-validation.type";
 
-export function validateEmailFormat(email: string): { type: LoginInternalType, message: string } | undefined {
+export function validateEmailFormat(email: string): { type: EmailValidationType, message: string } | undefined {
     if (!email) {
         return {
             type: 'missing_email',

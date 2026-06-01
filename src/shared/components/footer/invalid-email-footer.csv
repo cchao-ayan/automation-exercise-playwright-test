@@ -1,0 +1,6 @@
+id,scenario,email,error_message,internal_type
+1,Email has no @ symbol,Zoozoo-un,Please include an �@� in the email address.,missing_at
+2,Email has no mail server and domain,Zoozoo-un@,Please enter a part following �@�.,missing_after_at
+3,Email has no username,@gmail.com,Please enter a part followed by �@�.,missing_before_at
+4,Empty email,,Please fill out this field,missing_email
+5,Email has special character after @ symbol,Zoozoo-un@gm!&L.com,A part following �@� should not contain the symbol,invalid_domain_char

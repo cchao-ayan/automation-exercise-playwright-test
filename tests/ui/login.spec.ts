@@ -17,7 +17,7 @@ test.describe('Login Functionality', () => {
     for (const row of loginData) {
         test(`Login: ${row.id}. ${row.scenario}`, async ({ pom }) => {
             await pom.loginPage.login(row.email, row.password);
-            const result = validateLoginInput(row);
+            const result = validateLoginInput({ email: row.email, password: row.password });
             await pom.loginPage.assertLoginInputValidation(result);
 
         });
@@ -26,7 +26,7 @@ test.describe('Login Functionality', () => {
     for (const row of signupData) {
         test(`Signup: ${row.id}. ${row.scenario}`, async ({ pom }) => {
             await pom.loginPage.signUp(row.name, row.email);
-            const result = validateSignupInput(row);
+            const result = validateSignupInput({ name: row.name, email: row.email });
             await pom.loginPage.assertSignupInputValidation(result);
         });
     }

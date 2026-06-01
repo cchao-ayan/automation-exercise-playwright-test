@@ -40,13 +40,22 @@ export abstract class BasePage {
   }
 
   protected async assertErrorMessage(locator: Locator, expectedErrorMessage: string): Promise<void> {
-    await expect(locator).toBeVisible();
-    // Polling the validationMessage property of the input element until it contains the expected error message or the timeout is reached
-    await expect.poll(() => locator.evaluate((el: HTMLInputElement) => el.validationMessage),
-      {
-        message: `Expected validation message: "${expectedErrorMessage}" `,
-        timeout: 5000,
-      }
-    ).toContain(expectedErrorMessage);
+    await assertErrorMessage(locator, expectedErrorMessage);
   }
+}
+
+/**
+ * Helper function exported so components that don't extend BasePage can still
+ * reuse the same validation message polling logic.
+ */
+export async function assertErrorMessage(locator: Locator, expectedErrorMessage: string): Promise<void> {
+  await expect(locator).toBeVisible();
+  // Poll the input's validationMessage until it contains the expected text
+  await expect.poll(
+    () => locator.evaluate((el: HTMLInputElement) => el.validationMessage),
+    {
+      message: `Expected validation message: "${expectedErrorMessage}" `,
+      timeout: 5000,
+    }
+  ).toContain(expectedErrorMessage);
 }

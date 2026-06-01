@@ -1,4 +1,6 @@
 import { Locator, expect } from '@playwright/test';
+import { assertErrorMessage } from '@core/base/base.page';
+import { FooterValidationResult, InvalidFooterEmailTestData } from '@shared/components/footer/footer.component.type';
 
 export class FooterComponent {
   constructor(private readonly root: Locator) { }
@@ -17,9 +19,30 @@ export class FooterComponent {
   // ======================
   // Business methods
   // ======================
-  public async subscribe(email: string): Promise<void> {
-    await this.emailInput.fill(email);
+  public async subscribe(email?: string): Promise<void> {
+    if (email !== undefined) {
+      await this.emailInput.fill(email);
+    }
     await this.subscribeButton.click();
+  }
+
+  /**
+   * Assert footer email validation based on the validator result object.
+   * The result object is expected to have `internal_type` and `message` fields
+   * coming from the CSV test data.
+   */
+  public async assertFooterEmailValidation(result: FooterValidationResult): Promise<void> {
+    switch (result.type) {
+      case 'missing_at':
+      case 'missing_after_at':
+      case 'missing_before_at':
+      case 'missing_email':
+      case 'invalid_domain_char':
+        await assertErrorMessage(this.emailInput, result.message);
+        break;
+      default:
+        throw new Error(`Unhandled validation type: ${result.type}`);
+    }
   }
 
   // ======================
@@ -33,7 +56,7 @@ export class FooterComponent {
     return (await this.subscriptionDescription.textContent()) ?? '';
   }
 
-  async expectSuccessSubscription(): Promise<void> {
+  public async expectSuccessSubscription(): Promise<void> {
     await expect(this.successMessage).toBeVisible();
     await expect(this.successMessage).toHaveText('You have been successfully subscribed!');
   }

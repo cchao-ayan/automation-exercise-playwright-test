@@ -2,8 +2,8 @@ id,scenario,name,email,error_message,internal_type
 1,Empty name,,Zoozoo-un123@gmail.com,Please fill out this field.,missing_name
 2,Empty email,zooolander,,Please fill out this field.,missing_email
 3,Empty name and email,,,Please fill out this field.,missing_name_and_email
-4,Email has no @ symbol,zooolander,Zoozoo-un,Please include an ‘@’ in the email address.,missing_at
-5,Email has no mail server and domain,zooolander,Zoozoo-un@,Please enter a part following ‘@’.,missing_after_at
-6,Email has no username,zooolander,@gmail.com,Please enter a part followed by ‘@’.,missing_before_at
-7, Email has special character after @ symbol,zooolander,Zoozoo-un@gm!&L.com,Please include an ‘@’ in the email address.,special_char_after_at
+4,Email has no @ symbol,zooolander,Zoozoo-un,Please include an ï¿½@ï¿½ in the email address.,missing_at
+5,Email has no mail server and domain,zooolander,Zoozoo-un@,Please enter a part following ï¿½@ï¿½.,missing_after_at
+6,Email has no username,zooolander,@gmail.com,Please enter a part followed by ï¿½@ï¿½.,missing_before_at
+7, Email has special character after @ symbol,zooolander,Zoozoo-un@gm!&L.com,A part following ï¿½@ï¿½ should not contain the symbol,invalid_domain_char
 8,Email address already exists,asdf,asdf@asdf.com,Email Address already exist! ,email_exist

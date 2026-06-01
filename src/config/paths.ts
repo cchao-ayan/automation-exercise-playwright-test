@@ -13,6 +13,9 @@ export const paths = {
       invalidSignupInput: path.resolve('src/features/auth/datas/invalid-signup-input.csv'),
       invalidSignupFormInput: path.resolve('src/features/auth/datas/invalid-signup-form-input.csv'),
       registerUsers: path.resolve('src/features/auth/datas/register-users.csv'),
+    },
+    footer: {
+      invalidEmailFooter: path.resolve('src/shared/components/footer/invalid-email-footer.csv'),
     }
   },
 };
