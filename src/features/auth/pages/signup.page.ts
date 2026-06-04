@@ -2,7 +2,7 @@ import { BasePage } from '@core/base/base.page';
 import { expect, Page, Locator } from '@playwright/test';
 import { routes } from '@config/routes';
 import { assertTextEquals } from '@shared/assertion/generic';
-import { SignupFormFields, InvalidSignupFormTestData, SignupFormValidationResult } from '@features/auth/types/index';
+import { SignupFormFields, InvalidSignupFormTestData, SignupFormValidationResult, SignupFormTestData } from '@features/auth/types/index';
 
 export class SignUpPage extends BasePage {
 
@@ -79,12 +79,12 @@ export class SignUpPage extends BasePage {
   // ======================
   // Assertion Methods
   // ======================
-  public async verifyNameAndEmailPrefilled(username: string, email: string): Promise<void> {   
-      const nameText = await this.nameInput.getAttribute('value');
-      assertTextEquals(nameText as string, username);    
-    
-      const emailText = await this.emailInput.getAttribute('value');
-      assertTextEquals(emailText as string, email);    
+  public async verifyNameAndEmailPrefilled(username: string, email: string): Promise<void> {
+    const nameText = await this.nameInput.getAttribute('value');
+    assertTextEquals(nameText as string, username);
+
+    const emailText = await this.emailInput.getAttribute('value');
+    assertTextEquals(emailText as string, email);
   }
 
   // ======================
@@ -127,7 +127,7 @@ export class SignUpPage extends BasePage {
       await this.offersCheckbox.check();
     }
   }
-  public async enterAddressInfo(data: { firstname?: string, lastname?: string, company?: string, address1?: string, address2?: string, country?: string, state?: string, city?: string, zipcode?: string, mobile_number?: string}): Promise<void> {
+  public async enterAddressInfo(data: { firstname?: string, lastname?: string, company?: string, address1?: string, address2?: string, country?: string, state?: string, city?: string, zipcode?: string, mobile_number?: string }): Promise<void> {
     if (data.firstname !== undefined) {
       await this.firstNameInput.fill(data.firstname);
     }
@@ -157,7 +157,7 @@ export class SignUpPage extends BasePage {
       await this.mobileNumberInput.fill(data.mobile_number);
     }
   }
-  public async fillSignUpForm(user: InvalidSignupFormTestData): Promise<void> {
+  public async fillSignUpForm(user: InvalidSignupFormTestData | SignupFormTestData): Promise<void> {
     await this.enterAccountInfo({
       username: user.name,
       email: user.email,
@@ -184,13 +184,13 @@ export class SignUpPage extends BasePage {
       city: user.city,
       zipcode: user.zipcode,
       mobile_number: user.mobile_number
-  });
+    });
   }
   public async clickCreateAccountButton(): Promise<void> {
     await this.createAccountButton.click();
   }
 
-  public async submitSignupForm(user: InvalidSignupFormTestData): Promise<void> {
+  public async submitSignupForm(user: InvalidSignupFormTestData | SignupFormTestData): Promise<void> {
     await this.fillSignUpForm(user);
     await this.clickCreateAccountButton();
   }
