@@ -18,9 +18,12 @@ export interface LoginFieldsData {
   password?: string;
 }
 
-export type LoginFields =
-  | 'email'
-  | 'password';
+export const loginFields = [
+  'email',
+  'password'
+] as const;
+
+export type LoginFields = typeof loginFields[number];
 
 export type LoginInternalType =
   | EmailValidationType

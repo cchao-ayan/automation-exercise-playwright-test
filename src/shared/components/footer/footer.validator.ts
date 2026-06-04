@@ -1,5 +1,5 @@
 import { validateEmailFormat } from '@shared/types/validators/email.validator';
-import { FooterFieldData, FooterValidationResult } from '@shared/components/footer/footer.component.type';
+import { FooterFieldData, FooterValidationResult } from '@shared/components/footer/footer.type';
 
 export function validateFooterInput(data: FooterFieldData): FooterValidationResult {
     const e = data.email ?? '';

@@ -18,9 +18,12 @@ export interface SignupFieldsData {
   email?: string;
 }
 
-export type SignupFields =
-  | 'name'
-  | 'email';
+export const signupFields = [
+  'name',
+  'email'
+] as const;
+
+export type SignupFields = typeof signupFields[number];
 
 export type SignupInternalType =
   | EmailValidationType

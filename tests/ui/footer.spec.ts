@@ -1,7 +1,7 @@
 import { test } from '@core/fixtures/app.fixture';
 import { DataReader } from '@shared/utils/data/data-reader';
 import { paths } from '@config/paths';
-import { InvalidFooterEmailTestData } from '@shared/components/footer/footer.component.type';
+import { InvalidFooterEmailTestData } from '@shared/components/footer/footer.type';
 import { validateFooterInput } from '@shared/components/footer/footer.validator';
 
 
