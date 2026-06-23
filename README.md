@@ -1,163 +1,189 @@
+# AutomationExercise Playwright Framework
+
+This repository implements a feature-driven Playwright automation framework for `automationexercise.com`. The structure is organized around reusable feature modules, shared core services, and scalable test layers.
+
 ## Project Structure Overview
 
 ```
-src/
+.
 ├── .github/
 │   └── workflows/
-│       └── playwright.yml            # GitHub Actions CI pipeline
-│
+│       └── playwright.yml                # GitHub Actions CI pipeline
 ├── config/
-│   ├── .env                          # Environment variables (credentials, URLs)
-│   └── TestCredentials.ts            # Centralized credential handling
-│
-├── fixture/
-│   ├── pom.fixture.ts                # Page Object Model fixtures
-│   └── ui.fixture.ts                 # UI fixtures and setup
-│
-├── pages/
-│   ├── account-created/              # Account creation confirmation page
-│   ├── account-deleted/              # Account deletion confirmation page
-│   │
+│   ├── .env                              # Environment variables loaded by Playwright
+│   ├── paths.ts                          # Path helpers and route constants
+│   ├── routes.ts                         # Application route definitions
+│   └── urls.ts                           # Base URL and endpoint helpers
+├── core/
 │   ├── base/
-│   │   ├── BasePage.ts               # Base navigation & lifecycle logic
-│   │   └── CommonPageMethods.ts      # Shared reusable page methods
-│   │
-│   ├── common/
-│   │   ├── header/                   # Header component objects
-│   │   └── footer/                   # Footer component objects
-│   │
+│   │   └── base.page.ts                  # Base page class and shared navigation logic
+│   ├── fixtures/
+│   │   └── app.fixture.ts                # Playwright fixtures and page object injection
+│   └── managers/
+│       ├── api.manager.ts                # API helper management
+│       ├── flow.manager.ts               # Test flow orchestration
+│       ├── pom.manager.ts                # Page object manager factory
+│       └── POManagerAutoPageInit.ts      # Automatic page initialization helper
+├── features/
+│   ├── auth/
+│   │   ├── datas/
+│   │   │   ├── invalid/
+│   │   │   └── valid/
+│   │   ├── pages/
+│   │   ├── types/
+│   │   └── utils/
+│   ├── cart/
+│   │   └── pages/
+│   ├── checkout/
+│   │   └── pages/
+│   ├── contact-us/
+│   │   ├── assets/
+│   │   ├── datas/
+│   │   ├── pages/
+│   │   └── types/
+│   ├── exercises/
+│   │   └── pages/
 │   ├── home/
-│   │   ├── HomePage.ts
-│   │   └── HomePageLocators.ts
-│   │
-│   ├── login/
-│   │   ├── LoginPage.ts
-│   │   └── LoginPageLocators.ts
-│   │
-│   ├── signup/
-│   │   ├── SignUpPage.ts
-│   │   └── SignUpPageLocators.ts
-│   │
-│   ├── manager/
-│   │   ├── POManager.ts              # Page Object factory / manager
-│   │   └── POManager2.ts             # Alternative PO manager implementation
-│
-├── tests/                            # Test specifications
-│
-├── utilities/
-│   ├── broken-links-checker.ts       # Broken link validation utility
-│   ├── step-decorator.ts             # Step logging
-│   └── step-decorator2.ts
-│
-├── playwright-report/                # HTML execution report
-├── test-results/                     # Raw Playwright results
-├── test-screenshots/                 # Failure screenshots
-│
-├── playwright.config.ts              # Playwright global configuration
+│   │   └── pages/
+│   └── products/
+│       ├── api/
+│       ├── component/
+│       ├── datas/
+│       ├── flow/
+│       ├── pages/
+│       ├── types/
+│       └── utils/
+├── logs/
+│   └── test-log.txt                      # Execution logging history
+├── shared/
+│   ├── assertion/
+│   ├── components/
+│   ├── flow/
+│   ├── logger/
+│   ├── types/
+│   └── utils/
+├── tests/
+│   ├── api/
+│   ├── e2e/
+│   ├── test-data-creation/
+│   └── ui/
+├── playwright-report/                     # HTML summary results
+├── test-results/                          # Raw browser test outputs
+├── test-screenshots/                      # Failure screenshots
+├── playwright.config.ts                   # Playwright configuration
 ├── package.json
-├── package-lock.json
+├── tsconfig.json
 └── README.md
 ```
 
-## Framework Design & Key Concepts
+## Feature-Driven Framework Design
 
-✅ Page Object Model (POM)
+This repository follows a feature-driven structure so tests and automation code are grouped by product behavior rather than by technical layer.
 
-Each page has:
+### Features Module
 
-- Page class (actions & behaviors)
-- Locator class (selectors only)
-- Separating locators improves:
-- Maintainability
-- Readability
-- Easier UI updates
+- `src/features/` contains feature domains such as `auth`, `cart`, `checkout`, `contact-us`, `exercises`, `home`, and `products`
+- Each feature can contain:
+  - `pages/` for page object implementations
+  - `types/` for domain models and request data shapes
+  - `datas/` for test data fixtures
+  - `utils/` for feature-specific helpers
+  - `api/` or `component/` when needed for specialized logic
 
-Example:
-`await loginPage.login(username, password);`
+### Core Services
 
-✅ Base Page Architecture
-Located in pages/base/
+- `src/core/base/` contains shared page base classes and common UI behavior
+- `src/core/fixtures/` defines Playwright fixtures and dependency injection
+- `src/core/managers/` holds reusable managers for API, flow orchestration, and page object creation
 
-- BasePage.ts
-- Centralized navigation logic
-- URL handling
-- CommonPageMethods.ts
-- Shared methods like page readiness, common waits, reusable actions
-- This ensures consistent behavior across all pages.
+### Shared Utilities
 
-✅ Common Components
-Located in pages/common/
+- `src/shared/components/` houses reusable UI component models such as header/footer
+- `src/shared/assertion/` holds generic matchers and assertion helpers
+- `src/shared/logger/` centralizes logging helpers
+- `src/shared/utils/` contains common helpers used across features
+- `src/shared/types/` defines reusable validation and domain types
 
-- Header and Footer components
-- Reusable UI elements shared across multiple pages
-- Prevents duplicated locators and logic
+### Configuration
 
-✅ Page Object Manager Pattern
-Located in pages/manager/
+- `config/.env` stores environment-specific values loaded by Playwright
+- `config/paths.ts`, `config/routes.ts`, and `config/urls.ts` centralize URL and route configuration
 
-- Central factory for initializing page objects
-- Keeps test files clean
-- Supports scalable test growth
+## Tests Structure
 
-✅ Custom Fixtures
-Located in fixture/
+- `tests/ui/` contains UI-focused specs such as `login.spec.ts`, `signup.spec.ts`, and `footer.spec.ts`
+- `tests/e2e/` contains end-to-end flows such as `scenarios.spec.ts`
+- `tests/api/` contains API-level tests such as `test.spec.ts`
+- `tests/test-data-creation/` contains data creation or seed-related test scenarios
 
-- pom.fixture.ts - Injects page objects into tests
-- ui.fixture.ts - Shared UI setup logic
+## Running Tests
 
-Example usage:
+### Install dependencies
 
-`test('User can sign up', async ({ signupPage }) => {
-  await signupPage.registerUser();
-});`
+```bash
+npm install
+```
 
-✅ Environment Configuration
-Located in config/
+### Install Playwright browsers
 
-- .env - Stores credentials and environment values
-- TestCredentials.ts - Central access layer for environment variables, Avoids hardcoding sensitive data.
+```bash
+npx playwright install
+```
 
-✅ Utilities
-Located in utilities/
+### Run all tests
 
-- broken-links-checker.ts - Validates broken links on a page
-- step-decorator.ts - Adds readable step logging to tests, Improves reporting and debugging
+```bash
+npm run pw:run
+```
 
-## How to Run the Tests
+### Run tests in headed mode
 
-🔹 Prerequisites
+```bash
+npm run pw:headed
+```
 
-Node.js (v16+)
+### Run specific suites
 
-npm
+```bash
+npm run pw:api
+npm run pw:login
+npm run pw:signup
+npm run pw:footer
+npm run pw:scenario
+```
 
-🔹 Install Dependencies
-`npm install`
+### Open the test report
 
-🔹 Install Playwright Browsers
-`npx playwright install`
+```bash
+npm run pw:report
+```
 
-🔹 Run All Tests
-`npx playwright test`
+### Additional utilities
 
-🔹 Run Tests in Headed Mode
-`npx playwright test --headed`
+```bash
+npm run lint
+npm run format
+```
 
-🔹 View HTML Report
-`npx playwright show-report`
+## Playwright Configuration
+
+- `playwright.config.ts` sets the `testDir`, browser projects, reporting, retries, and shared `use` options
+- Uses `baseURL` configured for `https://automationexercise.com/`
+- Screenshots and videos are retained only on failure
+- HTML report output is stored in `playwright-report/`
 
 ## CI/CD Integration
 
-The project includes a GitHub Actions workflow:
-.github/workflows/playwright.yml
+- The GitHub Actions pipeline is defined in `.github/workflows/playwright.yml`
+- It installs dependencies, runs Playwright tests, and publishes results on pushes and pull requests
 
-- This pipeline:
-- Installs dependencies
-- Runs Playwright tests
-- Generates test results automatically on push or pull request
+## Test Reporting and Artifacts
 
-## Test Evidence & Reporting
+- Failure screenshots are available in `test-screenshots/`
+- HTML reports are generated in `playwright-report/`
+- Raw browser outputs are saved to `test-results/`
 
-- Screenshots captured on failure → test-screenshots/
-- HTML reports → playwright-report/
-- Execution artifacts → test-results/
+## Notes
+
+- If `config/.env` is not present, create it with the required environment values before running tests
+- The feature-driven design helps keep behaviour-specific automation separate from shared infrastructure code

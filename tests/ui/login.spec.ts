@@ -4,8 +4,8 @@ import { paths } from '@config/paths';
 import { validateLoginInput, validateSignupInput } from '@features/auth/utils/index';
 import { InvalidLoginTestData, InvalidSignupTestData } from '@features/auth/types/index';
 
-const loginData = DataReader.read<InvalidLoginTestData>(paths.data.login.invalidLoginInput);
-const signupData = DataReader.read<InvalidSignupTestData>(paths.data.signup.invalidSignupInput);
+const invalidLoginData = DataReader.read<InvalidLoginTestData>(paths.data.login.invalidLoginInput);
+const invalidSignupFormData = DataReader.read<InvalidSignupTestData>(paths.data.signup.invalidSignupInput);
 
 test.describe('Login Functionality', () => {
     test.beforeEach(async ({ pom }) => {
@@ -14,16 +14,15 @@ test.describe('Login Functionality', () => {
         await pom.homePage.header.clickSignupLoginLink();
         await pom.loginPage.assertPageLoaded();
     });
-    for (const row of loginData) {
+    for (const row of invalidLoginData) {
         test(`Invalid Login: ${row.id}. ${row.scenario}`, async ({ pom }) => {
             await pom.loginPage.login(row.email, row.password);
             const result = validateLoginInput({ email: row.email, password: row.password });
             await pom.loginPage.assertLoginInputValidation(result);
-
         });
     }
 
-    for (const row of signupData) {
+    for (const row of invalidSignupFormData) {
         test(`Invalid Signup: ${row.id}. ${row.scenario}`, async ({ pom }) => {
             await pom.loginPage.signUp(row.name, row.email);
             const result = validateSignupInput({ name: row.name, email: row.email });

@@ -3,15 +3,20 @@ import { routes } from '@config/routes';
 import { expect, Page, Locator } from '@playwright/test';
 import { ProductApi, ProductCard, normalizeProductData } from '@features/products/types/product.type';
 import { compareByKey } from '@shared/utils/comparison/compare-by-key';
+import { ProductAPI } from '../api/product.api';
+import { CartModalComponent } from '../component/cart-modal.component';
 
 type ProductView = 'info' | 'overlay';
 
 export class ProductsPage extends BasePage {
+  public readonly cartModal: CartModalComponent;
 
   constructor(protected readonly page: Page) {
     super(page);
+    //console.log('ProductsPage constructor called');
+    this.cartModal = new CartModalComponent(this.page);
   }
-  
+
   // ======================
   // Locators
   // ======================
@@ -22,7 +27,7 @@ export class ProductsPage extends BasePage {
   private readonly searchProductSection = this.page.getByRole('heading', { name: 'Searched Products' });
   private readonly recommendedSection = this.page.locator('div.recommended-items');
   // Buttons
-  private readonly addToCartButton = this.page.getByRole('button', { name: 'Add to cart' });
+  private readonly addToCartButton = this.page.getByText('Add to cart');
   private readonly searchButton = this.page.locator('#submit_search');
   private readonly searchProductInput = this.page.getByRole('textbox', { name: 'Search Product' });
   // Texts
@@ -43,7 +48,7 @@ export class ProductsPage extends BasePage {
   // ======================
   // State Methods
   // ======================
-  protected async assertPageLoaded(): Promise<void> {
+  public async assertPageLoaded(): Promise<void> {
     await expect(this.page).toHaveURL(new RegExp(`${routes.products}$`));
     await expect(this.allProductsSection).toBeVisible();
     await expect(this.brandSection).toBeVisible();
@@ -80,7 +85,7 @@ export class ProductsPage extends BasePage {
     return this.productViewAt(index, view).locator(this.priceText).innerText();
   }
   public async clickAddToCartButton(index: number, view: ProductView): Promise<void> {
-    await this.productViewAt(index, view).locator(this.addToCartButton).click();
+    await this.productViewAt(index, view).locator(this.addToCartButton).first().click();
   }
   public async clickViewProductButton(index: number): Promise<void> {
     await this.productAt(index).locator(this.viewProductLink).click();
@@ -100,17 +105,33 @@ export class ProductsPage extends BasePage {
       price: await this.productPrice(index, view),
     };
   }
+
+  /**
+   * Compares the product card displayed in the UI with the same product from the API.
+   *
+   * Steps:
+   *   1. Reads the product id, name and price from the product card in the given view.
+   *   2. Loads the full product list from the API.
+   *   3. Finds the API product that matches the UI id.
+   *   4. Normalizes the API response to the UI product shape.
+   *   5. Verifies that id, name and price match between UI and API.
+   *
+   * This method is intentionally awaited by callers, so any mismatch or missing API product
+   * will reject the returned promise instead of being swallowed.
+   */
   public async compareProductCardWithApi(
     index: number,
     view: ProductView,
-    productApi: ProductApi[],
   ): Promise<void> {
-    const actual = await this.productCard(index, view);
-    const productsFromApi = productApi.find((p) => String(p.id) === actual.id);
-    if (!productsFromApi) {
-      throw new Error('No product data returned from API');
+    const ui = await this.productCard(index, view);
+    const products = await new ProductAPI(this.page.request).getAllProducts();
+
+    const product = products.find((p) => String(p.id) === ui.id);
+    if (!product) {
+      throw new Error(`Product with ID ${ui.id} not found in API response`);
     }
-    const expected = normalizeProductData(productsFromApi);
-    compareByKey(actual, expected, ['id', 'name', 'price']);
+
+    const api = normalizeProductData(product);
+    compareByKey(ui, api, ['id', 'name', 'price']);
   }
 }

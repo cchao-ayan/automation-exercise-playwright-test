@@ -1,5 +1,5 @@
-import { AuthFlow } from '@features/auth/flows - not used/auth.flow';
-import { ProductsFlow } from '@features/products/flows/products.flow';
+/** 
+ * import { ProductsFlow } from '@features/products/flows/products.flow';
 import { CheckoutFlow } from '@features/checkout/flows/checkout.flow';
 import { POManager } from './pom.manager';
 
@@ -20,3 +20,4 @@ export class FlowManager {
     return (this._checkout ??= new CheckoutFlow(this.pom));
   }
 }
+  **/

@@ -21,7 +21,7 @@ export class HomePage extends BasePage {
   // State methods
   // ======================
   public async assertPageLoaded(): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(`${routes.home}$`));
+    await expect(this.page).toHaveURL(new RegExp(`${routes.home}$`), { timeout: 5000 });
     await expect(this.slider).toBeVisible();
     await expect(this.recommendedListHeading).toBeVisible();
     await expect(this.categoryHeading).toBeVisible();

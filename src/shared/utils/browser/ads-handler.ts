@@ -15,62 +15,62 @@ export class AdHandler {
    * - Keep tests clean
    * - Prevent flaky failures caused by overlays
    */
-  async playwrightAdHandler(): Promise<void> {
-    // Common selectors used by modal and popup ads
-    const closeSelectors = [
-      'button:has-text("Close")',
-      'button:has-text("×")',
-      '.modal-close',
-      '.close',
-      '[aria-label="Close"]',
-    ];
+  // async playwrightAdHandler(): Promise<void> {
+  //   // Common selectors used by modal and popup ads
+  //   const closeSelectors = [
+  //     'button:has-text("Close")',
+  //     'button:has-text("×")',
+  //     '.modal-close',
+  //     '.close',
+  //     '[aria-label="Close"]',
+  //   ];
 
-    // Register a handler for each selector
-    // Playwright will auto-trigger this ONLY if the locator blocks an action
-    for (const selector of closeSelectors) {
-      await this.page.addLocatorHandler(this.page.locator(selector), async (locator) => {
-        Logger.info(`Auto-closing popup using selector: ${selector}`);
-        await locator.click();
-      });
-    }
-  }
+  //   // Register a handler for each selector
+  //   // Playwright will auto-trigger this ONLY if the locator blocks an action
+  //   for (const selector of closeSelectors) {
+  //     await this.page.addLocatorHandler(this.page.locator(selector), async (locator) => {
+  //       Logger.info(`Auto-closing popup using selector: ${selector}`);
+  //       await locator.click();
+  //     });
+  //   }
+  // }
 
-  /**
-   * Handles JavaScript dialogs such as:
-   * - alert()
-   * - confirm()
-   * - prompt()
-   *
-   * These dialogs are NOT DOM elements and cannot be handled by locators
-   */
-  async handleDialogs(): Promise<void> {
-    this.page.on('dialog', async (dialog) => {
-      Logger.info(`Dialog detected: ${dialog.message()}`);
-      try {
-        if (dialog.message().includes('Press OK to proceed!')) {
-          Logger.info('Accepting success dialog');
-          await dialog.accept();
-          return; // handled
-        }
-        await dialog.dismiss();
-        Logger.info('Dialog dismissed');
-      } catch (err) {
-        // dialog may already be handled by another listener or the test; ignore duplicate handling
-        Logger.error('Dialog handling error (possibly already handled):', (err as Error).message);
-      }
-    });
-  }
+  // /**
+  //  * Handles JavaScript dialogs such as:
+  //  * - alert()
+  //  * - confirm()
+  //  * - prompt()
+  //  *
+  //  * These dialogs are NOT DOM elements and cannot be handled by locators
+  //  */
+  // async handleDialogs(): Promise<void> {
+  //   this.page.on('dialog', async (dialog) => {
+  //     Logger.info(`Dialog detected: ${dialog.message()}`);
+  //     try {
+  //       if (dialog.message().includes('Press OK to proceed!')) {
+  //         Logger.info('Accepting success dialog');
+  //         await dialog.accept();
+  //         return; // handled
+  //       }
+  //       Logger.info('Dialog dismissed');
+  //       await dialog.dismiss();        
+  //     } catch (err) {
+  //       // dialog may already be handled by another listener or the test; ignore duplicate handling
+  //       Logger.error('Dialog handling error (possibly already handled):', (err as Error).message);
+  //     }
+  //   });
+  // }
 
-  /**
-   * Handles unexpected popup windows or new browser tabs
-   * triggered by ads or third-party links
-   */
-  async handlePopups(): Promise<void> {
-    this.page.on('popup', async (popup) => {
-      Logger.info('Unexpected popup detected — closing it');
-      await popup.close();
-    });
-  }
+  // /**
+  //  * Handles unexpected popup windows or new browser tabs
+  //  * triggered by ads or third-party links
+  //  */
+  // async handlePopups(): Promise<void> {
+  //   this.page.on('popup', async (popup) => {
+  //     Logger.info('Unexpected popup detected — closing it');
+  //     await popup.close();
+  //   });
+  // }
 
   /**
    * Preventive approach:
@@ -100,9 +100,9 @@ export class AdHandler {
     if (this.handlersRegistered) return; // ensures handlers are registered only once per test run
     this.handlersRegistered = true;
 
-    await this.playwrightAdHandler();
-    await this.handleDialogs();
-    await this.handlePopups();
+    // await this.playwrightAdHandler();
+    // await this.handleDialogs();
+    // await this.handlePopups();
     await this.blockAds();
   }
 }

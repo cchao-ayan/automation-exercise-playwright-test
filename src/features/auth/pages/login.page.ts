@@ -8,7 +8,8 @@ export class LoginPage extends BasePage {
   constructor(protected readonly page: Page) {
     super(page);
   }
-  // ======================
+
+  // ======================   
   // Locators
   // ======================  
   private readonly logInHeading = this.page.getByText('Login to your account', { exact: true });
@@ -73,7 +74,7 @@ export class LoginPage extends BasePage {
     await expect(this.loginErrorMessage).toHaveText(message);
   }
 
-    public async assertExistingEmailMessage(message: string): Promise<void> {
+  public async assertExistingEmailMessage(message: string): Promise<void> {
     await expect(this.existingEmailErrMsg).toBeVisible();
     await expect(this.existingEmailErrMsg).toHaveText(message);
   }

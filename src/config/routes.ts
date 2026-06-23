@@ -10,4 +10,7 @@ export const routes = {
   contactUs: '/contact_us',
   accountCreated: '/account_created',
   accountDeleted: '/delete_account',
+  checkout: '/checkout',
+  payment: '/payment',
+  donePayment: '/payment_done',
 } as const;

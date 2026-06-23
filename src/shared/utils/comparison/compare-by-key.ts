@@ -16,6 +16,7 @@ export function compareByKey<T, K extends keyof T>(
   //  ARRAY CASE
   if (Array.isArray(actual) && Array.isArray(expected)) {
     expect(actual.length).toBe(expected.length);
+    Logger.info(`Comparing arrays`);
     // Create a map for quick lookup of actual items by composite key
     const map = new Map<string, T>(
       actual.map((item) => {
@@ -26,6 +27,12 @@ export function compareByKey<T, K extends keyof T>(
     // For each expected item, find the corresponding actual item using the composite key and compare
     for (const exp of expected) {
       const composite = JSON.stringify(keys.map((k) => exp[k]));
+      // Check for duplicate keys in the actual array
+      if (map.has(composite)) {
+        throw new Error(
+          `Duplicate key detected: ${composite}`
+        );
+      }
       const act = map.get(composite); // example: map.get('1') => {id: 1, name: 'A'}
 
       expect(act).toBeDefined();
@@ -38,6 +45,7 @@ export function compareByKey<T, K extends keyof T>(
   //  OBJECT CASE
   const actObj = actual as T;
   const expObj = expected as T;
+  Logger.info(`Comparing objects`);
 
   Logger.info(`Actual: ${JSON.stringify(actObj)}`);
   Logger.info(`Expected: ${JSON.stringify(expObj)}`);
