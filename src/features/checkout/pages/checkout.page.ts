@@ -9,13 +9,14 @@ export class CheckOutPage extends BasePage {
     // ======================
     // Locators
     // ======================
-    private readonly checkoutHeading = this.page.getByText('Checkout');
-    private readonly homeLink = this.page.getByRole('link', { name: 'Home' });
-    private readonly addressDetailsHeading = this.page.getByRole('heading', { name: 'Address Details', level: 2 });
-    private readonly reviewYourOrderHeading = this.page.getByRole('heading', { name: 'Review Your Order', level: 2 });
-    private readonly deliveryAddressHeading = this.page.getByRole('heading', { name: 'Delivery Address', level: 3 });
-    private readonly billingAddressHeading = this.page.getByRole('heading', { name: 'Billing Address', level: 3 });
-    private readonly placeOrderButton = this.page.getByRole('button', { name: 'Place Order' });
+    private readonly cartItemSection = this.page.locator('#cart_items');
+    private readonly checkoutHeading = this.cartItemSection.getByText('Checkout');
+    private readonly homeLink = this.cartItemSection.getByRole('link', { name: 'Home' });
+    private readonly addressDetailsHeading = this.cartItemSection.getByRole('heading', { name: 'Address Details', level: 2 });
+    private readonly reviewYourOrderHeading = this.cartItemSection.getByRole('heading', { name: 'Review Your Order', level: 2 });
+    private readonly deliveryAddressHeading = this.cartItemSection.getByRole('heading', { name: 'Delivery Address', level: 3 });
+    private readonly billingAddressHeading = this.cartItemSection.getByRole('heading', { name: 'Billing Address', level: 3 });
+    private readonly placeOrderButton = this.cartItemSection.getByRole('link', { name: 'Place Order' });
     // ======================
     // State Methods
     // ======================

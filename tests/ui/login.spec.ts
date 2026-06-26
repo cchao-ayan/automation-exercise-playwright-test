@@ -3,6 +3,9 @@ import { DataReader } from '@shared/utils/data/data-reader';
 import { paths } from '@config/paths';
 import { validateLoginInput, validateSignupInput } from '@features/auth/utils/index';
 import { InvalidLoginTestData, InvalidSignupTestData } from '@features/auth/types/index';
+import { feature} from 'allure-js-commons';
+
+feature('Login and Signup Invalid Validations');
 
 const invalidLoginData = DataReader.read<InvalidLoginTestData>(paths.data.login.invalidLoginInput);
 const invalidSignupFormData = DataReader.read<InvalidSignupTestData>(paths.data.signup.invalidSignupInput);

@@ -12,5 +12,5 @@ export const routes = {
   accountDeleted: '/delete_account',
   checkout: '/checkout',
   payment: '/payment',
-  donePayment: '/payment_done',
+  paymentDone: '/payment_done',
 } as const;

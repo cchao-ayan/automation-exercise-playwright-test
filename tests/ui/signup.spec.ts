@@ -3,6 +3,9 @@ import { DataReader } from '@shared/utils/data/data-reader';
 import { paths } from '@config/paths';
 import { validateSignupFormInput } from '@features/auth/utils/signup-form.validator';
 import { InvalidSignupFormTestData } from '@features/auth/types/signup-form.type';
+import { feature} from 'allure-js-commons';
+
+feature('Register Invalid Validations');
 
 const data = DataReader.read<InvalidSignupFormTestData>(paths.data.signup.invalidSignupFormInput);
 

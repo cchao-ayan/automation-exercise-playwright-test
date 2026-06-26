@@ -14,12 +14,11 @@ export class PaymentDonePage extends BasePage {
     private readonly downloadInvoiceButton = this.page.getByRole('link', { name: 'Download Invoice' });
     private readonly continueButton = this.page.getByTestId('continue-button');
     private readonly verifyText = this.page.getByText('Please wait while your')
-
     // ======================
     // State Methods
     // ======================
     public async assertPageLoaded(): Promise<void> {
-        await expect(this.page).toHaveURL(new RegExp(`${routes.donePayment}$`));
+        await expect(this.page).toHaveURL(new RegExp(routes.paymentDone));
         await expect(this.orderPlacedHeading).toBeVisible();
         await expect(this.confirmedText).toBeVisible();
         await expect(this.downloadInvoiceButton).toBeVisible();
@@ -28,5 +27,8 @@ export class PaymentDonePage extends BasePage {
 
     public async clickContinueButton(): Promise<void> {
         await this.continueButton.click();
+        if (await this.verifyText.isVisible()) {
+            await expect(this.verifyText).toBeVisible({ timeout: 5000 });
+        }
     }
 }

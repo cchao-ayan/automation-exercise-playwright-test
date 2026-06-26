@@ -29,15 +29,29 @@ jobs:
       
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
+
+      - name: Auth Setup - Create Storage State
+        run: npm run pw:setup
       
       - name: Run Playwright tests - Login Functionality
         run: npm run pw:login
 
       - name: Run Playwright tests - Signup Functionality
         run: npm run pw:signup
+      
+      - name: Run Playwright tests - Footer Functionality
+        run: npm run pw:footer
+
+      - name: Run Playwright tests - end-to-end scenario
+        run: npm run pw:scenario
         
-      - name: Upload Playwright report
+      - name: Generate Allure Report
+        if: always()
+        run: npm run pw:allure
+
+      - name: Upload Allure Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
-          path: test-report/
+          name: allure-report
+          path: allure-report

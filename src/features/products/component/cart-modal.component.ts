@@ -6,15 +6,20 @@ export class CartModalComponent {
     // ======================
     // Locators
     // ======================
-    private readonly modalIcon = this.page.getByRole('link', { name: ' Products' });
-    private readonly modalTitle = this.page.getByRole('heading', { name: 'Added!', level: 4 });
-    private readonly modalText = this.page.getByText('Your product has been added to cart.');
-    private readonly viewCartLink = this.page.getByRole('link', { name: 'View Cart' });
-    private readonly continueShoppingButton = this.page.getByRole('button', { name: 'Continue Shopping' });
+    private readonly modalContent = this.page.locator('.modal-content');
+    private readonly modalHeader = this.modalContent.locator('.modal-header');
+    private readonly modalBody = this.modalContent.locator('.modal-body');
+    private readonly modalFooter = this.modalContent.locator('.modal-footer');
+    private readonly modalIcon = this.modalHeader.locator('.material-icons');
+    private readonly modalTitle = this.modalHeader.getByRole('heading', { name: 'Added!', level: 4 });
+    private readonly modalText = this.modalBody.getByText('Your product has been added to cart.');
+    private readonly viewCartLink = this.modalBody.getByRole('link', { name: 'View Cart' });
+    private readonly continueShoppingButton = this.modalFooter.getByRole('button', { name: 'Continue Shopping' });
     // ======================
     // State Methods
     // ======================
       public async assertModalLoaded(): Promise<void> {
+        await expect(this.modalContent).toBeVisible();
         await expect(this.modalIcon).toBeVisible();
         await expect(this.modalTitle).toBeVisible();
         await expect(this.modalText).toBeVisible();

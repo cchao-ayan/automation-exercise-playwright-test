@@ -10,32 +10,36 @@ export class PaymentPage extends BasePage {
     // ======================
     // Locators
     // ======================
-    private readonly paymentBreadCrumb = this.page.getByText('Payment');
-    private readonly paymentHeading = this.page.getByRole('heading', { name: 'Payment', level: 2 });
-    private readonly homeLink = this.page.getByRole('link', { name: 'Home' });
-    private readonly payAndConfirmOrderButton = this.page.getByRole('button', { name: 'Pay and Confirm Order' });
+    private readonly cartItemSection = this.page.locator('#cart_items');
+    private readonly paymentBreadCrumb = this.cartItemSection.locator('div.breadcrumbs').getByText('Payment');
+    private readonly paymentHeading = this.cartItemSection.locator('div.step-one').getByRole('heading', { name: 'Payment', level: 2 });
+    private readonly homeLink = this.cartItemSection.locator('div.breadcrumbs').getByText('Home');
+    private readonly paymentInfo = this.cartItemSection.locator('div.payment-information');
+    private readonly payAndConfirmOrderButton = this.paymentInfo.getByRole('button', { name: 'Pay and Confirm Order' });
+    private readonly successAlertText = this.page.locator('col-md-12.form-group.hide');
     // ======================
     // Locator Map
     // ======================  
     private readonly cardDetailLocators: Record<CardDetailFields, Locator> = {
-        nameOnCard: this.page.getByTestId('name-on-card'),
-        cardNumber: this.page.getByTestId('card-number'),
-        cvc: this.page.getByTestId('cvc'),
-        expiryMonth: this.page.getByTestId('expiry-month'),
-        expiryYear: this.page.getByTestId('expiry-year')
+        nameOnCard: this.paymentInfo.getByTestId('name-on-card'),
+        cardNumber: this.paymentInfo.getByTestId('card-number'),
+        cvc: this.paymentInfo.getByTestId('cvc'),
+        expiryMonth: this.paymentInfo.getByTestId('expiry-month'),
+        expiryYear: this.paymentInfo.getByTestId('expiry-year')
     }
 
     // ======================
     // State Methods
     // ======================
     public async assertPageLoaded(): Promise<void> {
-        await expect(this.page).toHaveURL(new RegExp(`${routes.checkout}$`));
+        await expect(this.page).toHaveURL(new RegExp(`${routes.payment}$`));
         await expect(this.homeLink).toBeVisible();
         await expect(this.paymentBreadCrumb).toBeVisible();
         await expect(this.paymentHeading).toBeVisible();
     }
     public async clickPayAndConfirmOrderButton(): Promise<void> {
         await this.payAndConfirmOrderButton.click();
+        await expect(this.successAlertText).not.toBeVisible(); // Playwright cannot verify that the alert message is visible since it the button uses POST method thus page is destroyed
     }
     public async enterCardDetails(data: CardDetails): Promise<void> {
         for (const field of cardDetailFields) {

@@ -1,35 +1,44 @@
-import { test } from '@core/fixtures/app.fixture';
-import { DataReader } from '@shared/utils/data/data-reader';
+import { test } from '@core/fixtures/auth.fixture';
 import { paths } from '@config/paths';
-import { RegisteredUser } from '@features/auth/types/login.type';
+import { feature, story, step } from 'allure-js-commons';
 
-const data = DataReader.read<RegisteredUser>(paths.data.login.registeredUsers);
+feature('E2E Scenarios');
+story('Checkout');
 
-test.describe('End to end scenarios', () => {
-    test.beforeEach(async ({ pom }) => {
-        await pom.homePage.navigateToHomePage();
-        await pom.homePage.assertPageLoaded();
-        await pom.homePage.header.clickSignupLoginLink();
-        await pom.loginPage.assertPageLoaded();
-        await pom.loginPage.login(data[0].email, data[0].password);
-        await pom.homePage.header.successfulLogin(data[0].username);
-    });
-    test('Successfully checkout a product', async ({ pom }) => {
-        await pom.homePage.header.clickProductsLink();
-        await pom.productsPage.assertPageLoaded();
-        await pom.productsPage.searchProduct('Dress');
-        await pom.productsPage.clickAddToCartButton(0, 'info');
-        await pom.productsPage.cartModal.verifyModalAndContinueShopping();
-        await pom.productsPage.header.clickCartLink();
-        await pom.cartPage.assertPageLoaded();
-        await pom.cartPage.clickCheckoutButton();
-        await pom.checkoutPage.assertPageLoaded();
-        await pom.checkoutPage.clickPlaceOrderButton();
-        await pom.paymentPage.assertPageLoaded();
-        await pom.paymentPage.clickPayAndConfirmOrderButton();
-        await pom.paymentDonePage.assertPageLoaded();
-        await pom.paymentDonePage.clickContinueButton();
-        await pom.homePage.assertPageLoaded();
+test('Successfully checkout a product', async ({ authPom }) => {
+    await step('Open the home page', async () => {
+        await authPom.homePage.navigateToHomePage();
+        await authPom.homePage.assertPageLoaded();
     });
 
+    await step('Search for a product and add it to the cart', async () => {
+        await authPom.homePage.header.clickProductsLink();
+        await authPom.productsPage.assertPageLoaded();
+        await authPom.productsPage.searchProduct('Dress');
+        await authPom.productsPage.clickAddToCartButton(0, 'info');
+        await authPom.productsPage.cartModal.verifyModalAndContinueShopping();
+    });
+
+    await step('Go to cart and start checkout', async () => {
+        await authPom.productsPage.header.clickCartLink();
+        await authPom.cartPage.assertPageLoaded();
+        await authPom.cartPage.clickCheckoutButton();
+        await authPom.checkoutPage.assertPageLoaded();
+        await authPom.checkoutPage.clickPlaceOrderButton();
+    });
+
+    await step('Complete payment and confirm order', async () => {
+        await authPom.paymentPage.assertPageLoaded();
+        await authPom.paymentPage.enterCardDetails({
+            nameOnCard: 'John Doe',
+            cardNumber: 12345678901234567,
+            cvc: 221,
+            expiryMonth: 12,
+            expiryYear: 2028
+        });
+        await authPom.paymentPage.clickPayAndConfirmOrderButton();
+        await authPom.paymentDonePage.assertPageLoaded();
+        await authPom.paymentDonePage.clickContinueButton();
+        await authPom.homePage.assertPageLoaded();
+    });
 });

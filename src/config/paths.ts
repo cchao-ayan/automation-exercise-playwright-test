@@ -18,4 +18,7 @@ export const paths = {
       invalidEmailFooter: path.resolve('src/shared/components/footer/invalid-email-footer.csv'),
     }
   },
+  setup: {
+    storageState: path.resolve('src/.auth/auth.json')
+  }
 };
