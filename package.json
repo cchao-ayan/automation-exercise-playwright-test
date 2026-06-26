@@ -10,7 +10,7 @@
     "pw:setup": "playwright test tests/setup/login.spec.ts",
     "pw:run:headed": "playwright test --headed",
     "pw:scenario": "playwright test tests/e2e/scenarios.spec.ts",
-    "pw:allure": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "pw:allure": "allure generate allure-results --clean -o allure-report",
     "pw:login": "playwright test tests/ui/login.spec.ts",
     "pw:signup": "playwright test tests/ui/signup.spec.ts",
     "pw:footer": "playwright test tests/ui/footer.spec.ts",
