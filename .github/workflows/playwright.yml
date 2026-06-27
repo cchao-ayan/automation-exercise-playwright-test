@@ -52,12 +52,12 @@ jobs:
         run: npm run pw:scenario
       
       - name: Upload Playwright Test Results
-            if: always()
-            uses: actions/upload-artifact@v4
-            with:
-              name: playwright-test-results
-              path: test-results/
-              retention-days: 7
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: test-results/
+          retention-days: 7
         
       - name: Restore Allure History
         if: always()
