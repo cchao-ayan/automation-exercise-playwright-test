@@ -28,8 +28,10 @@ jobs:
           node-version: '24'
           cache: 'npm'
       
-      - name: Install dependencies
-        run: npm ci
+      - name: Install CI dependencies
+        run: |
+          cp package.ci.json package.json
+          npm install --package-lock=false --ignore-scripts --no-audit --prefer-offline
       
       - name: Install Playwright browsers
         run: npx playwright install --with-deps

@@ -1,8 +1,7 @@
 {
-  "name": "automationexercise",
+  "name": "automationexercise-ci",
   "version": "1.0.0",
-  "description": "Playwright TypeScript test automation project for automationexercise.com",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "pw:run": "playwright test",
     "pw:ui": "playwright test --ui",
@@ -17,28 +16,7 @@
     "pw:codegen": "playwright codegen automationexercise.com",
     "pw:headed": "playwright test --headed",
     "pw:debug": "playwright test --debug",
-    "pw:report": "playwright show-report",
-    "lint": "eslint \"**/*.{ts,tsx}\" --max-warnings=0",
-    "format": "prettier --write \"**/*.{ts,js,json,md}\"",
-    "ci:install": "npm install --omit=dev",
-    "local:install": "npm install"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "engines": {
-    "node": "24"
-  },
-  "devDependencies": {
-    "@types/node": "^24.10.1",
-    "@typescript-eslint/eslint-plugin": "^8.58.2",
-    "@typescript-eslint/parser": "^8.58.2",
-    "eslint": "^10.0.2",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-import-resolver-typescript": "^4.4.4",
-    "prettier": "^3.1.0",
-    "typescript": "^6.0.0"
+    "pw:report": "playwright show-report"
   },
   "dependencies": {
     "@playwright/test": "^1.58.2",
