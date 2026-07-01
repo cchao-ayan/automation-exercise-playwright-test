@@ -1,7 +1,7 @@
-import { test } from '@core/fixtures/app.fixture';
-import { DataReader } from '@shared/utils/data/data-reader';
-import { paths } from '@config/paths';
-import { RegisteredUser } from '@features/auth/types/login.type';
+import { test } from 'src/playwright/core/fixtures/app.fixture';
+import { DataReader } from 'src/playwright/shared/utils/data/data-reader';
+import { paths } from 'src/playwright/config/paths';
+import { RegisteredUser } from '@playwright-features/auth/types/login.type';
 import { feature, story, step } from 'allure-js-commons';
 
 feature('Authentication');

@@ -1,5 +1,5 @@
-import { test } from '@core/fixtures/auth.fixture';
-import { paths } from '@config/paths';
+import { test } from 'src/playwright/core/fixtures/auth.fixture';
+import { paths } from 'src/playwright/config/paths';
 import { feature, story, step } from 'allure-js-commons';
 
 feature('E2E Scenarios');

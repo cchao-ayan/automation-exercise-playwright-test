@@ -1,8 +1,8 @@
-import { test } from '@core/fixtures/app.fixture';
-import { DataReader } from '@shared/utils/data/data-reader';
-import { paths } from '@config/paths';
-import { InvalidFooterEmailTestData } from '@shared/components/footer/footer.type';
-import { validateFooterInput } from '@shared/components/footer/footer.validator';
+import { test } from 'src/playwright/core/fixtures/app.fixture';
+import { DataReader } from 'src/playwright/shared/utils/data/data-reader';
+import { paths } from 'src/playwright/config/paths';
+import { InvalidFooterEmailTestData } from 'src/playwright/shared/components/footer/footer.type';
+import { validateFooterInput } from 'src/playwright/shared/components/footer/footer.validator';
 import { feature} from 'allure-js-commons';
 
 feature('Footer Invalid Validations');

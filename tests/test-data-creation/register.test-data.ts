@@ -1,15 +1,11 @@
 import { test } from 'src/playwright/core/fixtures/app.fixture';
 import { DataReader } from 'src/playwright/shared/utils/data/data-reader';
 import { paths } from 'src/playwright/config/paths';
-import { validateSignupFormInput } from '@playwright-features/auth/utils/signup-form.validator';
-import { InvalidSignupFormTestData } from '@playwright-features/auth/types/signup-form.type';
-import { feature} from 'allure-js-commons';
+import { SignupFormTestData } from '@playwright-features/auth/types/signup-form.type';
 
-feature('Register Invalid Validations');
+const data = DataReader.read<SignupFormTestData>(paths.data.signup.registerUsers);
 
-const data = DataReader.read<InvalidSignupFormTestData>(paths.data.signup.invalidSignupFormInput);
-
-test.describe('Signup Functionality', () => {
+test.describe('Register Users', () => {
     test.beforeEach(async ({ pom }) => {
         await pom.homePage.navigateToHomePage();
         await pom.homePage.assertPageLoaded();
@@ -17,13 +13,11 @@ test.describe('Signup Functionality', () => {
         await pom.loginPage.assertPageLoaded();
     });
     for (const row of data) {
-        test(`${row.id}. ${row.scenario}`, async ({ pom }) => {
+        test(`Register ${row.name}`, async ({ pom }) => {
             await pom.loginPage.signUp(row.name, row.email);
             await pom.signUpPage.assertPageLoaded();
             await pom.signUpPage.submitSignupForm(row);
-            const result = validateSignupFormInput(row);
-            await pom.signUpPage.assertSignupInputValidation(result);
-           
+            await pom.accountCreatedPage.assertPageLoaded();
         });
     }
 });

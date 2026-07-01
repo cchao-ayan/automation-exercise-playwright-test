@@ -41,11 +41,11 @@
     "baseUrl": ".",
     // Path alias: @/ maps to src/
     "paths": {
-      "@core/*": ["src/core/*"],
-      "@shared/*": ["src/shared/*"],
-      "@features/*": ["src/features/*"],
+      "@playwright-core/*": ["src/playwright/core/*"],
+      "@playwright-shared/*": ["src/playwright/shared/*"],
+      "@playwright-features/*": ["src/playwright/features/*"],      
+      "@playwright-config/*": ["src/playwright/config/*"],
       "@tests/*": ["tests/*"],
-      "@config/*": ["src/config/*"],
     }
   },
 
