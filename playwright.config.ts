@@ -1,10 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 import path from 'path';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config({
-  path: './config/.env',
-});
+// dotenv.config({
+//   path: './config/.env',
+// });
 
 /**
  * Read environment variables from file.
@@ -23,7 +23,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : '50%',
+  workers: process.env.CI ? 2 : '50%',
   /* Timeout per test in milliseconds (120 seconds per test, override per-test with test.setTimeout) */
   //timeout: 120_000,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -33,7 +33,7 @@ export default defineConfig({
      [
       'allure-playwright',
       {
-        outputFolder: 'allure-results',
+        outputFolder: path.resolve(__dirname, 'results', 'playwright', 'test-results', 'allure-results'),
         detail: true,
         suiteTitle: false,
       },
@@ -55,7 +55,7 @@ export default defineConfig({
     /* Timeout for expect assertions (e.g., expect(locator).toBeVisible()) */
     //timeout: 5_000,
     toHaveScreenshot: {
-      pathTemplate: path.resolve(__dirname, 'test-screenshots', '{projectName}/{arg}{ext}'),
+      pathTemplate: path.resolve(__dirname, 'results', 'playwright', 'test-screenshots', '{projectName}/{arg}{ext}'),
       /* Threshold for visual regression (0.2 = 20% tolerance for screenshot diffs) */
       threshold: 0.2,
     },
@@ -66,7 +66,7 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-      outputDir: path.resolve(__dirname, 'test-results', 'chromium'),
+      outputDir: path.resolve(__dirname, 'results', 'playwright', 'test-results', 'chromium'),
     },
 
     // {

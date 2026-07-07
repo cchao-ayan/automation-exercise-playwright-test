@@ -3,7 +3,7 @@ import { paths } from 'src/playwright/config/paths';
 import { feature, story, step } from 'allure-js-commons';
 
 feature('E2E Scenarios');
-story('Checkout');
+story('Successful Checkout Flow');
 
 test('Successfully checkout a product', async ({ authPom }) => {
     await step('Open the home page', async () => {
